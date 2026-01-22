@@ -37,16 +37,6 @@ function formatTotal(total: number) {
   return `$${Math.round(total)}`;
 }
 
-function computeTotal(monthlyPrice: number, months: number, discount: number) {
-  return monthlyPrice * months * (1 - discount);
-}
-
-// ✅ prix sans promo (avant discount)
-function computeOriginalTotal(monthlyPrice: number, months: number) {
-  return monthlyPrice * months;
-}
-
-
 export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>('3m');
 
