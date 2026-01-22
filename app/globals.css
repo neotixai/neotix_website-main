@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 dark:bg-black dark:text-white;
+    background: radial-gradient(ellipse at top, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                #ffffff;
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background: radial-gradient(ellipse at top, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                #000000;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-gray-50/50 backdrop-blur-sm border border-gray-200 shadow-sm dark:bg-white/5 dark:border-white/10 dark:shadow-none;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-violet-600 to-blue-600 dark:from-violet-400 dark:to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-violet-500 to-blue-500;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
