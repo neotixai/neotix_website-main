@@ -23,13 +23,15 @@ export default function Home() {
     <>
       <HeroSection />
 
+       {/*
       <Section>
         <StatsRow stats={stats} />
       </Section>
-
+      */}
+      <IntegrationSection />
       <SolutionsSection />
       <ProcessSection />
-      <IntegrationSection />
+      
       <ContactSection />
     </>
   );
