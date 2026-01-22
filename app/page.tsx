@@ -3,8 +3,7 @@ import HeroSection from '@/components/home/HeroSection';
 import StatsRow from '@/components/shared/StatsRow';
 import SolutionsSection from '@/components/home/SolutionsSection';
 import ProcessSection from '@/components/home/ProcessSection';
-import OfferingsSection from '@/components/home/OfferingsSection';
-import TrustSection from '@/components/home/TrustSection';
+import IntegrationSection from '@/components/home/IntegrationSection';
 import ContactSection from '@/components/home/ContactSection';
 import Section from '@/components/shared/Section';
 
@@ -30,8 +29,7 @@ export default function Home() {
 
       <SolutionsSection />
       <ProcessSection />
-      <OfferingsSection />
-      <TrustSection />
+      <IntegrationSection />
       <ContactSection />
     </>
   );

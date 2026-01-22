@@ -18,7 +18,7 @@ export default function GradientButton({
   className = '',
   type = 'button'
 }: GradientButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95';
+  const baseClasses = 'inline-flex items-center justify-center px-6 py-3 font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 rounded-full';
 
   const variantClasses = variant === 'primary'
     ? 'bg-gradient-to-r from-violet-500 to-blue-500 text-white shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50'

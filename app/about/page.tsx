@@ -57,7 +57,7 @@ export default function AboutPage() {
               Founded by entrepreneurs who experienced firsthand the challenges of scaling operations, Neotix AI was born from a simple vision: make AI work for everyone.
             </p>
             <p className="text-gray-800 dark:text-white/60 mb-4">
-              We've helped hundreds of businesses automate their workflows, enhance customer experiences, and unlock new growth opportunities through custom AI solutions.
+              We help businesses automate their workflows, enhance customer experiences, and unlock new growth opportunities through custom AI solutions.
             </p>
             <p className="text-gray-800 dark:text-white/60">
               From startups to enterprises, we tailor our approach to meet you where you are and take you where you want to go.
@@ -75,19 +75,15 @@ export default function AboutPage() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-800">Proven track record with 500+ successful deployments</span>
+                <span className="text-gray-300">End-to-end support from discovery to deployment</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-800">End-to-end support from discovery to deployment</span>
+                <span className="text-gray-300">Custom solutions tailored to your unique needs</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-800">Custom solutions tailored to your unique needs</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-800">Transparent pricing and clear timelines</span>
+                <span className="text-gray-300">Transparent pricing and clear timelines</span>
               </li>
             </ul>
           </motion.div>
@@ -144,9 +140,9 @@ export default function AboutPage() {
           <p className="text-xl text-gray-800 dark:text-white/60 mb-8">
             Let's discuss how Neotix AI can help you achieve your goals with intelligent automation.
           </p>
-          <GradientButton href="/contact">
-            Get in Touch
-          </GradientButton>
+          <GradientButton href="/contact" className="w-1/3">
+                      Get in Touch
+                    </GradientButton>  
         </motion.div>
       </Section>
     </>

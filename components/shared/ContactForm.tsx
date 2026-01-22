@@ -74,15 +74,16 @@ export default function ContactForm() {
           className="w-full px-4 py-3 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white resize-none"
         />
       </div>
-
-      <GradientButton type="submit" className="w-full">
+      <div className="flex justify-center">
+      <GradientButton type="submit" className="w-1/2">
         Send Message
       </GradientButton>
+      </div>
 
       <p className="text-center text-sm text-gray-700 dark:text-white/60">
         Or email us directly at{' '}
-        <a href="mailto:hello@neotix.ai" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300">
-          hello@neotix.ai
+        <a href="mailto:contact@neotix.ai" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300">
+          contact@neotix.ai
         </a>
       </p>
     </form>

@@ -49,8 +49,8 @@ export default function ContactPage() {
               <Mail className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Email</h3>
-            <a href="mailto:hello@neotix.ai" className="text-white/60 hover:text-violet-400 transition-colors">
-              hello@neotix.ai
+            <a href="mailto:contact@neotix.ai" className="text-white/60 hover:text-violet-400 transition-colors">
+              contact@neotix.ai
             </a>
           </motion.div>
 
@@ -65,8 +65,8 @@ export default function ContactPage() {
               <Phone className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Phone</h3>
-            <a href="tel:+10000000000" className="text-white/60 hover:text-violet-400 transition-colors">
-              +1 (000) 000-0000
+            <a href="tel:+1 (514)-834-2926" className="text-white/60 hover:text-violet-400 transition-colors">
+              +1 (514)-834-2926
             </a>
           </motion.div>
 
@@ -130,7 +130,7 @@ export default function ContactPage() {
                     Request a Call
                   </GradientButton>
                   <a
-                    href="mailto:hello@neotix.ai?subject=Call%20Request"
+                    href="mailto:contact@neotix.ai?subject=Call%20Request"
                     className="block w-full"
                   >
                     <GradientButton variant="secondary" className="w-full">

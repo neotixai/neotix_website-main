@@ -331,10 +331,9 @@ export default function PricingPage() {
           <p className="text-xl text-white/60 mb-8">
             Tell us what you need (platforms, style, volume). We’ll propose the best plan for your timeline.
           </p>
-          <div className="w-full overflow-hidden rounded-full [&>*]:w-full [&>*]:rounded-full [&>*]:py-3 [&>*]:flex [&>*]:items-center [&>*]:justify-center">
-          <GradientButton href="/contact">Contact Us</GradientButton>
-          </div>        
-
+          <GradientButton href="/contact" className="w-1/3">
+            Contact us
+          </GradientButton>
         </motion.div>
       </Section>
     </>

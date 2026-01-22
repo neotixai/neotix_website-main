@@ -8,8 +8,8 @@ import ThemeToggle from '@/components/shared/ThemeToggle';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/ai-assistants', label: 'AI Assistants' },
-  { href: '/automation', label: 'Automation' },
+  { href: '/what-we-offer', label: 'What We Offer' },
+  { href: '/demos', label: 'Demos' },
   { href: '/pricing', label: 'Pricing' },  
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
