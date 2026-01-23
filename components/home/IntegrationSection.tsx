@@ -98,8 +98,8 @@ export default function IntegrationMarquee() {
         transition={{ duration: 0.45 }}
         className="text-center mb-10"
       >
-        <p className="text-gray-700 dark:text-white/60">
-          Integrations that power your workflows
+        <p className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+          Integrations that <span className="gradient-text">power</span> your workflows
         </p>
       </motion.div>
 

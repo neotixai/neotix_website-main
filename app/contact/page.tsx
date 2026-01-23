@@ -30,7 +30,7 @@ export default function ContactPage() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Get in <span className="gradient-text">Touch</span>
           </h1>
-          <p className="text-xl text-white/60 mb-12">
+          <p className="text-xl dark:text-white/60 mb-12">
             Ready to transform your business with AI? Let's discuss your project and explore how we can help.
           </p>
         </motion.div>
@@ -49,7 +49,7 @@ export default function ContactPage() {
               <Mail className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Email</h3>
-            <a href="mailto:contact@neotix.ai" className="text-white/60 hover:text-violet-400 transition-colors">
+            <a href="mailto:contact@neotix.ai" className="dark:text-white/60 hover:text-violet-400 transition-colors">
               contact@neotix.ai
             </a>
           </motion.div>
@@ -65,7 +65,7 @@ export default function ContactPage() {
               <Phone className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Phone</h3>
-            <a href="tel:+1 (514)-834-2926" className="text-white/60 hover:text-violet-400 transition-colors">
+            <a href="tel:+1 (514)-834-2926" className="dark:text-white/60 hover:text-violet-400 transition-colors">
               +1 (514)-834-2926
             </a>
           </motion.div>
@@ -81,7 +81,7 @@ export default function ContactPage() {
               <MapPin className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
-            <p className="text-white/60">
+            <p className="dark:text-white/60">
               Montreal, QC
             </p>
           </motion.div>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     </div>
                     <h3 className="text-xl font-semibold">Schedule a Consultation</h3>
                   </div>
-                  <p className="text-white/60 mb-6">
+                  <p className="dark:text-white/60 mb-6">
                     Prefer to talk directly? Choose one of the options below to schedule a call with our team.
                   </p>
                 </div>
@@ -146,19 +146,19 @@ export default function ContactPage() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-400 to-blue-400 mt-2" />
-                  <span className="text-white/80">Response within 24-48 hours</span>
+                  <span className="dark:text-white/80">Response within 24-48 hours</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-400 to-blue-400 mt-2" />
-                  <span className="text-white/80">Free consultation call</span>
+                  <span className="dark:text-white/80">Free consultation call</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-400 to-blue-400 mt-2" />
-                  <span className="text-white/80">Custom solution proposal</span>
+                  <span className="dark:text-white/80">Custom solution proposal</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-400 to-blue-400 mt-2" />
-                  <span className="text-white/80">No obligation quote</span>
+                  <span className="dark:text-white/80">No obligation quote</span>
                 </li>
               </ul>
             </div>

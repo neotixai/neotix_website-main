@@ -50,7 +50,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white/60">
               Who We Are
             </h2>
             <p className="text-gray-800 dark:text-white/60 mb-4">
@@ -75,15 +75,15 @@ export default function AboutPage() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-300">End-to-end support from discovery to deployment</span>
+                <span className="dark:text-white/60">End-to-end support from discovery to deployment</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-300">Custom solutions tailored to your unique needs</span>
+                <span className="dark:text-white/60">Custom solutions tailored to your unique needs</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 mt-2" />
-                <span className="text-gray-300">Transparent pricing and clear timelines</span>
+                <span className="dark:text-white/60">Transparent pricing and clear timelines</span>
               </li>
             </ul>
           </motion.div>

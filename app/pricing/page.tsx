@@ -123,7 +123,7 @@ export default function PricingPage() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Simple <span className="gradient-text">Pricing</span>
           </h1>
-          <p className="text-xl text-white/60 mb-10 max-w-3xl mx-auto">
+          <p className="text-xl dark:text-white/60 mb-10 max-w-3xl mx-auto">
             Choose the package that fits your needs.
             <p className="text-sm text-gray-700 dark:text-white/50">
               Packages are indicative — we tailor scopes to your needs
@@ -135,7 +135,7 @@ export default function PricingPage() {
             <button
               onClick={() => setBilling('3m')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
-                billing === '3m' ? 'bg-white/15' : 'text-white/70 hover:text-white'
+                billing === '3m' ? 'bg-white/15' : 'dark:text-white/70 hover:text-white'
               }`}
             >
               3 months
@@ -144,23 +144,23 @@ export default function PricingPage() {
             <button
               onClick={() => setBilling('6m')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
-                billing === '6m' ? 'bg-white/15' : 'text-white/70 hover:text-white'
+                billing === '6m' ? 'bg-white/15' : 'dark:text-white/70 hover:text-white'
               }`}
             >
-              6 months <span className="text-white/50 ml-1">(-10%)</span>
+              6 months <span className="dark:text-white/50 ml-1">(-10%)</span>
             </button>
 
             <button
               onClick={() => setBilling('1y')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
-                billing === '1y' ? 'bg-white/15' : 'text-white/70 hover:text-white'
+                billing === '1y' ? 'bg-white/15' : 'dark:text-white/70 hover:text-white'
               }`}
             >
-              1 year <span className="text-white/50 ml-1">(-20%)</span>
+              1 year <span className="dark:text-white/50 ml-1">(-20%)</span>
             </button>
           </div>
 
-          <div className="mt-4 text-sm text-white/50">
+          <div className="mt-4 text-sm dark:text-white/50">
             {durationBadge ? `${durationBadge} • ` : ''}
             {getBillingLabel(billing)}
           </div>
@@ -186,7 +186,7 @@ export default function PricingPage() {
     {/* Title + description */}
     <div>
       <h3 className="text-2xl font-bold">{plan.name}</h3>
-      <p className="text-white/60 mt-2">{plan.description}</p>
+      <p className="dark:text-white/60 mt-2">{plan.description}</p>
     </div>
 
     {/* PRICE pinned to bottom of the TOP */}
@@ -194,14 +194,14 @@ export default function PricingPage() {
       {plan.name === "Entreprise" ? (
         <>
           <div className="text-4xl font-bold">—</div>
-          <div className="mt-9 text-sm text-white/60">
+          <div className="mt-9 text-sm dark:text-white/60">
             Contact us for details. We’ll tailor scope & pricing to your needs.
           </div>
         </>
       ) : (
         <>
           {discount > 0 && (
-            <div className="text-white/40 line-through text-lg font-medium">
+            <div className="dark:text-white/40 line-through text-lg font-medium">
               ${(plan.originalTotal! / months).toFixed(2)}/mo
             </div>
           )}
@@ -213,13 +213,13 @@ export default function PricingPage() {
             </div>
 
             {billing !== "3m" && (
-              <span className="text-[11px] px-1.5 py-[2px] rounded-full bg-white/5 text-white/50 tracking-wide">
+              <span className="text-[11px] px-1.5 py-[2px] rounded-full bg-white/5 dark:text-white/50 tracking-wide">
                 {Math.round(discount * 100)}% OFF
               </span>
             )}
           </div>
 
-          <div className="mt-9 text-sm text-white/60">
+          <div className="mt-9 text-sm dark:text-white/60">
           <div>{formatTotal(plan.total!)} total</div>
           <div>{getBillingLabel(billing)}</div>
           </div>
@@ -237,10 +237,10 @@ export default function PricingPage() {
 
   {/* FEATURES */}
   <div className="mt-8 flex-1">
-    <div className="text-sm font-semibold text-white/80 mb-3">What’s included</div>
+    <div className="text-sm font-semibold dark:text-white/80 mb-3">What’s included</div>
     <ul className="space-y-3">
       {plan.features.map((f) => (
-        <li key={f} className="flex items-start gap-3 text-white/70">
+        <li key={f} className="flex items-start gap-3 dark:text-white/70">
           <Check className="w-5 h-5 mt-0.5 text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]" />
           <span>{f}</span>
         </li>
@@ -265,7 +265,7 @@ export default function PricingPage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
             Plan <span className="gradient-text">Comparison</span>
           </h2>
-          <p className="text-xl text-white/60 max-w-3xl mx-auto text-center mb-10">
+          <p className="text-xl dark:text-white/60 max-w-3xl mx-auto text-center mb-10">
             A quick look at what changes as you scale.
           </p>
 
@@ -280,7 +280,7 @@ export default function PricingPage() {
                   <th className="py-3 pr-4">Entreprise</th>
                 </tr>
               </thead>
-              <tbody className="text-white/70">
+              <tbody className="dark:text-white/70">
               {[
                 ['Included minutes / month', '200', '475', '1,100', 'Custom'],
                 ['Additional minutes', '$1.33 / min', '$0.99 / min', '$0.90 / min', 'Custom'],
@@ -290,21 +290,21 @@ export default function PricingPage() {
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>],
                 ['Phone number transfers', '1 number', '2 numbers', '3 numbers', 'Custom'],
-                ['Call transcripts', <span className="text-white/40">—</span>
+                ['Call transcripts', <span className="dark:text-white/40">—</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>],
-                ['Multi-language support', <span className="text-white/40">—</span>
+                ['Multi-language support', <span className="dark:text-white/40">—</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>],
-                ['Advanced analytics & reporting', <span className="text-white/40">—</span>
-                , <span className="text-white/40">—</span>
+                ['Advanced analytics & reporting', <span className="dark:text-white/40">—</span>
+                , <span className="dark:text-white/40">—</span>
                 , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>, 'Custom'],
                 ['Onboarding fee', '$400', '$400', '$0', 'Custom']
               ].map((row) => (
                 <tr className="border-t border-white/10">
-                  <td className="py-4 pr-4 font-semibold text-white/80">{row[0]}</td>
+                  <td className="py-4 pr-4 font-semibold dark:text-white/80">{row[0]}</td>
                   <td className="py-4 pr-4">{row[1]}</td>
                   <td className="py-4 pr-4">{row[2]}</td>
                   <td className="py-4 pr-4">{row[3]}</td>
@@ -328,7 +328,7 @@ export default function PricingPage() {
           className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to start?</h2>
-          <p className="text-xl text-white/60 mb-8">
+          <p className="text-xl dark:text-white/60 mb-8">
             Tell us what you need (platforms, style, volume). We’ll propose the best plan for your timeline.
           </p>
           <GradientButton href="/contact" className="w-1/3">

@@ -89,7 +89,7 @@ export default function AutomationAIPage() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             <span className="gradient-text">Automation & AI</span> That Scale Your Business
           </h1>
-          <p className="text-xl text-white/60 mb-12">
+          <p className="text-xl dark:text-white/60 mb-12">
             Intelligent workflows, AI assistants, and smart automation systems
             that eliminate busywork and elevate your customer experience.
           </p>
@@ -115,7 +115,7 @@ export default function AutomationAIPage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Our <span className="gradient-text">Solutions</span>
           </h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p className="text-xl dark:text-white/60 max-w-2xl mx-auto">
             End-to-end automation and AI systems built for modern businesses
           </p>
         </motion.div>
@@ -134,7 +134,7 @@ export default function AutomationAIPage() {
                 <item.icon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-white/60">{item.description}</p>
+              <p className="dark:text-white/60">{item.description}</p>
             </motion.div>
           ))}
         </div>
@@ -152,12 +152,12 @@ export default function AutomationAIPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               From Chaos to Clarity
             </h2>
-            <p className="text-white/60 mb-4">
+            <p className="dark:text-white/60 mb-4">
               Stop wasting hours on repetitive tasks. We design intelligent
               workflows that trigger automatically based on actions, time,
               or specific business conditions.
             </p>
-            <p className="text-white/60">
+            <p className="dark:text-white/60">
               Lead routing, invoice generation, CRM sync, notifications —
               everything runs automatically behind the scenes.
             </p>
@@ -171,11 +171,11 @@ export default function AutomationAIPage() {
             className="glass-card rounded-2xl p-8"
           >
             <h3 className="text-2xl font-bold mb-6">AI Assistants That Work 24/7</h3>
-            <p className="text-white/60 mb-4">
+            <p className="dark:text-white/60 mb-4">
               Our AI assistants handle customer support, sales conversations,
               and booking flows with human-like intelligence.
             </p>
-            <p className="text-white/60">
+            <p className="dark:text-white/60">
               Available 24/7, multilingual, and fully integrated with your
               tools — without adding headcount.
             </p>
@@ -208,10 +208,10 @@ export default function AutomationAIPage() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Scale with Automation & AI?
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            Ready to <span className="gradient-text">scale</span> with Automation & AI?
           </h2>
-          <p className="text-xl text-white/60 mb-8">
+          <p className="text-xl dark:text-white/60 mb-8">
             Let’s eliminate the busywork and build intelligent systems that grow your business.
           </p>
           <div className="flex justify-center">
