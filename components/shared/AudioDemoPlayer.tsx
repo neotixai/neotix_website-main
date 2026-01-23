@@ -73,8 +73,22 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
     }
   };
 
+  const seek = (
+  e: React.MouseEvent<HTMLDivElement>,
+  index: number
+) => {
+  const audio = audioRef.current;
+  if (!audio || currentIndex !== index) return;
+
+  const rect = e.currentTarget.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const ratio = clickX / rect.width;
+
+  audio.currentTime = audio.duration * ratio;
+};
+
   return (
-    <div className="space-y-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       {/* Audio element UNIQUE */}
       <audio ref={audioRef} preload="metadata" />
 
@@ -103,12 +117,14 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
             )}
 
             {/* Progress bar */}
-            <div className="mt-3 h-2 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-white/20">
+            <div
+              className="mt-3 h-2 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-white/20 cursor-pointer"
+              onClick={(e) => seek(e, index)}
+            >
               <div
                 className="h-full rounded-full bg-gradient-to-r from-violet-500 to-blue-500 transition-all"
                 style={{
-                  width:
-                    currentIndex === index ? `${progress}%` : '0%',
+                  width: currentIndex === index ? `${progress}%` : '0%',
                 }}
               />
             </div>
