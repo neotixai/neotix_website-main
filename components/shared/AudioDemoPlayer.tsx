@@ -78,7 +78,18 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
   index: number
 ) => {
   const audio = audioRef.current;
-  if (!audio || currentIndex !== index) return;
+  if (!audio) return;
+
+  // Si ce n’est pas l’audio courant, on le charge sans play
+  if (currentIndex !== index) {
+    audio.pause();
+    audio.src = demos[index].src;
+    audio.load();
+    setCurrentIndex(index);
+    setIsPlaying(false);
+  }
+
+  if (!audio.duration) return;
 
   const rect = e.currentTarget.getBoundingClientRect();
   const clickX = e.clientX - rect.left;

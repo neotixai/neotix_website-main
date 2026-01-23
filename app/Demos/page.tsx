@@ -130,7 +130,7 @@ export default function AutomationPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">
             Try it <span className="gradient-text">Yourself</span>
