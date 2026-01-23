@@ -8,6 +8,12 @@ import { Check } from 'lucide-react';
 
 type Billing = '3m' | '6m' | '1y';
 
+const checkIcon = (
+  <Check className="w-5 h-5 mx-auto text-green-500 dark:text-[#39FF14] dark:drop-shadow-[0_0_6px_#39FF14]" />
+);
+
+const dash = <span className="text-gray-400 dark:text-white/40">—</span>;
+
 const PRICES = {
   starter: 229.99,
   pro: 459.99,
@@ -131,7 +137,7 @@ export default function PricingPage() {
           </p>
 
           {/* BILLING TOGGLE */}
-          <div className="inline-flex items-center gap-2 p-2 rounded-2xl glass-card">
+          <div className="inline-flex items-center gap-2 p-2 rounded-2xl glass-card ring-1 ring-black/12 dark:ring-white/10">
             <button
               onClick={() => setBilling('3m')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
@@ -171,84 +177,117 @@ export default function PricingPage() {
       <Section>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
           {plans.map((plan, idx) => (
-           <motion.div
-  className={[
-    "glass-card rounded-2xl p-8 relative overflow-visible",
-    "flex flex-col h-full",
-    plan.highlighted
-      ? "ring-2 ring-violet-500 shadow-[0_0_40px_rgba(139,92,246,0.35)]"
-      : "hover:bg-white/10",
-    "transition-all duration-300",
-  ].join(" ")}
->
-  {/* ✅ TOP fixed height */}
-  <div className="h-[260px] flex flex-col">
-    {/* Title + description */}
-    <div>
-      <h3 className="text-2xl font-bold">{plan.name}</h3>
-      <p className="dark:text-white/60 mt-2">{plan.description}</p>
-    </div>
+            <motion.div
+              key={idx}
+              className={[
+                "glass-card rounded-2xl p-8 relative overflow-visible",
+                "flex flex-col h-full transition-all duration-300",
 
-    {/* PRICE pinned to bottom of the TOP */}
-    <div className="mt-auto">
-      {plan.name === "Entreprise" ? (
-        <>
-          <div className="text-4xl font-bold">—</div>
-          <div className="mt-9 text-sm dark:text-white/60">
-            Contact us for details. We’ll tailor scope & pricing to your needs.
-          </div>
-        </>
-      ) : (
-        <>
-          {discount > 0 && (
-            <div className="dark:text-white/40 line-through text-lg font-medium">
-              ${(plan.originalTotal! / months).toFixed(2)}/mo
-            </div>
-          )}
+                // ✅ Premium light (sans enlever glass-card)
+                "shadow-[0_10px_30px_rgba(0,0,0,0.06)]",
+                "hover:shadow-[0_14px_45px_rgba(0,0,0,0.10)]",
+                "ring-1 ring-black/12 hover:ring-black/20",
 
-          <div className="flex items-baseline gap-2 mt-1 whitespace-nowrap">
-            <div className="text-2xl font-bold">
-              ${(plan.total! / months).toFixed(2)}
-              <span className="text-lg font-medium text-white/60 ml-1">/mo</span>
-            </div>
+                // ✅ Dark garde ton style actuel
+                "dark:ring-white/10 dark:hover:bg-white/10 dark:hover:ring-white/20",
 
-            {billing !== "3m" && (
-              <span className="text-[11px] px-1.5 py-[2px] rounded-full bg-white/5 dark:text-white/50 tracking-wide">
-                {Math.round(discount * 100)}% OFF
-              </span>
-            )}
-          </div>
+                // ✅ Highlighted plan
+                plan.highlighted
+                  ? "ring-2 ring-violet-500 shadow-[0_0_40px_rgba(139,92,246,0.35)]"
+                  : "",
+              ].join(" ")}
+            >
+              {/* ✅ MOST POPULAR BADGE */}
+              {plan.highlighted && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
+                  <div className="px-4 py-1 text-xs font-semibold rounded-full
+                                  bg-gradient-to-r from-violet-500 to-blue-500
+                                  text-white shadow-lg
+                                  border border-black/10 dark:border-white/12">
+                    Most Popular
+                  </div>
+                </div>
+              )}
 
-          <div className="mt-9 text-sm dark:text-white/60">
-          <div>{formatTotal(plan.total!)} total</div>
-          <div>{getBillingLabel(billing)}</div>
-          </div>
-        </>
-      )}
-    </div>
-  </div>
+              {/* TOP fixed height */}
+              <div className="h-[260px] flex flex-col">
+                {/* Title + description */}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    {plan.name}
+                  </h3>
+                  <p className="text-gray-700 dark:text-white/60 mt-2">
+                    {plan.description}
+                  </p>
+                </div>
 
-  {/* ✅ CTA always same level (because TOP is fixed) */}
-  <div className="mt-9">
-    <div className="w-full overflow-hidden rounded-full [&>*]:w-full [&>*]:rounded-full [&>*]:py-3 [&>*]:flex [&>*]:items-center [&>*]:justify-center">
-      <GradientButton href={plan.href}>{plan.cta}</GradientButton>
-    </div>
-  </div>
+                {/* PRICE */}
+                <div className="mt-auto">
+                  {plan.name === "Entreprise" ? (
+                    <>
+                      <div className="text-4xl font-bold text-gray-900 dark:text-white">
+                        —
+                      </div>
+                      <div className="mt-9 text-sm text-gray-600 dark:text-white/60">
+                        Contact us for details. We’ll tailor scope & pricing to your needs.
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {discount > 0 && (
+                        <div className="text-gray-400 dark:text-white/40 line-through text-lg font-medium">
+                          ${(plan.originalTotal! / months).toFixed(2)}/mo
+                        </div>
+                      )}
 
-  {/* FEATURES */}
-  <div className="mt-8 flex-1">
-    <div className="text-sm font-semibold dark:text-white/80 mb-3">What’s included</div>
-    <ul className="space-y-3">
-      {plan.features.map((f) => (
-        <li key={f} className="flex items-start gap-3 dark:text-white/70">
-          <Check className="w-5 h-5 mt-0.5 text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]" />
-          <span>{f}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-</motion.div>
+                      <div className="flex items-baseline gap-2 mt-1 whitespace-nowrap">
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                          ${(plan.total! / months).toFixed(2)}
+                          <span className="text-lg font-medium text-gray-500 dark:text-white/60 ml-1">
+                            /mo
+                          </span>
+                        </div>
 
+                        {billing !== "3m" && (
+                          <span className="text-[11px] px-1.5 py-[2px] rounded-full bg-black/5 text-gray-600 dark:bg-white/5 dark:text-white/50 tracking-wide">
+                            {Math.round(discount * 100)}% OFF
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="mt-9 text-sm text-gray-600 dark:text-white/60">
+                        <div>{formatTotal(plan.total!)} total</div>
+                        <div>{getBillingLabel(billing)}</div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="mt-9">
+                <div className="w-full overflow-hidden rounded-full [&>*]:w-full [&>*]:rounded-full [&>*]:py-3 [&>*]:flex [&>*]:items-center [&>*]:justify-center">
+                  <GradientButton href={plan.href}>
+                    {plan.cta}
+                  </GradientButton>
+                </div>
+              </div>
+
+              {/* FEATURES */}
+              <div className="mt-8 flex-1">
+                <div className="text-sm font-semibold text-gray-900 dark:text-white/80 mb-3">
+                  What’s included
+                </div>
+                <ul className="space-y-3">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-3 text-gray-700 dark:text-white/70">
+                      <Check className=" w-5 h-5 flex-shrink-0 mt-[3px] text-green-500 dark:text-[#39FF14] dark:drop-shadow-[0_0_6px_#39FF14]"/>
+                      <span className="leading-relaxed">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           ))}
         </div>
       </Section>
@@ -269,50 +308,47 @@ export default function PricingPage() {
             A quick look at what changes as you scale.
           </p>
 
-          <div className="glass-card rounded-2xl p-6 overflow-x-auto">
-            <table className="min-w-[980px] w-full text-left">
+          <div className="glass-card rounded-2xl p-6 overflow-x-auto ring-1 ring-black/12 dark:ring-white/10">
+            <table className="min-w-[980px] w-full text-left border-collapse">
               <thead>
-                <tr className="text-white/70 text-sm">
-                  <th className="py-3 pr-4">Feature</th>
-                  <th className="py-3 pr-4">Starter</th>
-                  <th className="py-3 pr-4">Pro</th>
-                  <th className="py-3 pr-4">Business</th>
-                  <th className="py-3 pr-4">Entreprise</th>
+                <tr className="border-b border-black/12 dark:border-white/10">
+                  <th className="py-3 pr-4 text-left">Feature</th>
+                  <th className="py-3 pr-4 text-center">Starter</th>
+                  <th className="py-3 pr-4 text-center">Pro</th>
+                  <th className="py-3 pr-4 text-center">Business</th>
+                  <th className="py-3 pr-4 text-center">Entreprise</th>
                 </tr>
               </thead>
-              <tbody className="dark:text-white/70">
+
+              <tbody className="text-gray-800 dark:text-white/70 divide-y divide-black/12 dark:divide-white/10">
               {[
                 ['Included minutes / month', '200', '475', '1,100', 'Custom'],
                 ['Additional minutes', '$1.33 / min', '$0.99 / min', '$0.90 / min', 'Custom'],
                 ['CRM integration', 'Basic', 'Basic', 'Advanced', 'Custom'],
-                ['Email & SMS notifications', <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>],
+
+                ['Email & SMS notifications', checkIcon, checkIcon, checkIcon, checkIcon],
+
                 ['Phone number transfers', '1 number', '2 numbers', '3 numbers', 'Custom'],
-                ['Call transcripts', <span className="dark:text-white/40">—</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>],
-                ['Multi-language support', <span className="dark:text-white/40">—</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>],
-                ['Advanced analytics & reporting', <span className="dark:text-white/40">—</span>
-                , <span className="dark:text-white/40">—</span>
-                , <span className="text-[#39FF14] drop-shadow-[0_0_6px_#39FF14]">✓</span>, 'Custom'],
+
+                ['Call transcripts', dash, checkIcon, checkIcon, checkIcon],
+
+                ['Multi-language support', dash, checkIcon, checkIcon, checkIcon],
+
+                ['Advanced analytics & reporting', dash, dash, checkIcon, 'Custom'],
+
                 ['Onboarding fee', '$400', '$400', '$0', 'Custom']
-              ].map((row) => (
-                <tr className="border-t border-white/10">
-                  <td className="py-4 pr-4 font-semibold dark:text-white/80">{row[0]}</td>
-                  <td className="py-4 pr-4">{row[1]}</td>
-                  <td className="py-4 pr-4">{row[2]}</td>
-                  <td className="py-4 pr-4">{row[3]}</td>
-                  <td className="py-4 pr-4">{row[4]}</td>
+              ]
+              .map((row) => (
+                <tr>
+                  <td className="py-4 pr-4 font-semibold text-gray-900 dark:text-white/80">{row[0]}</td>
+                  <td className="py-4 pr-4 text-center">{row[1]}</td>
+                  <td className="py-4 pr-4 text-center">{row[2]}</td>
+                  <td className="py-4 pr-4 text-center">{row[3]}</td>
+                  <td className="py-4 pr-4 text-center">{row[4]}</td>
                 </tr>
               ))}
             </tbody>
-
+            
             </table>
           </div>
         </motion.div>
@@ -325,7 +361,7 @@ export default function PricingPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12"
+          className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12 ring-1 ring-black/12 dark:ring-white/10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to start?</h2>
           <p className="text-xl dark:text-white/60 mb-8">

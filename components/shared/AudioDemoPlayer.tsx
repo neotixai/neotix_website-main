@@ -16,49 +16,68 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
     const updateProgress = () => {
-      const audio = audioRef.current!;
       setProgress((audio.currentTime / audio.duration) * 100 || 0);
     };
 
-    audioRef.current.addEventListener('timeupdate', updateProgress);
-    audioRef.current.addEventListener('ended', () => {
+    const onEnded = () => {
       setIsPlaying(false);
       setProgress(0);
       setCurrentIndex(null);
-    });
+    };
+
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('ended', onEnded);
 
     return () => {
-      audioRef.current?.removeEventListener('timeupdate', updateProgress);
+      audio.removeEventListener('timeupdate', updateProgress);
+      audio.removeEventListener('ended', onEnded);
     };
   }, []);
 
   const togglePlay = (index: number) => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(demos[index].src);
-    }
+    const audio = audioRef.current;
+    if (!audio) return;
 
+    const src = demos[index].src;
+
+    // Si on clique sur un autre audio
     if (currentIndex !== index) {
-      audioRef.current.src = demos[index].src;
-      audioRef.current.play();
-      setCurrentIndex(index);
-      setIsPlaying(true);
+      audio.pause();
+      audio.src = src;
+      audio.load(); // 🔑 TRÈS IMPORTANT pour Safari
+      audio
+        .play()
+        .then(() => {
+          setCurrentIndex(index);
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          console.error('Safari audio error:', err);
+        });
       return;
     }
 
+    // Play / Pause sur le même audio
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play();
-      setIsPlaying(true);
+      audio
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => console.error(err));
     }
   };
 
   return (
     <div className="space-y-6">
+      {/* Audio element UNIQUE */}
+      <audio ref={audioRef} preload="metadata" />
+
       {demos.map((demo, index) => (
         <div
           key={index}
@@ -78,15 +97,18 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
           <div className="flex-1">
             <h4 className="font-semibold">{demo.title}</h4>
             {demo.description && (
-              <p className="text-sm dark:text-white/60">{demo.description}</p>
+              <p className="text-sm dark:text-white/60">
+                {demo.description}
+              </p>
             )}
 
-            <div className="mt-3 h-2 w-full bg-white/10 rounded-full overflow-hidden">
+            {/* Progress bar */}
+            <div className="mt-3 h-2 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-white/20">
               <div
-                className="h-full bg-gradient-to-r from-violet-400 to-blue-400 transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-blue-500 transition-all"
                 style={{
                   width:
-                    currentIndex === index ? `${progress}%` : '0%'
+                    currentIndex === index ? `${progress}%` : '0%',
                 }}
               />
             </div>

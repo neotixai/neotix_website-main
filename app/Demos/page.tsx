@@ -4,49 +4,54 @@ import { motion } from 'framer-motion';
 import Section from '@/components/shared/Section';
 import GradientButton from '@/components/shared/GradientButton';
 import FAQAccordion from '@/components/shared/FAQAccordion';
-import { Workflow, Mail, Database } from 'lucide-react';
+import { PhoneCall, Volume2, CalendarCheck } from 'lucide-react';
 import AudioDemoPlayer from '@/components/shared/AudioDemoPlayer';
 
 const audioDemos = [
   {
-    title: 'AI restaurant Agent',
+    title: 'Barbershop Agent',
+    description: 'Customer inquiries about the business',
+    src: '/audio/Barbershop.m4a'
+  },
+  {
+    title: 'Restaurant Agent',
     description: 'Inbound call handling and qualification',
-    src: '/audio/demo-sales-call.mp3'
+    src: '/audio/Restaurant.m4a'
   },
   {
-    title: 'AI dental Agent',
-    description: 'Automated patient follow-up summary',
-    src: '/audio/demo-medical-call.mp3'
+    title: 'Dental Agent',
+    description: 'Automated patient booking appointment',
+    src: '/audio/Dental.m4a'
   },
   {
-    title: 'AI barbershop Agent',
-    description: 'Issue resolution and escalation',
-    src: '/audio/demo-support-call.mp3'
+    title: 'Fitness Club Agent',
+    description: 'Answering customer questions about the business',
+    src: '/audio/Fitness.m4a'
   }
 ];
 
 const features = [
   {
-    icon: Workflow,
+    icon: PhoneCall,
     title: 'Never Miss a Call',
     description: "Your AI receptionist answers 100% of incoming calls, 24/7, even outside business hours. Don't forget, 1 missed call <=> 1 less customer"
   },
   {
-    icon: Mail,
+    icon: Volume2,
     title: 'Human-Like Voice',
     description: 'Natural, expressive voice that sounds like a real receptionist, not a robot'
   },
   {
-    icon: Database,
+    icon: CalendarCheck,
     title: 'Appointment Booking & Lead Capture',
-    description: 'Books, cancel, reschedule appointments, captures leads, and syncs everything to your tools automatically'
+    description: 'Books, cancels, reschedules appointments, captures leads, and syncs everything to your tools automatically'
   }
 ];
 
 const faqs = [
   {
-    question: 'What platforms do you integrate with?',
-    answer: 'We integrate with all major platforms and custom systems. Our solutions are designed to adapt to your existing tools, processes, and infrastructure'
+    question: "What if I need more minutes?",
+    answer: "You can adjust your plan whenever you need. Additional minutes are billed at a simple per-minute rate, and you’ll always be notified before reaching your limit to avoid any unexpected charges."
   },
   {
     question: 'Can the AI receptionist handle multiple calls at the same time?',
@@ -55,6 +60,10 @@ const faqs = [
   {
     question: 'Can the AI receptionist speak multiple languages?',
     answer: "Yes. The AI receptionist can speak multiple languages and automatically adapt to your customer's preferred language."
+  },
+  {
+    question: "Can I customize the AI's responses?",
+    answer: "Yes. You have full control over how the AI interacts with your callers, from greetings and qualification questions to business hours and overall tone. The system also improves continuously based on your feedback."
   }
 ];
 

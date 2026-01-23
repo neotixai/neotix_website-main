@@ -49,6 +49,18 @@ function ImgIcon({ src, label }: { src: string; label: string }) {
 
   const isColor = keepColor.has(src);
 
+  // Ajuste finement l’équilibre visuel (padding interne des SVG)
+  const scaleMap: Record<string, string> = {
+    '/integrations/telegram.svg': 'scale-[0.62]',
+    '/integrations/whatsapp.svg': 'scale-[1.3]',
+    '/integrations/slack.svg': 'scale-[0.92]',
+    '/integrations/paypal.svg': 'scale-[1.2]',
+    '/integrations/monday.svg': 'scale-[1.3]',
+    '/integrations/elevenlabs.svg': 'scale-[1.2]',
+  };
+
+  const scaleClass = scaleMap[src] ?? 'scale-100';
+
   return (
     <div className="h-[72px] w-[72px] md:h-[84px] md:w-[84px] lg:h-[96px] lg:w-[96px] flex items-center justify-center">
       <img
@@ -58,26 +70,28 @@ function ImgIcon({ src, label }: { src: string; label: string }) {
         draggable={false}
         className={[
           'h-full w-full object-contain',
-          'opacity-80 hover:opacity-100 transition-opacity duration-300',
+          'opacity-80 hover:opacity-100 transition-all duration-300',
+          scaleClass,
           isColor ? '' : 'grayscale hover:grayscale-0 dark:invert dark:brightness-200',
         ].join(' ')}
       />
     </div>
   );
-} // ✅ fermeture ajoutée ici
+}
 
 function MarqueeRow({ items, reverse = false }: { items: IntegrationItem[]; reverse?: boolean }) {
   const doubled = [...items, ...items];
 
   return (
-    <div className="group relative overflow-hidden">
+    <div className="group relative overflow-hidden rounded-2xl">
       <div
         className={[
-          'flex items-center gap-24 md:gap-32 whitespace-nowrap will-change-transform',
+          'flex min-w-max items-center gap-24 md:gap-32 whitespace-nowrap will-change-transform',
           reverse ? 'animate-marquee-reverse' : 'animate-marquee',
           'group-hover:[animation-play-state:paused]',
         ].join(' ')}
       >
+
         {doubled.map((it, idx) => (
           <div key={`${it.label}-${idx}`} className="flex items-center justify-center">
             <ImgIcon src={it.src} label={it.label} />
@@ -103,7 +117,7 @@ export default function IntegrationMarquee() {
         </p>
       </motion.div>
 
-      <div className="relative">
+      <div className="relative rounded-3xl overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/15 dark:ring-white/10">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-gray-50 to-transparent dark:from-black z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-gray-50 to-transparent dark:from-black z-10" />
 

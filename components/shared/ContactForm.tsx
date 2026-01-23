@@ -30,8 +30,7 @@ export default function ContactForm() {
           required
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"
-        />
+          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"        />
       </div>
 
       <div>
@@ -44,8 +43,7 @@ export default function ContactForm() {
           required
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"
-        />
+          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"        />
       </div>
 
       <div>
@@ -57,8 +55,7 @@ export default function ContactForm() {
           id="company"
           value={formData.company}
           onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"
-        />
+          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"        />
       </div>
 
       <div>

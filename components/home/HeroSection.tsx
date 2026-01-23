@@ -20,7 +20,7 @@ export default function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <div className="mb-6">
-            <span className="inline-block px-4 py-2 rounded-full glass-card text-sm font-medium gradient-text">
+            <span className="inline-block px-4 py-2 rounded-full glass-card ring-1 ring-black/15 dark:ring-white/10 text-sm font-medium gradient-text">
               Next-Gen AI Solutions
             </span>
           </div>
@@ -38,7 +38,11 @@ export default function HeroSection() {
             <GradientButton onClick={() => scrollToSection('contact')}>
               Get a Free Consultation
             </GradientButton>
-            <GradientButton variant="secondary" onClick={() => scrollToSection('solutions')}>
+              <GradientButton
+                variant="secondary"
+                className="ring-1 ring-black/15 dark:ring-white/10"
+                onClick={() => scrollToSection('solutions')}
+              >
               Explore Our Services
             </GradientButton>
           </div>

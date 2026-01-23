@@ -128,7 +128,7 @@ export default function AutomationAIPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="glass-card rounded-xl p-6 hover:bg-white/10 transition-all duration-300"
+              className="glass-card rounded-xl p-6 ring-1 ring-black/12 dark:ring-white/10 hover:bg-white/10 transition-all duration-300"
             >
               <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
                 <item.icon className="w-6 h-6 text-white" />
@@ -168,7 +168,7 @@ export default function AutomationAIPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="glass-card rounded-2xl p-8"
+            className="glass-card rounded-2xl p-8 ring-1 ring-black/12 dark:ring-white/10"
           >
             <h3 className="text-2xl font-bold mb-6">AI Assistants That Work 24/7</h3>
             <p className="dark:text-white/60 mb-4">
@@ -206,7 +206,7 @@ export default function AutomationAIPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12"
+          className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12 ring-1 ring-black/12 dark:ring-white/10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
             Ready to <span className="gradient-text">scale</span> with Automation & AI?
