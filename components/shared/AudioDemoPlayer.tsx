@@ -9,31 +9,49 @@ type AudioDemo = {
   src: string;
 };
 
+function formatTime(seconds: number) {
+  if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
 export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
+
+  // ✅ seconds
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const updateProgress = () => {
-      setProgress((audio.currentTime / audio.duration) * 100 || 0);
+    const updateTime = () => setCurrentTime(audio.currentTime || 0);
+
+    const onLoadedMeta = () => {
+      setDuration(audio.duration || 0);
+      setCurrentTime(audio.currentTime || 0);
     };
 
     const onEnded = () => {
       setIsPlaying(false);
-      setProgress(0);
+      setCurrentTime(0);
+      setDuration(audio.duration || 0);
       setCurrentIndex(null);
     };
 
-    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', onLoadedMeta);
+    audio.addEventListener('durationchange', onLoadedMeta);
     audio.addEventListener('ended', onEnded);
 
     return () => {
-      audio.removeEventListener('timeupdate', updateProgress);
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', onLoadedMeta);
+      audio.removeEventListener('durationchange', onLoadedMeta);
       audio.removeEventListener('ended', onEnded);
     };
   }, []);
@@ -44,24 +62,26 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
 
     const src = demos[index].src;
 
-    // Si on clique sur un autre audio
+    // ✅ clic sur un autre audio
     if (currentIndex !== index) {
       audio.pause();
       audio.src = src;
-      audio.load(); // 🔑 TRÈS IMPORTANT pour Safari
+      audio.load(); // Safari
+      setCurrentTime(0);
+      setDuration(0);
+
       audio
         .play()
         .then(() => {
           setCurrentIndex(index);
           setIsPlaying(true);
         })
-        .catch((err) => {
-          console.error('Safari audio error:', err);
-        });
+        .catch((err) => console.error('Safari audio error:', err));
+
       return;
     }
 
-    // Play / Pause sur le même audio
+    // ✅ play/pause même audio
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
@@ -73,48 +93,87 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
     }
   };
 
+  // ✅ seek (avancer / reculer)
+  const seekTo = (index: number, newTime: number) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (currentIndex !== index) return;
+
+    const t = Math.min(Math.max(newTime, 0), duration || 0);
+    audio.currentTime = t;
+    setCurrentTime(t);
+  };
+
   return (
     <div className="space-y-6">
-      {/* Audio element UNIQUE */}
       <audio ref={audioRef} preload="metadata" />
 
-      {demos.map((demo, index) => (
-        <div
-          key={index}
-          className="glass-card rounded-xl p-6 flex items-center gap-4"
-        >
-          <button
-            onClick={() => togglePlay(index)}
-            className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center"
+      {demos.map((demo, index) => {
+        const isActive = currentIndex === index;
+        const shownCurrent = isActive ? currentTime : 0;
+        const shownDuration = isActive ? duration : 0;
+        const progressPercent =
+          isActive && shownDuration > 0 ? (shownCurrent / shownDuration) * 100 : 0;
+
+        return (
+          <div
+            key={index}
+            className="mx-auto w-full max-w-2xl glass-card rounded-xl p-6 flex items-center gap-4 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
           >
-            {isPlaying && currentIndex === index ? (
-              <Pause className="w-6 h-6 text-white" />
-            ) : (
-              <Play className="w-6 h-6 text-white ml-1" />
-            )}
-          </button>
+            <button
+              onClick={() => togglePlay(index)}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center"
+              aria-label={isPlaying && isActive ? 'Pause' : 'Play'}
+            >
+              {isPlaying && isActive ? (
+                <Pause className="w-6 h-6 text-white" />
+              ) : (
+                <Play className="w-6 h-6 text-white ml-1" />
+              )}
+            </button>
 
-          <div className="flex-1">
-            <h4 className="font-semibold">{demo.title}</h4>
-            {demo.description && (
-              <p className="text-sm dark:text-white/60">
-                {demo.description}
-              </p>
-            )}
+            <div className="flex-1">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h4 className="font-semibold">{demo.title}</h4>
+                  {demo.description && (
+                    <p className="text-sm dark:text-white/60">{demo.description}</p>
+                  )}
+                </div>
 
-            {/* Progress bar */}
-            <div className="mt-3 h-2 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-white/20">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-blue-500 transition-all"
-                style={{
-                  width:
-                    currentIndex === index ? `${progress}%` : '0%',
-                }}
-              />
+                {/* ✅ time display */}
+                <div className="text-sm text-gray-600 dark:text-white/60 tabular-nums whitespace-nowrap">
+                  {formatTime(shownCurrent)} / {formatTime(shownDuration)}
+                </div>
+              </div>
+
+              {/* ✅ Seek bar */}
+              <div className="mt-3 w-full max-w-[520px]">
+                <div className="relative h-2 rounded-full bg-gray-200 dark:bg-white/20 overflow-hidden">
+                  <div
+                    className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-violet-500 to-blue-500"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={shownDuration || 0}
+                    step={0.1}
+                    value={shownCurrent}
+                    onChange={(e) => seekTo(index, Number(e.target.value))}
+                    disabled={!isActive || !shownDuration}
+                    className={[
+                      "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
+                      (!isActive || !shownDuration) ? "cursor-not-allowed" : ""
+                    ].join(" ")}
+                    aria-label="Seek audio"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

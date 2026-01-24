@@ -66,5 +66,55 @@
   animation: marquee-reverse 40s linear infinite;
 }
 
+/* ================================
+   Google Translate: hard-hide banner
+   ================================ */
+
+/* Banner iframe + wrappers */
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+.goog-te-banner-frame,
+.goog-te-banner,
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+/* Google sometimes adds this class and pushes layout */
+.skiptranslate {
+  top: 0 !important;
+}
+
+/* Prevent layout shift */
+html, body {
+  top: 0 !important;
+  margin-top: 0 !important;
+  position: static !important;
+}
+
+/* Tooltip/bubble */
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+/* Remove highlight artifacts */
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+
+
+
+
 
 

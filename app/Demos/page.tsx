@@ -83,7 +83,7 @@ export default function AutomationPage() {
           <p className="text-xl dark:text-white/60 mb-12">
             Connect your tools, optimize manual work, and scale your operations with intelligent workflow automation.
           </p>
-          <GradientButton href="/contact">
+          <GradientButton href="/contact" className="w-2/5">
             Automate Your Business
           </GradientButton>
         </motion.div>
@@ -113,7 +113,7 @@ export default function AutomationPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card rounded-xl p-6 hover:bg-white/10 transition-all duration-300"
+              className="text-center glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
             >
               <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
                 <feature.icon className="w-6 h-6 text-white" />
@@ -135,9 +135,6 @@ export default function AutomationPage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">
             Try it <span className="gradient-text">Yourself</span>
           </h2>
-          <p className="text-xl dark:text-white/60 text-center mb-12">
-            Listen to real AI voice agents in action.
-          </p>
 
           <AudioDemoPlayer demos={audioDemos} />
         </motion.div>
@@ -163,7 +160,7 @@ export default function AutomationPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12"
+          className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12 ring-1 ring-black/12 dark:ring-white/10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Automate Your Operations?
