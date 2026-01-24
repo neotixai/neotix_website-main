@@ -31,16 +31,16 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center">
-  <div className="relative h-20 w-56">
+  <div className="relative h-14 w-56">
     <Image
-      src="/integrations/neotix.svg"
+      src="/integrations/neotix_dark.svg"
       alt="Neotix AI"
       fill
       priority
       className="object-contain dark:hidden"
     />
     <Image
-      src="/integrations/neotix.svg"
+      src="/integrations/neotix_dark.svg"
       alt="Neotix AI"
       fill
       priority
