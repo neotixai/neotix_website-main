@@ -66,6 +66,11 @@
   animation: marquee-reverse 40s linear infinite;
 }
 
+html {
+  font-size: 87%;
+}
+
+
 
 
 
