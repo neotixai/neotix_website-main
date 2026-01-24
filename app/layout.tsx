@@ -15,14 +15,11 @@ export const metadata: Metadata = {
   description: 'We build AI assistants, intelligent workflows, and creative AI products that scale your business.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        {/* Google Translate (hidden) */}
         <Script id="google-translate-init" strategy="afterInteractive">
           {`
             function googleTranslateElementInit() {
@@ -39,55 +36,11 @@ export default function RootLayout({
         </Script>
 
         <Script
-          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           strategy="afterInteractive"
         />
+
         <div id="google_translate_element" style={{ display: 'none' }} />
-        
-        <Script id="gt-banner-killer" strategy="afterInteractive">
-          {`
-            (function () {
-              const reset = () => {
-                // Remove banner if present
-                const f1 = document.querySelector('iframe.goog-te-banner-frame');
-                if (f1) f1.style.display = 'none';
-
-                // Google sometimes injects a banner div too
-                const banners = document.querySelectorAll('.goog-te-banner-frame, .goog-te-banner');
-                banners.forEach(b => (b.style.display = 'none'));
-
-                // Hard reset layout shift (Google sets body{top:40px} inline)
-                document.documentElement.style.setProperty('top', '0px', 'important');
-                document.body.style.setProperty('top', '0px', 'important');
-                document.body.style.setProperty('margin-top', '0px', 'important');
-                document.body.style.setProperty('position', 'static', 'important');
-
-                // Remove skiptranslate class which can affect layout
-                document.documentElement.classList.remove('skiptranslate');
-                document.body.classList.remove('skiptranslate');
-              };
-
-              // Run often for a bit (Google re-applies after translation)
-              reset();
-              const interval = setInterval(reset, 50);
-              setTimeout(() => clearInterval(interval), 12000);
-
-              // Also after user interactions (translate triggers async changes)
-              window.addEventListener('click', () => {
-                reset();
-                const burst = setInterval(reset, 50);
-                setTimeout(() => clearInterval(burst), 2000);
-              }, true);
-
-              // Mutation observer as backup
-              const obs = new MutationObserver(reset);
-              obs.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
-              setTimeout(() => obs.disconnect(), 20000);
-            })();
-          `}
-        </Script>
-
-
 
         <ThemeProvider>
           <LanguageProvider>
