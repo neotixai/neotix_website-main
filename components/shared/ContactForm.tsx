@@ -93,7 +93,7 @@ export default function ContactForm() {
           href="mailto:contact@neotix-ai.com"
           className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300"
         >
-          contact@neotix.ai
+          contact@neotix-ai.com
         </a>
       </p>
     </form>
