@@ -59,7 +59,7 @@ export default function ContactPage() {
               href="mailto:contact@neotix-ai.com"
               className="dark:text-white/60 hover:text-violet-400 transition-colors"
             >
-              contact@neotix.ai
+              contact@neotix-ai.com
             </a>
           </motion.div>
 
@@ -150,7 +150,7 @@ export default function ContactPage() {
                   </GradientButton>
 
                   <a
-                    href={`mailto:contact@neotix.ai?subject=${encodeURIComponent(
+                    href={`mailto:contact@neotix-ai.com?subject=${encodeURIComponent(
                       t.contactPage.call.emailSubject
                     )}`}
                     className="block w-full"
