@@ -7,6 +7,7 @@ import { useState } from 'react';
 import ThemeToggle from '@/components/shared/ThemeToggle';
 import LanguageToggle from '@/components/shared/LanguageToggle';
 import { useT } from '@/hooks/useT';
+import Image from 'next/image';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -29,12 +30,25 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-lg">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          <Link
-            href="/"
-            className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-violet-600 to-blue-600 dark:from-violet-400 dark:to-blue-400 bg-clip-text text-transparent"
-          >
-            Neotix AI
-          </Link>
+          <Link href="/" className="flex items-center">
+  <div className="relative h-20 w-56">
+    <Image
+      src="/integrations/neotix.svg"
+      alt="Neotix AI"
+      fill
+      priority
+      className="object-contain dark:hidden"
+    />
+    <Image
+      src="/integrations/neotix.svg"
+      alt="Neotix AI"
+      fill
+      priority
+      className="hidden dark:block object-contain"
+    />
+  </div>
+</Link>
+
 
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
