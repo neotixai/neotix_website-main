@@ -42,7 +42,7 @@ export default function DemosPage() {
             {t.demosPage.hero.subtitle}
           </p>
 
-          <GradientButton href="/contact" className="w-2/5">
+          <GradientButton href="/contact" className="w-full sm:w-2/5">
             {t.demosPage.hero.cta}
           </GradientButton>
         </motion.div>
@@ -81,7 +81,7 @@ export default function DemosPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
               >
-                <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
+                <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
 

@@ -356,7 +356,7 @@ export default function PricingPage() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.pricingPage.finalCta.title}</h2>
           <p className="text-xl dark:text-white/60 mb-8">{t.pricingPage.finalCta.subtitle}</p>
-          <GradientButton href="/contact" className="w-1/3">
+          <GradientButton href="/contact" className="w-full sm:w-1/3">
             {t.pricingPage.finalCta.button}
           </GradientButton>
         </motion.div>

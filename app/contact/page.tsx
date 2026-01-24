@@ -42,7 +42,7 @@ export default function ContactPage() {
       </Section>
 
       <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* EMAIL */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             className="text-center glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
           >
-            <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
+            <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500">
               <Mail className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">{t.contactPage.cards.emailTitle}</h3>
@@ -64,6 +64,7 @@ export default function ContactPage() {
           </motion.div>
 
           {/* PHONE */}
+          {/*
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +75,9 @@ export default function ContactPage() {
             <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
               <Phone className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">{t.contactPage.cards.phoneTitle}</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              {t.contactPage.cards.phoneTitle}
+            </h3>
             <a
               href="tel:+15148342926"
               className="dark:text-white/60 hover:text-violet-400 transition-colors"
@@ -82,6 +85,8 @@ export default function ContactPage() {
               +1 (514)-834-2926
             </a>
           </motion.div>
+          */}
+
 
           {/* LOCATION */}
           <motion.div
@@ -91,7 +96,7 @@ export default function ContactPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-center glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
           >
-            <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
+            <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500">
               <MapPin className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">{t.contactPage.cards.locationTitle}</h3>
@@ -130,7 +135,7 @@ export default function ContactPage() {
               <div className="glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl">
                 <div className="mb-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
+                    <div className="mb-1 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500">
                       <Calendar className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold">{t.contactPage.call.cardTitle}</h3>

@@ -75,7 +75,7 @@ export default function AutomationAIPage() {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="glass-card rounded-xl p-6 ring-1 ring-black/12 dark:ring-white/10 hover:bg-white/10 transition-all duration-300"
             >
-              <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
+              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500">
                 <item.icon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -149,7 +149,7 @@ export default function AutomationAIPage() {
           <p className="text-xl dark:text-white/60 mb-8">{t.offerPage.finalCta.subtitle}</p>
 
           <div className="flex justify-center">
-            <GradientButton href="/contact" className="w-1/2">
+            <GradientButton href="/contact" className="w-full sm:w-1/2">
               {t.offerPage.finalCta.button}
             </GradientButton>
           </div>

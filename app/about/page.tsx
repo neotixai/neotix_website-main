@@ -144,7 +144,7 @@ export default function AboutPage() {
             {t.aboutPage.finalCta.subtitle}
           </p>
 
-          <GradientButton href="/contact" className="w-1/3">
+          <GradientButton href="/contact" className="w-full sm:w-1/3">
             {t.aboutPage.finalCta.button}
           </GradientButton>
         </motion.div>

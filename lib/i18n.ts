@@ -2,7 +2,7 @@ export const messages = {
   en: {
     nav: {
       home: 'Home',
-      offer: 'What We Offer',
+      offer: 'Services',
       demos: 'Demos',
       pricing: 'Pricing',
       about: 'About',
@@ -64,7 +64,7 @@ export const messages = {
         home: 'Home',
         about: 'About',
         contact: 'Contact',
-        offer: 'What We Offer',
+        offer: 'Services',
         demos: 'Demos',
       },
       rights: 'All rights reserved.',
