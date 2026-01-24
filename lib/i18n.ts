@@ -183,7 +183,7 @@ export const messages = {
       },
       {
         title: 'Human-Like Voice',
-        description: 'Natural, expressive voice that sounds like a real receptionist, not a robot',
+        description: 'Natural, expressive voice that sounds like a real receptionist',
       },
       {
         title: 'Appointment Booking & Lead Capture',
@@ -248,12 +248,12 @@ pricingPage: {
     btn3m: '3 months',
     btn6m: '6 months',
     btn1y: '1 year',
-    billed3m: 'Billed every 3 months',
-    billed6m: 'Billed every 6 months',
-    billed1y: 'Billed yearly',
+    billed3m: '3 month minimum commitment',
+    billed6m: '6 month minimum commitment',
+    billed1y: '1 year minimum commitment',
     badgeNone: 'No discount',
     badge10: 'Save 10%',
-    badge20: 'Save 20%',
+    badge20: 'Save 15%',
     off: 'OFF',
   },
 
@@ -310,7 +310,7 @@ pricingPage: {
         'Call transcripts',
         'Multi-language support',
         'Advanced analytics & reporting',
-        'Onboarding included',
+        'One-time setup & onboarding fee: $250',
       ],
     },
     enterprise: {
@@ -340,7 +340,7 @@ pricingPage: {
       ['Call transcripts', '__dash__', '__check__', '__check__', '__check__'],
       ['Multi-language support', '__dash__', '__check__', '__check__', '__check__'],
       ['Advanced analytics & reporting', '__dash__', '__dash__', '__check__', 'Custom'],
-      ['Onboarding fee', '$400', '$400', '$0', 'Custom'],
+      ['Onboarding fee', '$400', '$400', '$250', 'Custom'],
     ],
   },
 
@@ -476,8 +476,8 @@ contactForm: {
 
     home: {
       badge: 'Solutions IA nouvelle génération',
-      titlePrefix: 'Neotix AI — Là où la vision devient',
-      titleAccent: 'Automatisation',
+      titlePrefix: 'Neotix AI —  Transformez vos idées en',
+      titleAccent: ' automatisation intelligente',
       subtitle:
         "On construit des assistants IA, des workflows intelligents et des produits créatifs qui font grandir ton business. Du support client aux campagnes de croissance, on livre des résultats concrets.",
       primary: 'Consultation gratuite',
@@ -501,9 +501,9 @@ contactForm: {
       titleAccent: 'Processus',
       subtitle: 'De l’idée au lancement en trois étapes simples et efficaces',
       steps: [
-        { title: 'Découvrir', description: 'On analyse tes besoins et on conçoit la solution IA idéale' },
-        { title: 'Construire', description: 'On développe et on intègre des systèmes IA sur mesure' },
-        { title: 'Lancer', description: 'On déploie, optimise et fait évoluer avec un support continu' },
+        { title: 'Découvrir', description: 'On analyse tes besoins et on conçoit la solution IA idéale.' },
+        { title: 'Construire', description: 'On développe et on intègre des systèmes IA sur mesure.' },
+        { title: 'Lancer', description: 'On déploie, optimise et fait évoluer avec un support continu.' },
       ],
     },
 
@@ -512,9 +512,9 @@ contactForm: {
       titleAccent: 'Solutions',
       subtitle: 'Des services IA complets pour transformer tes opérations',
       items: [
-        { title: 'Assistants IA', description: 'Assistants chat/voix sur mesure pour support, ventes et réservations' },
-        { title: 'Automatisation business', description: 'Workflows Make/N8N, synchro CRM, email/SMS, routage de leads' },
-        { title: 'Développement web & app', description: 'Landing pages modernes, dashboards, intégrations' },
+        { title: 'Assistants IA', description: 'Assistants chat/voix sur mesure pour support, ventes et réservations.' },
+        { title: 'Automatisation business', description: 'Workflows Make/N8N, synchro CRM, email/SMS, routage de leads.' },
+        { title: 'Développement web & app', description: 'Landing pages modernes, dashboards, intégrations.' },
       ],
     },
 
@@ -550,32 +550,32 @@ contactForm: {
       {
         title: 'Automatisation de workflows',
         description:
-          'Créer des scénarios Make/N8N avancés pour connecter tes outils et automatiser les tâches répétitives',
+          'Créer des scénarios Make/N8N avancés pour connecter tes outils et automatiser les tâches répétitives.',
       },
       {
         title: 'Automatisation des communications',
         description:
-          'Automatiser des séquences email, campagnes SMS et notifications déclenchées par les actions clients',
+          'Automatiser des séquences email, campagnes SMS et notifications déclenchées par les actions clients.',
       },
       {
         title: 'Intégration de données',
         description:
-          'Synchroniser CRM, bases de données et spreadsheets automatiquement avec des flux en temps réel',
+          'Synchroniser CRM, bases de données et spreadsheets automatiquement avec des flux en temps réel.',
       },
       {
         title: 'Assistants chat',
         description:
-          'Déployer des chatbots intelligents pour le support, la qualification de leads et l’aide à la vente',
+          'Déployer des chatbots intelligents pour le support, la qualification de leads et l’aide à la vente.',
       },
       {
-        title: 'IA vocale',
+        title: 'Assistants vocaux',
         description:
-          'Créer des assistants vocaux pour le support téléphonique et la prise de rendez-vous',
+          'Créer des assistants vocaux personnalisés pour le support téléphonique et la prise de rendez-vous.',
       },
       {
-        title: 'Automatisation de réservation',
+        title: 'Réservation automatique',
         description:
-          'Automatiser la prise de rendez-vous et la gestion de calendrier avec des agents IA',
+          'Automatiser la prise de rendez-vous et la gestion de calendrier avec des agents IA.',
       },
     ],
   },
@@ -585,7 +585,7 @@ contactForm: {
     leftP1:
       "Arrête de perdre des heures sur des tâches répétitives. On conçoit des workflows intelligents qui se déclenchent automatiquement selon des actions, le temps ou des conditions métier.",
     leftP2:
-      "Routage de leads, facturation, synchro CRM, notifications — tout tourne automatiquement en arrière-plan.",
+      "Routage de leads, facturation, synchro CRM, notifications, tout tourne automatiquement en arrière-plan.",
 
     rightTitle: 'Des assistants IA actifs 24/7',
     rightP1:
@@ -629,8 +629,8 @@ contactForm: {
 
 demosPage: {
   hero: {
-    titlePrefix: 'Automatisation business',
-    titleSuffix: 'qui fonctionne vraiment',
+    titlePrefix: 'Automatise ton business',
+    titleSuffix: 'de la bonne manière',
     subtitle:
       "Connecte tes outils, réduis le travail manuel et scale tes opérations grâce à l’automatisation intelligente.",
     cta: 'Automatiser mon business',
@@ -644,29 +644,29 @@ demosPage: {
       {
         title: 'Ne rate plus aucun appel',
         description:
-          "Ton réceptionniste IA répond à 100% des appels entrants, 24/7, même hors heures d’ouverture. N’oublie pas : 1 appel manqué est 1 client de moins",
+          "Ton réceptionniste IA répond à 100% des appels entrants, 24/7, même hors heures d’ouverture. N’oublie pas : 1 appel manqué est 1 client de moins.",
       },
       {
         title: 'Voix naturelle',
         description:
-          'Une voix expressive et naturelle, comme une vraie réceptionniste — pas un robot',
+          'Une voix expressive et naturelle, comme une vraie réceptionniste.',
       },
       {
-        title: 'Prise de rendez-vous & capture de leads',
+        title: 'Prise de rendez-vous & synchronisation',
         description:
-          'Prend, annule, reporte les rendez-vous, capture des leads, et synchronise tout automatiquement avec tes outils',
+          'Prend, annule, reporte les rendez-vous, et synchronise tout automatiquement avec tes outils.',
       },
     ],
   },
 
   try: {
-    titlePrefix: 'Teste-le',
-    titleAccent: 'toi-même',
+    titlePrefix: 'Essayez par ',
+    titleAccent: 'vous-même',
   },
 
   audioDemos: [
     { title: 'Agent Barbershop', description: 'Questions clients sur le business' },
-    { title: 'Agent Restaurant', description: 'Gestion des appels entrants & qualification' },
+    { title: 'Agent Restaurant', description: 'Gestion des appels entrants' },
     { title: 'Agent Dentaire', description: 'Prise de rendez-vous patients automatisée' },
     { title: 'Agent Fitness', description: 'Réponses aux questions clients sur le business' },
   ],
@@ -714,12 +714,12 @@ pricingPage: {
     btn3m: '3 mois',
     btn6m: '6 mois',
     btn1y: '1 an',
-    billed3m: 'Facturé tous les 3 mois',
-    billed6m: 'Facturé tous les 6 mois',
-    billed1y: 'Facturé annuellement',
+    billed3m: 'Engagement minimum sur 3 mois',
+    billed6m: 'Engagement minimum sur 6 mois',
+    billed1y: 'Engagement minimum sur 1 an',
     badgeNone: 'Aucun rabais',
     badge10: '-10%',
-    badge20: '-20%',
+    badge20: '-15%',
     off: 'OFF',
   },
 
@@ -866,11 +866,11 @@ aboutPage: {
   who: {
     title: 'Qui sommes-nous',
     p1:
-      "Fondée par des entrepreneurs qui ont vécu de près les défis de la croissance, Neotix AI est née d’une vision simple : faire fonctionner l’IA pour tout le monde.",
+      "Fondée par des entrepreneurs qui ont vécu de près les défis de la croissance, Neotix AI est née d’une vision simple : offrir la technologie de l’IA pour tout le monde.",
     p2:
       "On aide les entreprises à automatiser leurs workflows, améliorer l’expérience client et débloquer de nouvelles opportunités de croissance grâce à des solutions IA sur mesure.",
     p3:
-      "Des startups aux grandes entreprises, on adapte notre approche à ton contexte — et on t’aide à atteindre tes objectifs.",
+      "Des startups aux grandes entreprises, on adapte notre approche à ton contexte et on t’aide à atteindre tes objectifs.",
   },
 
   why: {
@@ -895,7 +895,7 @@ aboutPage: {
       {
         title: 'Centrés client',
         description:
-          "Ton succès = notre succès. On travaille avec toi pour comprendre tes besoins et livrer des solutions qui dépassent les attentes.",
+          "Ton succès = notre succès. On travaille avec toi pour comprendre tes besoins et livrer des solutions concrètes.",
       },
       {
         title: 'Innovation d’abord',

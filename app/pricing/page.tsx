@@ -18,7 +18,7 @@ const PRICES = {
 const DISCOUNT = {
   '3m': 0,
   '6m': 0.1,
-  '1y': 0.2,
+  '1y': 0.15,
 } as const;
 
 function formatTotal(total: number) {
@@ -117,12 +117,13 @@ export default function PricingPage() {
             <span className="gradient-text">{t.pricingPage.hero.titleAccent}</span>
           </h1>
 
-          <p className="text-xl dark:text-white/60 mb-10 max-w-3xl mx-auto">
-            {t.pricingPage.hero.subtitle}
-            <p className="text-sm text-gray-700 dark:text-white/50">
+          <div className="text-xl dark:text-white/60 mb-10 max-w-3xl mx-auto">
+            <p>{t.pricingPage.hero.subtitle}</p>
+
+            <p className="text-sm text-gray-700 dark:text-white/50 mt-2">
               {t.pricingPage.hero.note}
             </p>
-          </p>
+          </div>
 
           {/* BILLING TOGGLE */}
           <div className="inline-flex items-center gap-2 p-2 rounded-2xl glass-card ring-1 ring-black/12 dark:ring-white/10">
@@ -152,7 +153,7 @@ export default function PricingPage() {
               }`}
             >
               {t.pricingPage.billing.btn1y}{' '}
-              <span className="dark:text-white/50 ml-1">(-20%)</span>
+              <span className="dark:text-white/50 ml-1">(-15%)</span>
             </button>
           </div>
 
