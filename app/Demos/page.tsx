@@ -10,22 +10,22 @@ import AudioDemoPlayer from '@/components/shared/AudioDemoPlayer';
 const audioDemos = [
   {
     title: 'Barbershop Agent',
-    description: 'Customer inquiries about the business',
+    description: 'Customer inquiries about the business (French)',
     src: '/audio/Barbershop.m4a'
   },
   {
     title: 'Restaurant Agent',
-    description: 'Inbound call handling and qualification',
+    description: 'Inbound call handling and qualification (English)',
     src: '/audio/Restaurant.m4a'
   },
   {
     title: 'Dental Agent',
-    description: 'Automated patient booking appointment',
+    description: 'Automated patient booking appointment (English)',
     src: '/audio/Dental.m4a'
   },
   {
     title: 'Fitness Club Agent',
-    description: 'Answering customer questions about the business',
+    description: 'Answering customer questions about the business (French)',
     src: '/audio/Fitness.m4a'
   }
 ];
@@ -130,7 +130,7 @@ export default function AutomationPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">
             Try it <span className="gradient-text">Yourself</span>
