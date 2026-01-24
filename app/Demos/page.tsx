@@ -134,30 +134,6 @@ export default function DemosPage() {
         </motion.div>
       </Section>
 
-      {/* FAQ */}
-      <Section>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-            {t.demosPage.faq.titlePrefix}{' '}
-            <span className="gradient-text">
-              {t.demosPage.faq.titleAccent}
-            </span>
-          </h2>
-
-          <FAQAccordion
-            items={t.demosPage.faq.items.map((item) => ({
-              question: item.q,
-              answer: item.a,
-            }))}
-          />
-        </motion.div>
-      </Section>
 
       {/* FINAL CTA */}
       <Section>

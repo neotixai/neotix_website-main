@@ -6,6 +6,8 @@ import Section from '@/components/shared/Section';
 import GradientButton from '@/components/shared/GradientButton';
 import { Check } from 'lucide-react';
 import { useT } from '@/hooks/useT';
+import FAQAccordion from '@/components/shared/FAQAccordion';
+
 
 type Billing = '3m' | '6m' | '1y';
 
@@ -176,7 +178,7 @@ export default function PricingPage() {
                 'shadow-[0_10px_30px_rgba(0,0,0,0.06)]',
                 'hover:shadow-[0_14px_45px_rgba(0,0,0,0.10)]',
                 'ring-1 ring-black/12 hover:ring-black/20',
-                'dark:ring-white/10 dark:hover:bg-white/10 dark:hover:ring-white/20',
+                'dark:ring-white/15 dark:hover:bg-white/10 dark:hover:ring-white/20',
                 plan.highlighted ? 'ring-2 ring-violet-500 shadow-[0_0_40px_rgba(139,92,246,0.35)]' : '',
               ].join(' ')}
             >
@@ -315,6 +317,31 @@ export default function PricingPage() {
               </tbody>
             </table>
           </div>
+        </motion.div>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl mx-auto"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            {t.demosPage.faq.titlePrefix}{' '}
+            <span className="gradient-text">
+              {t.demosPage.faq.titleAccent}
+            </span>
+          </h2>
+
+          <FAQAccordion
+            items={t.demosPage.faq.items.map((item) => ({
+              question: item.q,
+              answer: item.a,
+            }))}
+          />
         </motion.div>
       </Section>
 
