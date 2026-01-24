@@ -745,7 +745,7 @@ pricingPage: {
         'Intégration CRM basique',
         'Notifications email & SMS',
         'Transfert 1 numéro',
-        'Frais de setup & onboarding : 400$ (one-time)',
+        'Frais de setup & onboarding : 400$',
       ],
     },
     pro: {
@@ -760,7 +760,7 @@ pricingPage: {
         'Transfert 2 numéros',
         'Transcriptions d’appels',
         'Support multilingue',
-        'Frais de setup & onboarding : 400$ (one-time)',
+        'Frais de setup & onboarding : 400$',
       ],
     },
     business: {
@@ -776,7 +776,7 @@ pricingPage: {
         'Transcriptions d’appels',
         'Support multilingue',
         'Analytics & reporting avancés',
-        'Onboarding inclus',
+        'Frais de setup & onboarding : 250$',
       ],
     },
     enterprise: {
@@ -806,7 +806,7 @@ pricingPage: {
       ['Transcriptions d’appels', '__dash__', '__check__', '__check__', '__check__'],
       ['Support multilingue', '__dash__', '__check__', '__check__', '__check__'],
       ['Analytics & reporting', '__dash__', '__dash__', '__check__', 'Sur mesure'],
-      ['Frais d’onboarding', '400$', '400$', '0$', 'Sur mesure'],
+      ['Frais d’onboarding', '400$', '400$', '250$', 'Sur mesure'],
     ],
   },
 
