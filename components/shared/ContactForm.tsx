@@ -90,7 +90,7 @@ export default function ContactForm() {
       <p className="text-center text-sm text-gray-700 dark:text-white/60">
         {t.contactForm.orEmail}{' '}
         <a
-          href="mailto:contact@neotix.ai"
+          href="mailto:contact@neotix-ai.com"
           className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300"
         >
           contact@neotix.ai
