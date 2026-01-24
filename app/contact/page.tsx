@@ -56,7 +56,7 @@ export default function ContactPage() {
             </div>
             <h3 className="text-lg font-semibold mb-2">{t.contactPage.cards.emailTitle}</h3>
             <a
-              href="mailto:contact@neotix.ai"
+              href="mailto:contact@neotix-ai.com"
               className="dark:text-white/60 hover:text-violet-400 transition-colors"
             >
               contact@neotix.ai
