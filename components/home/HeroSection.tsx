@@ -2,13 +2,14 @@
 
 import { motion } from 'framer-motion';
 import GradientButton from '@/components/shared/GradientButton';
+import { useT } from '@/hooks/useT';
 
 export default function HeroSection() {
+  const { t } = useT();
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -21,29 +22,30 @@ export default function HeroSection() {
         >
           <div className="mb-6">
             <span className="inline-block px-4 py-2 rounded-full glass-card ring-1 ring-black/15 dark:ring-white/10 text-sm font-medium gradient-text">
-              Next-Gen AI Solutions
+              {t.home.badge}
             </span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
-            Neotix AI — Where Vision Becomes{' '}
-            <span className="gradient-text">Automation</span>
+            {t.home.titlePrefix}{' '}
+            <span className="gradient-text">{t.home.titleAccent}</span>
           </h1>
 
           <p className="text-xl text-gray-800 dark:text-white/60 mb-10 max-w-2xl mx-auto">
-            We build AI assistants, intelligent workflows, and creative AI products that scale your business. From customer support to growth campaigns, we deliver real outcomes.
+            {t.home.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <GradientButton onClick={() => scrollToSection('contact')}>
-              Get a Free Consultation
+              {t.home.primary}
             </GradientButton>
-              <GradientButton
-                variant="secondary"
-                className="ring-1 ring-black/15 dark:ring-white/10"
-                onClick={() => scrollToSection('solutions')}
-              >
-              Explore Our Services
+
+            <GradientButton
+              variant="secondary"
+              className="ring-1 ring-black/15 dark:ring-white/10"
+              onClick={() => scrollToSection('solutions')}
+            >
+              {t.home.secondary}
             </GradientButton>
           </div>
         </motion.div>

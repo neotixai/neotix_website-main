@@ -6,70 +6,26 @@ import GradientButton from '@/components/shared/GradientButton';
 import FAQAccordion from '@/components/shared/FAQAccordion';
 import { PhoneCall, Volume2, CalendarCheck } from 'lucide-react';
 import AudioDemoPlayer from '@/components/shared/AudioDemoPlayer';
+import { useT } from '@/hooks/useT';
 
-const audioDemos = [
-  {
-    title: 'Barbershop Agent',
-    description: 'Customer inquiries about the business (French)',
-    src: '/audio/Barbershop.m4a'
-  },
-  {
-    title: 'Restaurant Agent',
-    description: 'Inbound call handling and qualification (English)',
-    src: '/audio/Restaurant.m4a'
-  },
-  {
-    title: 'Dental Agent',
-    description: 'Automated patient booking appointment (English)',
-    src: '/audio/Dental.m4a'
-  },
-  {
-    title: 'Fitness Club Agent',
-    description: 'Answering customer questions about the business (French)',
-    src: '/audio/Fitness.m4a'
-  }
-];
+export default function DemosPage() {
+  const { t } = useT();
 
-const features = [
-  {
-    icon: PhoneCall,
-    title: 'Never Miss a Call',
-    description: "Your AI receptionist answers 100% of incoming calls, 24/7, even outside business hours. Don't forget, 1 missed call <=> 1 less customer"
-  },
-  {
-    icon: Volume2,
-    title: 'Human-Like Voice',
-    description: 'Natural, expressive voice that sounds like a real receptionist, not a robot'
-  },
-  {
-    icon: CalendarCheck,
-    title: 'Appointment Booking & Lead Capture',
-    description: 'Books, cancels, reschedules appointments, captures leads, and syncs everything to your tools automatically'
-  }
-];
+  const audioDemos = [
+    { ...t.demosPage.audioDemos[0], src: '/audio/Barbershop.m4a', lang: 'fr' },
+    { ...t.demosPage.audioDemos[1], src: '/audio/Restaurant.m4a', lang: 'en' },
+    { ...t.demosPage.audioDemos[2], src: '/audio/Dental.m4a', lang: 'en' },
+    { ...t.demosPage.audioDemos[3], src: '/audio/Fitness.m4a', lang: 'fr' },
+  ];
 
-const faqs = [
-  {
-    question: "What if I need more minutes?",
-    answer: "You can adjust your plan whenever you need. Additional minutes are billed at a simple per-minute rate, and you’ll always be notified before reaching your limit to avoid any unexpected charges."
-  },
-  {
-    question: 'Can the AI receptionist handle multiple calls at the same time?',
-    answer: 'Yes. The AI receptionist can handle multiple calls simultaneously with no wait time, ensuring every caller is answered instantly, even during peak hours'
-  },
-  {
-    question: 'Can the AI receptionist speak multiple languages?',
-    answer: "Yes. The AI receptionist can speak multiple languages and automatically adapt to your customer's preferred language."
-  },
-  {
-    question: "Can I customize the AI's responses?",
-    answer: "Yes. You have full control over how the AI interacts with your callers, from greetings and qualification questions to business hours and overall tone. The system also improves continuously based on your feedback."
-  }
-];
+  const frDemos = audioDemos.filter(d => d.lang === 'fr');
+  const enDemos = audioDemos.filter(d => d.lang === 'en');
 
-export default function AutomationPage() {
+  const featuresIcons = [PhoneCall, Volume2, CalendarCheck];
+
   return (
     <>
+      {/* HERO */}
       <Section className="pt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,17 +34,21 @@ export default function AutomationPage() {
           className="max-w-4xl mx-auto text-center"
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="gradient-text">Business Automation</span> That Works
+            <span className="gradient-text">{t.demosPage.hero.titlePrefix}</span>{' '}
+            {t.demosPage.hero.titleSuffix}
           </h1>
+
           <p className="text-xl dark:text-white/60 mb-12">
-            Connect your tools, optimize manual work, and scale your operations with intelligent workflow automation.
+            {t.demosPage.hero.subtitle}
           </p>
+
           <GradientButton href="/contact" className="w-2/5">
-            Automate Your Business
+            {t.demosPage.hero.cta}
           </GradientButton>
         </motion.div>
       </Section>
 
+      {/* FEATURES */}
       <Section>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -98,32 +58,47 @@ export default function AutomationPage() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Automation <span className="gradient-text">Solutions</span>
+            {t.demosPage.features.titlePrefix}{' '}
+            <span className="gradient-text">
+              {t.demosPage.features.titleAccent}
+            </span>
           </h2>
+
           <p className="text-xl dark:text-white/60 max-w-2xl mx-auto">
-            End-to-end automation services for modern businesses
+            {t.demosPage.features.subtitle}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
-            >
-              <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
-                <feature.icon className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="dark:text-white/60">{feature.description}</p>
-            </motion.div>
-          ))}
+          {t.demosPage.features.items.map((feature, index) => {
+            const Icon = featuresIcons[index];
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center glass-card rounded-2xl p-8 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
+              >
+                <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
+                  <Icon className="w-6 h-6 text-white" />
+                </div>
+
+                <h3 className="text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+
+                <p className="dark:text-white/60">
+                  {feature.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </Section>
+
+      {/* TRY IT */}
       <Section>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -132,13 +107,34 @@ export default function AutomationPage() {
           transition={{ duration: 0.5 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">
-            Try it <span className="gradient-text">Yourself</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center">
+            {t.demosPage.try.titlePrefix}{' '}
+            <span className="gradient-text">
+              {t.demosPage.try.titleAccent}
+            </span>
           </h2>
 
-          <AudioDemoPlayer demos={audioDemos} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* FR */}
+            <div className="flex flex-col items-center">
+              <h3 className="text-lg font-semibold mb-4 text-center">Français</h3>
+              <div className="w-full max-w-2xl">
+                <AudioDemoPlayer demos={frDemos} />
+              </div>
+            </div>
+
+            {/* EN */}
+            <div className="flex flex-col items-center">
+              <h3 className="text-lg font-semibold mb-4 text-center">English</h3>
+              <div className="w-full max-w-2xl">
+                <AudioDemoPlayer demos={enDemos} />
+              </div>
+            </div>
+          </div>
         </motion.div>
       </Section>
+
+      {/* FAQ */}
       <Section>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -148,12 +144,22 @@ export default function AutomationPage() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-            Common <span className="gradient-text">Questions</span>
+            {t.demosPage.faq.titlePrefix}{' '}
+            <span className="gradient-text">
+              {t.demosPage.faq.titleAccent}
+            </span>
           </h2>
-          <FAQAccordion items={faqs} />
+
+          <FAQAccordion
+            items={t.demosPage.faq.items.map((item) => ({
+              question: item.q,
+              answer: item.a,
+            }))}
+          />
         </motion.div>
       </Section>
 
+      {/* FINAL CTA */}
       <Section>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -163,13 +169,15 @@ export default function AutomationPage() {
           className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12 ring-1 ring-black/12 dark:ring-white/10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Automate Your Operations?
+            {t.demosPage.finalCta.title}
           </h2>
+
           <p className="text-xl dark:text-white/60 mb-8">
-            Let’s optimize your business, whatever your industry, and free up time for what really matters.
+            {t.demosPage.finalCta.subtitle}
           </p>
+
           <GradientButton href="/contact">
-            Start Automating
+            {t.demosPage.finalCta.button}
           </GradientButton>
         </motion.div>
       </Section>

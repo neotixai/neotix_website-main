@@ -16,12 +16,18 @@ function formatTime(seconds: number) {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
+export default function AudioDemoPlayer({
+  demos,
+  columns = 1,
+}: {
+  demos: AudioDemo[];
+  columns?: 1 | 2;
+}) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // ✅ seconds
+  // seconds
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -62,7 +68,7 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
 
     const src = demos[index].src;
 
-    // ✅ clic sur un autre audio
+    // click sur un autre audio
     if (currentIndex !== index) {
       audio.pause();
       audio.src = src;
@@ -76,12 +82,12 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
           setCurrentIndex(index);
           setIsPlaying(true);
         })
-        .catch((err) => console.error('Safari audio error:', err));
+        .catch((err) => console.error('Audio play error:', err));
 
       return;
     }
 
-    // ✅ play/pause même audio
+    // play/pause même audio
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
@@ -93,7 +99,7 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
     }
   };
 
-  // ✅ seek (avancer / reculer)
+  // seek
   const seekTo = (index: number, newTime: number) => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -105,7 +111,11 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div
+      className={[
+        columns === 2 ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'space-y-6',
+      ].join(' ')}
+    >
       <audio ref={audioRef} preload="metadata" />
 
       {demos.map((demo, index) => {
@@ -117,12 +127,17 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
 
         return (
           <div
-            key={index}
-            className="mx-auto w-full max-w-2xl glass-card rounded-xl p-6 flex items-center gap-4 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl"
+            key={`${demo.src}-${index}`}
+            className={[
+              'w-full glass-card rounded-xl p-6 flex items-center gap-4',
+              'bg-white/60 dark:bg-white/5 backdrop-blur-xl',
+              'ring-1 ring-black/12 dark:ring-white/10',
+              'transition-all duration-300 hover:ring-black/20 dark:hover:ring-white/20 hover:shadow-xl',
+            ].join(' ')}
           >
             <button
               onClick={() => togglePlay(index)}
-              className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center"
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0"
               aria-label={isPlaying && isActive ? 'Pause' : 'Play'}
             >
               {isPlaying && isActive ? (
@@ -132,28 +147,29 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
               )}
             </button>
 
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h4 className="font-semibold">{demo.title}</h4>
+                <div className="min-w-0">
+                  <h4 className="font-semibold truncate">{demo.title}</h4>
                   {demo.description && (
-                    <p className="text-sm dark:text-white/60">{demo.description}</p>
+                    <p className="text-sm dark:text-white/60 line-clamp-2">
+                      {demo.description}
+                    </p>
                   )}
                 </div>
 
-                {/* ✅ time display */}
                 <div className="text-sm text-gray-600 dark:text-white/60 tabular-nums whitespace-nowrap">
                   {formatTime(shownCurrent)} / {formatTime(shownDuration)}
                 </div>
               </div>
 
-              {/* ✅ Seek bar */}
-              <div className="mt-3 w-full max-w-[520px]">
+              <div className="mt-3 w-full">
                 <div className="relative h-2 rounded-full bg-gray-200 dark:bg-white/20 overflow-hidden">
                   <div
                     className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-violet-500 to-blue-500"
                     style={{ width: `${progressPercent}%` }}
                   />
+
                   <input
                     type="range"
                     min={0}
@@ -163,9 +179,9 @@ export default function AudioDemoPlayer({ demos }: { demos: AudioDemo[] }) {
                     onChange={(e) => seekTo(index, Number(e.target.value))}
                     disabled={!isActive || !shownDuration}
                     className={[
-                      "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
-                      (!isActive || !shownDuration) ? "cursor-not-allowed" : ""
-                    ].join(" ")}
+                      'absolute inset-0 w-full h-full opacity-0 cursor-pointer',
+                      !isActive || !shownDuration ? 'cursor-not-allowed' : '',
+                    ].join(' ')}
                     aria-label="Seek audio"
                   />
                 </div>

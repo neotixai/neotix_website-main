@@ -2,6 +2,7 @@
 
 import Section from '@/components/shared/Section';
 import { motion } from 'framer-motion';
+import { useT } from '@/hooks/useT';
 
 type IntegrationItem = { src: string; label: string };
 
@@ -103,6 +104,8 @@ function MarqueeRow({ items, reverse = false }: { items: IntegrationItem[]; reve
 }
 
 export default function IntegrationMarquee() {
+  const { t } = useT();
+
   return (
     <Section className="bg-gradient-to-b from-violet-500/5 to-transparent overflow-hidden">
       <motion.div
@@ -113,7 +116,9 @@ export default function IntegrationMarquee() {
         className="text-center mb-10"
       >
         <p className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-          Integrations that <span className="gradient-text">power</span> your workflows
+          {t.integrations.titlePrefix}{' '}
+          <span className="gradient-text">{t.integrations.titleAccent}</span>{' '}
+          {t.integrations.titleSuffix}
         </p>
       </motion.div>
 

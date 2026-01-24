@@ -6,27 +6,27 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import ThemeToggle from '@/components/shared/ThemeToggle';
 import LanguageToggle from '@/components/shared/LanguageToggle';
-import { useLanguage } from '@/components/providers/LanguageProvider';
+import { useT } from '@/hooks/useT';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { language } = useLanguage();
+  const { t } = useT();
 
   const navLinks = [
-    { href: '/', label: language === 'en' ? 'Home' : 'Accueil' },
-    { href: '/what-we-offer', label: language === 'en' ? 'What We Offer' : 'Nos services' },
-    { href: '/demos', label: language === 'en' ? 'Demos' : 'Démos' },
-    { href: '/pricing', label: language === 'en' ? 'Pricing' : 'Tarifs' },
-    { href: '/about', label: language === 'en' ? 'About' : 'À propos' },
-    { href: '/contact', label: language === 'en' ? 'Contact' : 'Contact' },
+    { href: '/', label: t.nav.home },
+    { href: '/what-we-offer', label: t.nav.offer },
+    { href: '/demos', label: t.nav.demos },
+    { href: '/pricing', label: t.nav.pricing },
+    { href: '/about', label: t.nav.about },
+    { href: '/contact', label: t.nav.contact },
   ];
 
-  const ctaLabel = language === 'en' ? 'Book With Us' : 'Réserver';
+  const ctaLabel = t.nav.cta;
 
   return (
-    <nav className="notranslate sticky top-0 z-50 w-full border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-lg">
+    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-lg">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <Link

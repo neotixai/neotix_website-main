@@ -4,78 +4,25 @@ import { motion } from 'framer-motion';
 import Section from '@/components/shared/Section';
 import GradientButton from '@/components/shared/GradientButton';
 import FAQAccordion from '@/components/shared/FAQAccordion';
-import {
-  Workflow,
-  Mail,
-  Database,
-  MessageSquare,
-  Phone,
-  Calendar
-} from 'lucide-react';
+import { Workflow, Mail, Database, MessageSquare, Phone, Calendar } from 'lucide-react';
+import { useT } from '@/hooks/useT';
 
-const solutions = [
-  {
-    icon: Workflow,
-    title: 'Workflow Automation',
-    description:
-      'Build sophisticated Make/N8N workflows that connect your tools and automate repetitive tasks'
-  },
-  {
-    icon: Mail,
-    title: 'Communication Automation',
-    description:
-      'Automate email sequences, SMS campaigns, and notifications triggered by customer actions'
-  },
-  {
-    icon: Database,
-    title: 'Data Integration',
-    description:
-      'Sync your CRM, databases, and spreadsheets automatically with real-time data flows'
-  },
-  {
-    icon: MessageSquare,
-    title: 'Chat Assistants',
-    description:
-      'Deploy intelligent chatbots for customer support, lead qualification, and sales assistance'
-  },
-  {
-    icon: Phone,
-    title: 'Voice AI',
-    description:
-      'Build voice-enabled assistants for phone support and appointment scheduling'
-  },
-  {
-    icon: Calendar,
-    title: 'Booking Automation',
-    description:
-      'Automate appointment scheduling and calendar management with smart AI agents'
-  }
-];
-
-const faqs = [
-  {
-    question: 'What platforms do you integrate with?',
-    answer:
-      'We integrate with Make, N8N, Google Workspace, Microsoft 365, Salesforce, HubSpot, Slack, Acuity, Cal, CRMs and hundreds more via APIs.'
-  },
-  {
-    question: 'How long does deployment take?',
-    answer:
-      'Simple automations or chatbots can be deployed in a few days. More complex AI assistants typically take 2–4 weeks.'
-  },
-  {
-    question: 'Is everything secure?',
-    answer:
-      'Yes. We use encrypted connections, secure authentication, and enterprise-grade best practices to protect your data.'
-  },
-  {
-    question: 'Can this work with our current processes?',
-    answer:
-      'Absolutely. We analyze your existing workflows and design automation and AI systems that fit seamlessly into your operations.'
-  }
-];
+const solutionIcons = [Workflow, Mail, Database, MessageSquare, Phone, Calendar] as const;
 
 export default function AutomationAIPage() {
+  const { t } = useT();
+
+  const solutions = t.offerPage.solutions.items.map((item, idx) => ({
+    icon: solutionIcons[idx],
+    title: item.title,
+    description: item.description,
+  }));
+
+  const faqs = t.offerPage.faq.items.map((it) => ({
+    question: it.q,
+    answer: it.a,
+  }));
+
   return (
     <>
       {/* HERO */}
@@ -87,19 +34,15 @@ export default function AutomationAIPage() {
           className="max-w-4xl mx-auto text-center"
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="gradient-text">Automation & AI</span> That Scale Your Business
+            <span className="gradient-text">{t.offerPage.hero.titlePrefix}</span>{' '}
+            {t.offerPage.hero.titleSuffix}
           </h1>
-          <p className="text-xl dark:text-white/60 mb-12">
-            Intelligent workflows, AI assistants, and smart automation systems
-            that eliminate busywork and elevate your customer experience.
-          </p>
-        
-          <GradientButton
-              href="/contact"
-              className="w-2/5"
-            >
-              Transform Your Operations
-            </GradientButton>
+
+          <p className="text-xl dark:text-white/60 mb-12">{t.offerPage.hero.subtitle}</p>
+
+          <GradientButton href="/contact" className="w-full sm:w-2/5">
+            {t.offerPage.hero.cta}
+          </GradientButton>
         </motion.div>
       </Section>
 
@@ -113,10 +56,12 @@ export default function AutomationAIPage() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Our <span className="gradient-text">Solutions</span>
+            {t.offerPage.solutions.titlePrefix}{' '}
+            <span className="gradient-text">{t.offerPage.solutions.titleAccent}</span>
           </h2>
+
           <p className="text-xl dark:text-white/60 max-w-2xl mx-auto">
-            End-to-end automation and AI systems built for modern businesses
+            {t.offerPage.solutions.subtitle}
           </p>
         </motion.div>
 
@@ -149,18 +94,9 @@ export default function AutomationAIPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              From Chaos to Clarity
-            </h2>
-            <p className="dark:text-white/60 mb-4">
-              Stop wasting hours on repetitive tasks. We design intelligent
-              workflows that trigger automatically based on actions, time,
-              or specific business conditions.
-            </p>
-            <p className="dark:text-white/60">
-              Lead routing, invoice generation, CRM sync, notifications —
-              everything runs automatically behind the scenes.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.offerPage.blocks.leftTitle}</h2>
+            <p className="dark:text-white/60 mb-4">{t.offerPage.blocks.leftP1}</p>
+            <p className="dark:text-white/60">{t.offerPage.blocks.leftP2}</p>
           </motion.div>
 
           <motion.div
@@ -170,15 +106,9 @@ export default function AutomationAIPage() {
             transition={{ duration: 0.5 }}
             className="glass-card rounded-2xl p-8 ring-1 ring-black/12 dark:ring-white/10"
           >
-            <h3 className="text-2xl font-bold mb-6">AI Assistants That Work 24/7</h3>
-            <p className="dark:text-white/60 mb-4">
-              Our AI assistants handle customer support, sales conversations,
-              and booking flows with human-like intelligence.
-            </p>
-            <p className="dark:text-white/60">
-              Available 24/7, multilingual, and fully integrated with your
-              tools — without adding headcount.
-            </p>
+            <h3 className="text-2xl font-bold mb-6">{t.offerPage.blocks.rightTitle}</h3>
+            <p className="dark:text-white/60 mb-4">{t.offerPage.blocks.rightP1}</p>
+            <p className="dark:text-white/60">{t.offerPage.blocks.rightP2}</p>
           </motion.div>
         </div>
       </Section>
@@ -193,8 +123,10 @@ export default function AutomationAIPage() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-            Frequently Asked <span className="gradient-text">Questions</span>
+            {t.offerPage.faq.titlePrefix}{' '}
+            <span className="gradient-text">{t.offerPage.faq.titleAccent}</span>
           </h2>
+
           <FAQAccordion items={faqs} />
         </motion.div>
       </Section>
@@ -209,17 +141,16 @@ export default function AutomationAIPage() {
           className="text-center max-w-3xl mx-auto glass-card rounded-2xl p-12 ring-1 ring-black/12 dark:ring-white/10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-            Ready to <span className="gradient-text">scale</span> with Automation & AI?
+            {t.offerPage.finalCta.titlePrefix}{' '}
+            <span className="gradient-text">{t.offerPage.finalCta.titleAccent}</span>{' '}
+            {t.offerPage.finalCta.titleSuffix}
           </h2>
-          <p className="text-xl dark:text-white/60 mb-8">
-            Let’s eliminate the busywork and build intelligent systems that grow your business.
-          </p>
+
+          <p className="text-xl dark:text-white/60 mb-8">{t.offerPage.finalCta.subtitle}</p>
+
           <div className="flex justify-center">
-            <GradientButton
-              href="/contact"
-              className="w-1/2"
-            >
-              Get Started Today
+            <GradientButton href="/contact" className="w-1/2">
+              {t.offerPage.finalCta.button}
             </GradientButton>
           </div>
         </motion.div>

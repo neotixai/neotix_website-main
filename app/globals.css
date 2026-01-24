@@ -66,16 +66,6 @@
   animation: marquee-reverse 40s linear infinite;
 }
 
-/* Google Translate - hide top banner (best-effort) */
-iframe.goog-te-banner-frame,
-.goog-te-banner-frame {
-  display: none !important;
-}
-
-html, body {
-  top: 0 !important;
-  margin-top: 0 !important;
-}
 
 
 

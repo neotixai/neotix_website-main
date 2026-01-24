@@ -2,28 +2,21 @@
 
 import Section from '@/components/shared/Section';
 import FeatureCard from '@/components/shared/FeatureCard';
-import { Bot, Zap, Palette, Globe, TrendingUp, Plug } from 'lucide-react';
+import { Bot, Zap, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useT } from '@/hooks/useT';
 
-const solutions = [
-  {
-    icon: Bot,
-    title: 'AI Assistants',
-    description: 'Custom chat/voice assistants for support, sales, and booking flows'
-  },
-  {
-    icon: Zap,
-    title: 'Business Automation',
-    description: 'Make/N8N workflows, CRM sync, email/SMS, lead routing'
-  },
-  {
-    icon: Globe,
-    title: 'Web & App Development',
-    description: 'Modern landing pages, dashboards, integrations'
-  },
-];
+const solutionIcons = [Bot, Zap, Globe] as const;
 
 export default function SolutionsSection() {
+  const { t } = useT();
+
+  const solutions = t.solutions.items.map((it, i) => ({
+    icon: solutionIcons[i],
+    title: it.title,
+    description: it.description,
+  }));
+
   return (
     <Section id="solutions">
       <motion.div
@@ -34,10 +27,11 @@ export default function SolutionsSection() {
         className="text-center mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-          Our <span className="gradient-text">Solutions</span>
+          {t.solutions.titlePrefix}{' '}
+          <span className="gradient-text">{t.solutions.titleAccent}</span>
         </h2>
         <p className="text-xl text-gray-800 dark:text-white/60 max-w-2xl mx-auto">
-          Comprehensive AI-powered services to transform your business operations
+          {t.solutions.subtitle}
         </p>
       </motion.div>
 

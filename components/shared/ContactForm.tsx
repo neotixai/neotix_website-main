@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import GradientButton from './GradientButton';
+import { useT } from '@/hooks/useT';
 
 export default function ContactForm() {
+  const { t } = useT();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,7 +17,7 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Thanks — we\'ll reply within 24–48h!');
+    toast.success(t.contactForm.toastSuccess);
     setFormData({ name: '', email: '', company: '', message: '' });
   };
 
@@ -22,7 +25,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
-          Name
+          {t.contactForm.fields.name}
         </label>
         <input
           type="text"
@@ -30,12 +33,13 @@ export default function ContactForm() {
           required
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"        />
+          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"
+        />
       </div>
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
-          Email
+          {t.contactForm.fields.email}
         </label>
         <input
           type="email"
@@ -43,24 +47,29 @@ export default function ContactForm() {
           required
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"        />
+          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"
+        />
       </div>
 
       <div>
         <label htmlFor="company" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
-          Company <span className="text-gray-700 dark:text-white/50">(optional)</span>
+          {t.contactForm.fields.company}{' '}
+          <span className="text-gray-700 dark:text-white/50">
+            ({t.contactForm.fields.optional})
+          </span>
         </label>
         <input
           type="text"
           id="company"
           value={formData.company}
           onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"        />
+          className="w-full px-4 py-3 rounded-lg glass-card ring-1 ring-black/12 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white"
+        />
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
-          Message
+          {t.contactForm.fields.message}
         </label>
         <textarea
           id="message"
@@ -71,15 +80,19 @@ export default function ContactForm() {
           className="w-full px-4 py-3 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-900 dark:text-white resize-none"
         />
       </div>
+
       <div className="flex justify-center">
-      <GradientButton type="submit" className="w-1/2">
-        Send Message
-      </GradientButton>
+        <GradientButton type="submit" className="w-1/2">
+          {t.contactForm.submit}
+        </GradientButton>
       </div>
 
       <p className="text-center text-sm text-gray-700 dark:text-white/60">
-        Or email us directly at{' '}
-        <a href="mailto:contact@neotix.ai" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300">
+        {t.contactForm.orEmail}{' '}
+        <a
+          href="mailto:contact@neotix.ai"
+          className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300"
+        >
           contact@neotix.ai
         </a>
       </p>
