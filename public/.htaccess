@@ -1,24 +1,20 @@
 # Enable Rewrite Engine
 RewriteEngine On
 
-# Remove trailing slashes (directories only)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} .+/$
-RewriteRule ^(.+)/$ /$1 [R=301,L]
+# Handle index.html as directory index
+DirectoryIndex index.html
 
-# Add .html extension if file exists
+# Add trailing slash if directory exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ /$1/ [R=301,L]
+
+# For non-trailing-slash URLs, try to serve the .html file if it exists
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
-
-# Handle /en and /fr root paths -> index.html
-RewriteCond %{REQUEST_URI} ^/(en|fr)/?$
-RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
-RewriteRule ^(en|fr)/?$ /$1/index.html [L]
-
-# Handle index.html as directory index
-DirectoryIndex index.html
 
 # Custom 404 error page
 ErrorDocument 404 /404.html
