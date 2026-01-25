@@ -15,10 +15,37 @@ export default function ContactForm() {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success(t.contactForm.toastSuccess);
-    setFormData({ name: '', email: '', company: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/send-contact-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      toast.success(t.contactForm.toastSuccess);
+      setFormData({ name: '', email: '', company: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Failed to send message. Please try again or email us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,8 +109,8 @@ export default function ContactForm() {
       </div>
 
       <div className="flex justify-center">
-        <GradientButton type="submit" className="w-1/2">
-          {t.contactForm.submit}
+        <GradientButton type="submit" className="w-1/2" disabled={isSubmitting}>
+          {isSubmitting ? 'Sending...' : t.contactForm.submit}
         </GradientButton>
       </div>
 
