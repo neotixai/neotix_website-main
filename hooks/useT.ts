@@ -1,9 +1,10 @@
 'use client';
 
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { messages } from '@/lib/i18n';
+import { messages, DEFAULT_LANG } from '@/lib/i18n';
 
 export function useT() {
   const { language } = useLanguage();
-  return { t: messages[language], language };
+  const safeLang = language || DEFAULT_LANG;
+  return { t: messages[safeLang], language: safeLang };
 }

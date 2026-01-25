@@ -4,6 +4,7 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 
 export function useLangPath() {
   const { language } = useLanguage();
+  const safeLang = language || 'en';
 
   const langPath = (path: string) => {
     // If path already starts with a language prefix, return as-is
@@ -11,8 +12,8 @@ export function useLangPath() {
       return path;
     }
     // Add language prefix
-    return `/${language}${path}`;
+    return `/${safeLang}${path}`;
   };
 
-  return { langPath, language };
+  return { langPath, language: safeLang };
 }
