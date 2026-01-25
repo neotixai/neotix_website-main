@@ -17,9 +17,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
+  const locale = lang as Locale;
 
   const titles = {
     en: 'Neotix AI - Next-Gen AI Solutions',
@@ -32,10 +33,10 @@ export async function generateMetadata({
   };
 
   return {
-    title: titles[lang],
-    description: descriptions[lang],
+    title: titles[locale],
+    description: descriptions[locale],
     alternates: {
-      canonical: `/${lang}`,
+      canonical: `/${locale}`,
       languages: {
         en: '/en',
         fr: '/fr',
@@ -49,12 +50,13 @@ export default async function LangLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  const locale = lang as Locale;
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="alternate" hrefLang="en" href="/en" />
         <link rel="alternate" hrefLang="fr" href="/fr" />
@@ -62,7 +64,7 @@ export default async function LangLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <LanguageProvider initialLang={lang}>
+          <LanguageProvider initialLang={locale}>
             <Navbar />
             <main className="min-h-screen transition-opacity duration-200">{children}</main>
             <Footer />
