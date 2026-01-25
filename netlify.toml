@@ -1,6 +1,9 @@
 [build]
 command = "npx next build"
-publish = ".next"
+publish = "out"
 
-[[plugins]]
-package = "@netlify/plugin-nextjs"
+[[redirects]]
+from = "/"
+to = "/en"
+status = 302
+force = false
