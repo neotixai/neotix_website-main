@@ -6,5 +6,12 @@ import { messages, DEFAULT_LANG } from '@/lib/i18n';
 export function useT() {
   const { language } = useLanguage();
   const safeLang = language || DEFAULT_LANG;
-  return { t: messages[safeLang], language: safeLang };
+  
+  // Ensure we always return a valid translation object
+  const translations = messages[safeLang] || messages[DEFAULT_LANG];
+  
+  return { 
+    t: translations, 
+    language: safeLang 
+  };
 }
