@@ -2,7 +2,7 @@
 const nextConfig = {
   compress: true,
   poweredByHeader: false,
-  //output: 'export',
+  output: 'export',
   trailingSlash: true,
   images: {
     formats: ['image/avif', 'image/webp'],
