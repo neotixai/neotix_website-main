@@ -1,5 +1,8 @@
+'use client';
+
 import { ReactNode } from 'react';
 import Link from 'next/link';
+import { useLangPath } from '@/hooks/useLangPath';
 
 interface GradientButtonProps {
   children: ReactNode;
@@ -18,6 +21,8 @@ export default function GradientButton({
   className = '',
   type = 'button'
 }: GradientButtonProps) {
+  const { langPath } = useLangPath();
+
   const baseClasses = 'inline-flex items-center justify-center px-6 py-3 font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 rounded-full';
 
   const variantClasses = variant === 'primary'
@@ -27,8 +32,10 @@ export default function GradientButton({
   const classes = `${baseClasses} ${variantClasses} ${className}`;
 
   if (href) {
+    // Add language prefix to internal links
+    const finalHref = href.startsWith('/') ? langPath(href) : href;
     return (
-      <Link href={href} className={classes}>
+      <Link href={finalHref} className={classes}>
         {children}
       </Link>
     );

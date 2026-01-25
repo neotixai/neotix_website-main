@@ -1,8 +1,9 @@
 # Enable Rewrite Engine
 RewriteEngine On
 
-# Remove trailing slashes
+# Remove trailing slashes (except for language roots)
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/(en|fr)/$
 RewriteCond %{REQUEST_URI} (.+)/$
 RewriteRule ^ %1 [R=301,L]
 
@@ -12,15 +13,16 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
+# Handle /en and /fr root paths -> index.html
+RewriteCond %{REQUEST_URI} ^/(en|fr)/?$
+RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
+RewriteRule ^(en|fr)/?$ /$1/index.html [L]
+
 # Handle index.html as directory index
 DirectoryIndex index.html
 
 # Custom 404 error page
 ErrorDocument 404 /404.html
-
-# Prevent direct access to .html files (optional - comment out if you want .html accessible)
-# RewriteCond %{THE_REQUEST} \.html
-# RewriteRule ^(.*)\.html$ /$1 [R=301,L]
 
 # Enable compression
 <IfModule mod_deflate.c>

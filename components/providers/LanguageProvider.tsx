@@ -1,32 +1,23 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
-
-type Language = 'en' | 'fr';
+import { createContext, useContext } from 'react';
+import type { Locale } from '@/lib/i18n-config';
 
 const LanguageContext = createContext<{
-  language: Language;
-  setLanguage: (lang: Language) => void;
+  language: Locale;
 }>({
   language: 'en',
-  setLanguage: () => {},
 });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
-
-  useEffect(() => {
-    const saved = localStorage.getItem('lang') as Language | null;
-    if (saved) setLanguage(saved);
-  }, []);
-
-  const changeLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem('lang', lang);
-  };
-
+export function LanguageProvider({
+  children,
+  initialLang,
+}: {
+  children: React.ReactNode;
+  initialLang: Locale;
+}) {
   return (
-    <LanguageContext.Provider value={{ language, setLanguage: changeLanguage }}>
+    <LanguageContext.Provider value={{ language: initialLang }}>
       {children}
     </LanguageContext.Provider>
   );

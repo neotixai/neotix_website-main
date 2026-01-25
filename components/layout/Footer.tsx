@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Linkedin } from 'lucide-react';
 import { siX, siFacebook } from 'simple-icons';
 import { useT } from '@/hooks/useT';
+import { useLangPath } from '@/hooks/useLangPath';
 
 type SimpleIcon = {
   svg: string;
@@ -31,6 +32,7 @@ function SocialIcon({ icon, href, label }: { icon: SimpleIcon; href: string; lab
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { t } = useT();
+  const { langPath } = useLangPath();
 
   return (
     <footer className="border-t border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black">
@@ -49,17 +51,17 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <Link href={langPath('/')} className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
                   {t.footer.links.home}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <Link href={langPath('/about')} className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
                   {t.footer.links.about}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <Link href={langPath('/contact')} className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
                   {t.footer.links.contact}
                 </Link>
               </li>
@@ -72,12 +74,12 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/what-we-offer" className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <Link href={langPath('/what-we-offer')} className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
                   {t.footer.links.offer}
                 </Link>
               </li>
               <li>
-                <Link href="/demos" className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <Link href={langPath('/demos')} className="text-sm text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white transition-colors">
                   {t.footer.links.demos}
                 </Link>
               </li>

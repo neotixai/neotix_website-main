@@ -1,37 +1,54 @@
 import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import HeroSection from '@/components/home/HeroSection';
-import StatsRow from '@/components/shared/StatsRow';
 import SolutionsSection from '@/components/home/SolutionsSection';
 import ProcessSection from '@/components/home/ProcessSection';
 import IntegrationSection from '@/components/home/IntegrationSection';
 import ContactSection from '@/components/home/ContactSection';
-import Section from '@/components/shared/Section';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import { Toaster } from '@/components/ui/sonner';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { LanguageProvider } from '@/components/providers/LanguageProvider';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Neotix AI - Next-Gen AI Solutions for Business Automation',
-  description: 'We build AI assistants, intelligent workflows, and creative AI products that scale your business. From customer support to growth campaigns, we deliver real outcomes.',
+  description: 'We build AI assistants, intelligent workflows, and creative AI products that scale your business.',
+  alternates: {
+    canonical: '/',
+    languages: {
+      en: '/en',
+      fr: '/fr',
+    },
+  },
 };
 
-const stats = [
-  { value: '500+', label: 'Automations Deployed' },
-  { value: '99%', label: 'Client Satisfaction' },
-  { value: '24/7', label: 'Smart Support' }
-];
-
-export default function Home() {
+export default function RootHomePage() {
   return (
-    <>
-      <HeroSection />
-
-       {/*
-      <Section>
-        <StatsRow stats={stats} />
-      </Section>
-      */}
-      <IntegrationSection />
-      <SolutionsSection />
-      <ProcessSection />
-      <ContactSection />
-    </>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="alternate" hrefLang="en" href="/en" />
+        <link rel="alternate" hrefLang="fr" href="/fr" />
+        <link rel="alternate" hrefLang="x-default" href="/" />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <LanguageProvider initialLang="en">
+            <Navbar />
+            <main className="min-h-screen">
+              <HeroSection />
+              <IntegrationSection />
+              <SolutionsSection />
+              <ProcessSection />
+              <ContactSection />
+            </main>
+            <Footer />
+            <Toaster />
+          </LanguageProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

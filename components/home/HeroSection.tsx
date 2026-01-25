@@ -4,11 +4,8 @@ import { motion } from 'framer-motion';
 import GradientButton from '@/components/shared/GradientButton';
 import { useT } from '@/hooks/useT';
 
-import { useRouter } from 'next/navigation'
-
 export default function HeroSection() {
   const { t } = useT();
-  const router = useRouter()
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -46,7 +43,7 @@ export default function HeroSection() {
             <GradientButton
               variant="secondary"
               className="ring-1 ring-black/15 dark:ring-white/10"
-              onClick={() => router.push('/what-we-offer')}
+              href="/what-we-offer"
             >
               {t.home.secondary}
             </GradientButton>
