@@ -12,10 +12,10 @@ export default function DemosPage() {
   const { t } = useT();
 
   const audioDemos = [
-    { ...t.demosPage.audioDemos[0], src: '/audio/Barbershop.m4a', lang: 'fr' },
-    { ...t.demosPage.audioDemos[1], src: '/audio/Restaurant.m4a', lang: 'en' },
-    { ...t.demosPage.audioDemos[2], src: '/audio/Dental.m4a', lang: 'en' },
-    { ...t.demosPage.audioDemos[3], src: '/audio/Fitness.m4a', lang: 'fr' },
+    { ...t.demosPage.audioDemos[0], src: '/audio/barbershop.m4a', lang: 'fr' },
+    { ...t.demosPage.audioDemos[1], src: '/audio/restaurant.m4a', lang: 'en' },
+    { ...t.demosPage.audioDemos[2], src: '/audio/dental.m4a', lang: 'en' },
+    { ...t.demosPage.audioDemos[3], src: '/audio/fitness.m4a', lang: 'fr' },
   ];
 
   const frDemos = audioDemos.filter(d => d.lang === 'fr');
