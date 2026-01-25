@@ -1,3 +1,5 @@
+import type { Locale } from '@/lib/i18n-config';
+
 export const messages = {
   en: {
     nav: {
@@ -931,4 +933,4 @@ contactForm: {
 } as const;
 
 export type Lang = keyof typeof messages;
-export const DEFAULT_LANG: Lang = 'en';
+export const DEFAULT_LANG: Locale = 'en';

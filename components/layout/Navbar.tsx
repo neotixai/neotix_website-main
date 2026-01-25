@@ -17,6 +17,11 @@ export default function Navbar() {
   const { t } = useT();
   const { langPath, language } = useLangPath();
 
+  // Safety check during hydration
+  if (!t?.nav) {
+    return null;
+  }
+
   const navLinks = [
     { href: langPath('/'), label: t.nav.home },
     { href: langPath('/what-we-offer'), label: t.nav.offer },
