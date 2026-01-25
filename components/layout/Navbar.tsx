@@ -9,6 +9,7 @@ import LanguageToggle from '@/components/shared/LanguageToggle';
 import { useT } from '@/hooks/useT';
 import { useLangPath } from '@/hooks/useLangPath';
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -18,18 +19,17 @@ export default function Navbar() {
   const { langPath, language } = useLangPath();
 
   // Safety check during hydration
-  if (!t?.nav) {
-    return null;
-  }
+  if (!t?.nav) return null;
 
-  const navLinks = [
+  // Mémorisez navLinks pour éviter de les recréer à chaque render
+  const navLinks = useMemo(() => [
     { href: langPath('/'), label: t.nav.home },
     { href: langPath('/what-we-offer'), label: t.nav.offer },
     { href: langPath('/demos'), label: t.nav.demos },
     { href: langPath('/pricing'), label: t.nav.pricing },
     { href: langPath('/about'), label: t.nav.about },
     { href: langPath('/contact'), label: t.nav.contact },
-  ];
+  ], [langPath, t.nav]);
 
   const ctaLabel = t.nav.cta;
 
@@ -50,6 +50,7 @@ export default function Navbar() {
       fill
       priority
       className="object-contain dark:hidden"
+      sizes="224px"
     />
     <Image
       src="/integrations/neotix_dark.svg"
@@ -57,6 +58,7 @@ export default function Navbar() {
       fill
       priority
       className="hidden dark:block object-contain"
+      sizes="224px"
     />
   </div>
 </Link>
@@ -67,6 +69,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={true}
                 className={`text-base font-medium transition-colors hover:text-gray-900 dark:hover:text-white ${
                   isActive(link.href) ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-white/70'
                 }`}

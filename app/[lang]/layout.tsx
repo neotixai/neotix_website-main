@@ -64,7 +64,7 @@ export default async function LangLayout({
         <ThemeProvider>
           <LanguageProvider initialLang={lang}>
             <Navbar />
-            <main className="min-h-screen">{children}</main>
+            <main className="min-h-screen transition-opacity duration-200">{children}</main>
             <Footer />
             <Toaster />
           </LanguageProvider>
