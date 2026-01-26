@@ -35,6 +35,13 @@ export async function generateMetadata({
   return {
     title: titles[locale],
     description: descriptions[locale],
+
+    icons: {
+      icon: [
+        { url: '/neotix.ico' },
+      ],
+    },
+
     alternates: {
       canonical: `/${locale}`,
       languages: {
