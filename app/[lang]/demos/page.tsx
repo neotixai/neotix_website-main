@@ -3,26 +3,117 @@
 import { motion } from 'framer-motion';
 import Section from '@/components/shared/Section';
 import GradientButton from '@/components/shared/GradientButton';
-import FAQAccordion from '@/components/shared/FAQAccordion';
 import { PhoneCall, Volume2, CalendarCheck } from 'lucide-react';
-import AudioDemoPlayer from '@/components/shared/AudioDemoPlayer';
+import InteractiveDemoSection from '@/components/shared/InteractiveDemoSection';
 import { useT } from '@/hooks/useT';
+import { useMemo } from 'react';
 
 export default function DemosPage() {
   const { t } = useT();
 
+  
   const audioDemos = [
-    { ...t.demosPage.audioDemos[0], src: '/audio/barbershop.mp3', lang: 'fr' },
-    { ...t.demosPage.audioDemos[1], src: '/audio/restaurant.mp3', lang: 'en' },
-    { ...t.demosPage.audioDemos[2], src: '/audio/dental.mp3', lang: 'en' },
-    { ...t.demosPage.audioDemos[3], src: '/audio/fitness.mp3', lang: 'fr' },
+    {
+      ...t.demosPage.audioDemos[0],
+      src: '/audio/barbershop.mp3',
+      industry: 'Customer inquiries about the business',
+      messages: [
+        { id: 1, text: "Bonjour ! Je voudrais prendre rendez-vous pour une coupe.", sender: 'user' as const, time: '14:30', timestamp: 0 },
+        { id: 2, text: "Bonjour ! Avec plaisir. Préférez-vous un créneau en semaine ou le weekend ?", sender: 'agent' as const, time: '14:30', timestamp: 3 },
+        { id: 3, text: "Plutôt samedi prochain si possible.", sender: 'user' as const, time: '14:31', timestamp: 8 },
+        { id: 4, text: "Parfait ! J'ai une disponibilité samedi à 10h ou 14h. Quelle heure vous convient ?", sender: 'agent' as const, time: '14:31', timestamp: 12 },
+        { id: 5, text: "10h c'est parfait !", sender: 'user' as const, time: '14:32', timestamp: 18 },
+        { id: 6, text: "Excellent ! Votre rendez-vous est confirmé pour samedi à 10h. À bientôt !", sender: 'agent' as const, time: '14:32', timestamp: 22 },
+      ],
+      clientInfo: [
+        { label: 'Nom', value: 'Marc Dubois', timestamp: 5, icon: 'user' as const },
+        { label: 'Téléphone', value: '+33 6 12 34 56 78', timestamp: 7, icon: 'phone' as const },
+        { label: 'Email', value: 'marc.dubois@email.fr', timestamp: 10, icon: 'mail' as const },
+        { label: 'Service', value: 'Coupe homme', timestamp: 14, icon: 'calendar' as const },
+        { label: 'Date', value: 'Samedi 10h00', timestamp: 19, icon: 'calendar' as const },
+      ],
+      aiFunctions: [
+        { label: 'Identification du client', timestamp: 6 },
+        { label: 'Vérification des disponibilités', timestamp: 13 },
+        { label: 'Création du rendez-vous', timestamp: 20 },
+        { label: 'Envoi de confirmation par SMS', timestamp: 24 },
+      ]
+    },
+    {
+      ...t.demosPage.audioDemos[1],
+      src: '/audio/restaurant.mp3',
+      industry: 'Inbound call handling and qualification',
+      messages: [
+        { id: 1, text: "Hi, I'd like to make a reservation for tonight.", sender: 'user' as const, time: '18:15', timestamp: 0 },
+        { id: 2, text: "Good evening! I'd be happy to help. How many people will be dining?", sender: 'agent' as const, time: '18:15', timestamp: 4 },
+        { id: 3, text: "4 people, around 8 PM if possible.", sender: 'user' as const, time: '18:16', timestamp: 9 },
+        { id: 4, text: "Let me check our availability... Yes, we have a table for 4 at 8 PM. May I have your name?", sender: 'agent' as const, time: '18:16', timestamp: 13 },
+        { id: 5, text: "John Smith", sender: 'user' as const, time: '18:17', timestamp: 20 },
+        { id: 6, text: "Perfect! Your table for 4 is reserved for tonight at 8 PM under John Smith. See you soon!", sender: 'agent' as const, time: '18:17', timestamp: 23 },
+      ],
+      clientInfo: [
+        { label: 'Name', value: 'John Smith', timestamp: 6, icon: 'user' as const },
+        { label: 'Phone', value: '+1 555-123-4567', timestamp: 8, icon: 'phone' as const },
+        { label: 'Party Size', value: '4 people', timestamp: 10, icon: 'user' as const },
+        { label: 'Date & Time', value: 'Tonight 8:00 PM', timestamp: 15, icon: 'calendar' as const },
+        { label: 'Table', value: 'Table 12 (Window)', timestamp: 21, icon: 'location' as const },
+      ],
+      aiFunctions: [
+        { label: 'Customer identification', timestamp: 7 },
+        { label: 'Check table availability', timestamp: 14 },
+        { label: 'Reserve table #12', timestamp: 22 },
+        { label: 'Send confirmation email', timestamp: 25 },
+      ]
+    },
+    {
+      ...t.demosPage.audioDemos[2],
+      src: '/audio/dental.mp3',
+      industry: 'Automated patient booking appointment',
+      messages: [
+        { id: 1, text: "Hello, I need to schedule a dental cleaning.", sender: 'user' as const, time: '10:20', timestamp: 0 },
+        { id: 2, text: "Hello! I'd be happy to help you schedule that. Do you have a preferred day?", sender: 'agent' as const, time: '10:20', timestamp: 3 },
+        { id: 3, text: "Next Tuesday afternoon would be great.", sender: 'user' as const, time: '10:21', timestamp: 8 },
+        { id: 4, text: "Perfect! We have availability at 2 PM and 4 PM. Which time works better for you?", sender: 'agent' as const, time: '10:21', timestamp: 12 },
+        { id: 5, text: "2 PM would be perfect.", sender: 'user' as const, time: '10:22', timestamp: 17 },
+        { id: 6, text: "Great! You're all set for next Tuesday at 2 PM. We'll send you a reminder!", sender: 'agent' as const, time: '10:22', timestamp: 20 },
+      ],
+      clientInfo: [
+        { label: 'Name', value: 'Sarah Johnson', timestamp: 5, icon: 'user' as const },
+        { label: 'Phone', value: '+1 555-987-6543', timestamp: 7, icon: 'phone' as const },
+        { label: 'Email', value: 'sarah.j@email.com', timestamp: 9, icon: 'mail' as const },
+        { label: 'Service', value: 'Dental Cleaning', timestamp: 13, icon: 'calendar' as const },
+        { label: 'Appointment', value: 'Tuesday 2:00 PM', timestamp: 18, icon: 'calendar' as const },
+      ],
+      aiFunctions: [
+        { label: 'Patient record lookup', timestamp: 6 },
+        { label: 'Check dentist availability', timestamp: 13 },
+        { label: 'Book appointment slot', timestamp: 19 },
+        { label: 'Schedule SMS reminder', timestamp: 22 },
+      ]
+    },
+    {
+      ...t.demosPage.audioDemos[3],
+      src: '/audio/fitness.mp3',
+      industry: 'Answering customer questions about the business',
+      messages: [
+        { id: 1, text: "Bonjour, Je m'appelle Eric de Power Club, comment puis je vous aider ?", sender: 'agent' as const, time: '16:45', timestamp: 0 },
+        { id: 2, text: "Bonjour ! Je voudrais savoir c est qui les coachs qui sont dans votre club.", sender: 'user' as const, time: '16:45', timestamp: 4 },
+        { id: 3, text: "Nous avons 4 coachs certifiés dans notre club : Jason, Myke, Ryan et Chris. Chacun d'eux est spécialisé dans différentes approches d'entraînement et adapte les sécances au objectifs et à la condition physique de chaque client", sender: 'agent' as const, time: '16:45', timestamp: 7 },
+        { id: 4, text: "Et c'est quoi les activités proposées ?", sender: 'user' as const, time: '16:46', timestamp: 20 },
+        { id: 5, text: "Nous offrons plusieurs services pour vous aider à atteindre vos objectifs de remise en forme. Nous avons des séances d'entraînement personnels, de l'entraînement de musculation, du coaching en perte de poids, de l'entraînement HIIT (High Intensity Interval Training) ainsi qu'une séance de mobilité et de récuperation.", sender: 'agent' as const, time: '16:46', timestamp: 22 },
+        { id: 6, text: " Parfait, merci !", sender: 'user' as const, time: '16:47', timestamp: 38 },
+      ],
+      clientInfo: [
+      ],
+      aiFunctions: [
+        { label: 'Informations concernant les coachs du club', timestamp: 6 },
+        { label: 'Informations concernant les activités proposées', timestamp: 21 }
+      ]
+    },
   ];
 
-  const frDemos = audioDemos.filter(d => d.lang === 'fr');
-  const enDemos = audioDemos.filter(d => d.lang === 'en');
-
   const featuresIcons = [PhoneCall, Volume2, CalendarCheck];
-
+  
   return (
     <>
       {/* HERO */}
@@ -98,42 +189,24 @@ export default function DemosPage() {
         </div>
       </Section>
 
-      {/* TRY IT */}
-      <Section>
+      {/* INTERACTIVE DEMOS */}
+      <Section className="bg-gradient-to-b from-transparent via-slate-50/50 to-transparent dark:via-slate-900/50">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-6xl mx-auto"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">
             {t.demosPage.try.titlePrefix}{' '}
             <span className="gradient-text">
               {t.demosPage.try.titleAccent}
             </span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* FR */}
-            <div className="flex flex-col items-center">
-              <h3 className="text-lg font-semibold mb-4 text-center">Français</h3>
-              <div className="w-full max-w-2xl">
-                <AudioDemoPlayer demos={frDemos} />
-              </div>
-            </div>
-
-            {/* EN */}
-            <div className="flex flex-col items-center">
-              <h3 className="text-lg font-semibold mb-4 text-center">English</h3>
-              <div className="w-full max-w-2xl">
-                <AudioDemoPlayer demos={enDemos} />
-              </div>
-            </div>
-          </div>
+          <InteractiveDemoSection demos={audioDemos} />
         </motion.div>
       </Section>
-
 
       {/* FINAL CTA */}
       <Section>

@@ -1,4 +1,6 @@
 import type { Locale } from '@/lib/i18n-config';
+export type Lang = keyof typeof messages;
+export const DEFAULT_LANG: Locale = 'en';
 
 export const messages = {
   en: {
@@ -171,6 +173,26 @@ export const messages = {
     subtitle:
       'Connect your tools, optimize manual work, and scale your operations with intelligent workflow automation.',
     cta: 'Automate Your Business',
+  },
+  
+  ui: {
+    selectDemo: 'Select a Demo',
+    readyToStart: 'Ready to Start',
+
+    answeringQuestions: 'Answering customer questions about the business',
+
+    clientInformation: 'Client Information',
+    waitingClientData: 'Waiting for client data...',
+
+    aiActions: 'AI Actions',
+    noActions: 'No actions executed yet...',
+
+    industries: {
+      customerInquiries: 'Customer inquiries about the business',
+      inboundCalls: 'Inbound call handling and qualification',
+      dentalBooking: 'Automated patient booking appointment',
+      fitnessQuestions: 'Answering customer questions about the business',
+    },
   },
 
   features: {
@@ -638,6 +660,26 @@ demosPage: {
     cta: 'Automatiser mon business',
   },
 
+  ui: {
+    selectDemo: 'Choisir une démo',
+    readyToStart: 'Prêt à démarrer',
+
+    answeringQuestions: 'Réponse aux questions des clients',
+
+    clientInformation: 'Informations client',
+    waitingClientData: 'En attente des données client...',
+
+    aiActions: 'Actions IA',
+    noActions: 'Aucune action exécutée pour le moment...',
+
+    industries: {
+      customerInquiries: 'Questions clients sur le business',
+      inboundCalls: 'Gestion des appels entrants et qualification',
+      dentalBooking: 'Prise de rendez-vous patient automatisée',
+      fitnessQuestions: 'Réponses aux questions clients sur le business',
+    } 
+  },
+
   features: {
     titlePrefix: 'Solutions',
     titleAccent: 'd’automatisation',
@@ -931,6 +973,3 @@ contactForm: {
 
   },
 } as const;
-
-export type Lang = keyof typeof messages;
-export const DEFAULT_LANG: Locale = 'en';
