@@ -5,11 +5,7 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
-  },
-
-  experimental: {
-    optimizeCss: true,
+    unoptimized: true,
   },
 };
 

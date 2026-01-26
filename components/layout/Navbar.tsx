@@ -18,18 +18,21 @@ export default function Navbar() {
   const { t } = useT();
   const { langPath, language } = useLangPath();
 
+  // Mémorisez navLinks pour éviter de les recréer à chaque render
+  const navLinks = useMemo(() => {
+    if (!t?.nav) return [];
+    return [
+      { href: langPath('/'), label: t.nav.home },
+      { href: langPath('/what-we-offer'), label: t.nav.offer },
+      { href: langPath('/demos'), label: t.nav.demos },
+      { href: langPath('/pricing'), label: t.nav.pricing },
+      { href: langPath('/about'), label: t.nav.about },
+      { href: langPath('/contact'), label: t.nav.contact },
+    ];
+  }, [langPath, t?.nav]);
+
   // Safety check during hydration
   if (!t?.nav) return null;
-
-  // Mémorisez navLinks pour éviter de les recréer à chaque render
-  const navLinks = useMemo(() => [
-    { href: langPath('/'), label: t.nav.home },
-    { href: langPath('/what-we-offer'), label: t.nav.offer },
-    { href: langPath('/demos'), label: t.nav.demos },
-    { href: langPath('/pricing'), label: t.nav.pricing },
-    { href: langPath('/about'), label: t.nav.about },
-    { href: langPath('/contact'), label: t.nav.contact },
-  ], [langPath, t.nav]);
 
   const ctaLabel = t.nav.cta;
 
