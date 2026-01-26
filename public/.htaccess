@@ -4,6 +4,12 @@ RewriteEngine On
 # Handle index.html as directory index
 DirectoryIndex index.html
 
+# Fix for Next.js [lang] dynamic route directories
+# Apache needs help decoding %5B and %5D ([ and ]) in URLs
+# Escape brackets in substitution to use literal characters
+RewriteCond %{REQUEST_URI} ^(.*)%5Blang%5D(.*)$ [NC]
+RewriteRule .* %1\[lang\]%2 [L,NE]
+
 # Add trailing slash if directory exists
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} -d
