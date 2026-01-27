@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Battery, Wifi, Signal } from 'lucide-react';
+import { Battery, Wifi, Signal, Lock, BatteryFull } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
 interface Message {
@@ -14,13 +14,14 @@ interface Message {
 interface IPhoneMockupProps {
   messages: Message[];
   title?: string;
+  isLocked?: boolean;
 }
 
 export default function IPhoneMockup({
   messages,
   title = 'Conversation',
+  isLocked = false,
 }: IPhoneMockupProps) {
-  // 🔽 Scroll UNIQUEMENT dans l’écran du téléphone
   const chatScrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -32,6 +33,19 @@ export default function IPhoneMockup({
       behavior: 'smooth',
     });
   }, [messages]);
+
+  // Obtenir l'heure actuelle
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const currentTime = `${hours}:${minutes}`;
+
+  // Obtenir la date
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const dayName = days[now.getDay()];
+  const monthName = months[now.getMonth()];
+  const date = now.getDate();
 
   return (
     <motion.div
@@ -57,109 +71,189 @@ export default function IPhoneMockup({
           <div className="relative w-full h-full rounded-[44px] overflow-hidden bg-white">
             {/* 🔳 Encoche */}
             <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-8 bg-black rounded-b-3xl z-50 flex items-center justify-center"
-              style={{ boxShadow: '0 4px 8px rgba(0,0,0,0.3)' }}
+              className="absolute top-4 left-1/2 -translate-x-1/2 w-[38%] h-7 bg-black rounded-[999px] z-50 flex items-center justify-center"
+              style={{ boxShadow: '0 8px 14px rgba(0,0,0,0.45)' }}
             >
-              <div className="w-16 h-1.5 bg-gray-900 rounded-full mt-2" />
+              <div className="w-16 h-1.5 bg-gray-900 rounded-full opacity-80" />
             </div>
 
-            <div className="relative h-full flex flex-col bg-gradient-to-b from-gray-50 to-white">
-              {/* 🔝 Status + Header */}
-              <div className="pt-12 pb-4 px-5 bg-gradient-to-b from-white to-gray-50 border-b border-gray-200">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-[15px] font-semibold text-gray-900">
-                    9:41
+
+
+            {isLocked ? (
+              /* 🔒 ÉCRAN DE VERROUILLAGE */
+              <div className="relative h-full flex flex-col bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
+                {/* Status bar */}
+                <div className="pt-3 px-6 flex items-center justify-between ml-2 mt-2">
+                  <div className="text-white text-sm font-semibold mr-3">
+                    TELUS
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Signal className="w-4 h-4 text-gray-900" />
-                    <Wifi className="w-4 h-4 text-gray-900" />
-                    <Battery className="w-6 h-4 text-gray-900" />
+                    <Signal className="w-4 h-4 text-white" />
+                    <Wifi className="w-4 h-4 text-white" />
+                    <BatteryFull className="w-6 h-4 text-white fill-white" />
                   </div>
                 </div>
 
-                <div className="flex items-center">
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mr-3 shadow-lg">
-                    <span className="text-white text-sm font-semibold">AI</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-gray-900 font-semibold text-[15px]">
-                      {title}
-                    </div>
-                    <div className="text-gray-500 text-xs">
-                      Neotix Agent
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 💬 Messages (zone scrollable) */}
-              <div
-                ref={chatScrollRef}
-                className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-gray-50 to-white"
-              >
-                <div className="space-y-3">
-                  {messages.map((message) => (
-                    <motion.div
-                      key={message.id}
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.35, ease: 'easeOut' }}
-                      className={`flex ${
-                        message.sender === 'user'
-                          ? 'justify-end'
-                          : 'justify-start'
-                      }`}
-                    >
-                      <div className="flex flex-col max-w-[75%]">
-                        <div
-                          className={`rounded-[20px] px-4 py-2.5 shadow-sm ${
-                            message.sender === 'user'
-                              ? 'bg-blue-500 text-white rounded-br-md'
-                              : 'bg-gray-200 text-gray-900 rounded-bl-md'
-                          }`}
-                        >
-                          <p className="text-[15px] leading-[1.4]">
-                            {message.text}
-                          </p>
-                        </div>
-                        <span
-                          className={`text-[11px] text-gray-400 mt-1 px-1 ${
-                            message.sender === 'user'
-                              ? 'text-right'
-                              : 'text-left'
-                          }`}
-                        >
-                          {message.time}
-                        </span>
+                {/* Centre : Date et branding */}
+                <div className="flex-1 flex flex-col items-center justify-center px-8">
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center"
+                  >
+                    {/* Date */}
+                    <div className="mb-12 mt-8">
+                      <div className="text-white/90 text-lg font-medium mb-1">
+                        {dayName}, {monthName} {date}
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+                      
+                      <div className="text-white text-6xl sm:text-7xl lg:text-8xl font-semibold mt-2">
+                        {currentTime}
+                      </div>
+                    </div>
 
-              {/* ⌨️ Input */}
-              <div className="px-4 py-3 bg-white border-t border-gray-200">
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 bg-gray-100 rounded-full px-4 py-3 text-gray-400 text-[15px]">
-                    Message...
-                  </div>
-                  <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+                    {/* Logo/Branding */}
+                    <div className="mb-8 mt-14">
+                      <div className="w-48 h-48 mx-auto mb-5 rounded-3xl bg-white/20 backdrop-blur-xl flex items-center justify-center shadow-2xl p-4">
+                        {/* 🆕 Utiliser l'image du logo */}
+                        <img 
+                          src="/neotix-logo.png" 
+                          alt="Neotix Logo" 
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <h1 className="text-4xl font-bold text-white mb-2">
+                        Neotix AI
+                      </h1>
+                      <p className="text-white/80 text-sm">
+                        AI Agent
+                      </p>
+                    </div>
+
+                    {/* Icône de déverrouillage */}
+                    <motion.div
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                      className="flex flex-col items-center gap-2 mt-14"
                     >
-                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                    </svg>
-                  </div>
+                      <Lock className="w-6 h-6 text-white/60" />
+                      <p className="text-white/60 text-xs">
+                        Select a demo to unlock
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                </div>
+
+                {/* Bas : Home indicator */}
+                <div className="h-8 flex items-center justify-center">
+                  <div className="w-32 h-1 bg-white/30 rounded-full" />
                 </div>
               </div>
+            ) : (
+              /* 💬 ÉCRAN DE CONVERSATION */
+              <div className="relative h-full flex flex-col bg-gradient-to-b from-gray-50 to-white">
+                {/* 🔝 Status bar - remontée */}
+                <div className="pt-3 px-7 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
+                  <div className="flex items-center justify-between">
+                    <div className="text-[15px] font-semibold text-gray-900">
+                      {currentTime}
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Signal className="w-4 h-4 text-gray-900" />
+                      <Wifi className="w-4 h-4 text-gray-900" />
+                      <BatteryFull className="w-6 h-4 text-black fill-black" />
+                    </div>
+                  </div>
+                </div>
 
-              {/* ⬜ Home indicator */}
-              <div className="h-5 bg-white flex items-center justify-center">
-                <div className="w-32 h-1 bg-gray-900 rounded-full" />
+                {/* 👤 Header avec AI et titre */}
+                <div className="pt-6 pb-4 px-5 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA] border-b border-white/10">
+                  <div className="max-w-[175px] mx-auto">
+                    <div className="flex items-center bg-gray-300 rounded-2xl p-3 shadow-sm border border-gray-500">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mr-3 shadow-lg">
+                        <span className="text-white text-sm font-semibold">AI</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-gray-900 font-semibold text-[11px]">
+                          {title}
+                        </div>
+                        <div className="text-gray-500 text-xs">
+                          Neotix Agent
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* 💬 Messages (zone scrollable) */}
+                <div
+                  ref={chatScrollRef}
+                  className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]"
+                >
+                  <div className="space-y-3">
+                    {messages.map((message) => (
+                      <motion.div
+                        key={message.id}
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                        className={`flex ${
+                          message.sender === 'user'
+                            ? 'justify-end'
+                            : 'justify-start'
+                        }`}
+                      >
+                        <div className="flex flex-col max-w-[75%]">
+                          <div
+                            className={`rounded-[20px] px-4 py-2.5 shadow-sm ${
+                              message.sender === 'user'
+                                ? 'bg-blue-500 text-white rounded-br-md'
+                                : 'bg-gray-200 text-gray-900 rounded-bl-md'
+                            }`}
+                          >
+                            <p className="text-[15px] leading-[1.4]">
+                              {message.text}
+                            </p>
+                          </div>
+                          <span
+                            className={`text-[11px] text-gray-400 mt-1 px-1 ${
+                              message.sender === 'user'
+                                ? 'text-right'
+                                : 'text-left'
+                            }`}
+                          >
+                            {message.time}
+                          </span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ⌨️ Input */}
+                <div className="px-4 py-3 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-gray-100 rounded-full px-4 py-3 text-gray-400 text-[11px]">
+                      Message...
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                      <svg
+                        className="w-5 h-5 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ⬜ Home indicator */}
+                <div className="h-5 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA] flex items-center justify-center">
+                  <div className="w-32 h-1 bg-gray-900 rounded-full" />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

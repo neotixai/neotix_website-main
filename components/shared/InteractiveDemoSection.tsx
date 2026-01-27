@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { Play, Pause, Volume2, User, Phone, Mail, MapPin, Calendar, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import IPhoneMockup from './IPhoneMockup';
@@ -52,6 +52,47 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
   const [visibleClientInfo, setVisibleClientInfo] = useState<ClientInfo[]>([]);
   const [visibleAIFunctions, setVisibleAIFunctions] = useState<AIFunction[]>([]);
 
+  // 🆕 États pour l'effet de frappe
+  const [displayedMessages, setDisplayedMessages] = useState<Map<number, string>>(new Map());
+  const [typingProgress, setTypingProgress] = useState<Map<number, number>>(new Map());
+  const typingIntervalsRef = useRef<Map<number, NodeJS.Timeout>>(new Map());
+
+  // 🆕 Nettoyer les intervalles de frappe
+  useEffect(() => {
+    return () => {
+      typingIntervalsRef.current.forEach(interval => clearInterval(interval));
+      typingIntervalsRef.current.clear();
+    };
+  }, []);
+
+  // 🆕 Fonction pour démarrer l'effet de frappe
+  const startTypingEffect = useCallback((message: Message) => {
+    const startIndex = typingProgress.get(message.id) || 0;
+    let charIndex = startIndex;
+    const typingSpeed = 42;
+
+    const interval = setInterval(() => {
+      // Vérifier si l'audio est toujours en lecture
+      if (!audioRef.current || audioRef.current.paused) {
+        clearInterval(interval);
+        typingIntervalsRef.current.delete(message.id);
+        setTypingProgress(prev => new Map(prev).set(message.id, charIndex));
+        return;
+      }
+
+      if (charIndex <= message.text.length) {
+        setDisplayedMessages(prev => new Map(prev).set(message.id, message.text.slice(0, charIndex)));
+        charIndex++;
+      } else {
+        clearInterval(interval);
+        typingIntervalsRef.current.delete(message.id);
+        setTypingProgress(prev => new Map(prev).set(message.id, message.text.length));
+      }
+    }, typingSpeed);
+
+    typingIntervalsRef.current.set(message.id, interval);
+  }, [typingProgress]);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -66,6 +107,17 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
           (msg) => msg.timestamp <= time
         );
         setVisibleMessages(messagesToShow);
+
+        // 🆕 Démarrer l'effet de frappe pour les nouveaux messages
+        messagesToShow.forEach((message) => {
+          const currentProgress = typingProgress.get(message.id) || 0;
+          const fullLength = message.text.length;
+          
+          // Si le message n'est pas complètement affiché et n'est pas déjà en train de s'afficher
+          if (currentProgress < fullLength && !typingIntervalsRef.current.has(message.id) && !audio.paused) {
+            startTypingEffect(message);
+          }
+        });
 
         const clientInfoToShow = currentDemo.clientInfo.filter(
           (info) => info.timestamp <= time
@@ -101,7 +153,7 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
       audio.removeEventListener('durationchange', onLoadedMeta);
       audio.removeEventListener('ended', onEnded);
     };
-  }, [currentIndex, demos]);
+  }, [currentIndex, demos, typingProgress, startTypingEffect]);
 
   const togglePlay = (index: number) => {
     const audio = audioRef.current;
@@ -118,6 +170,12 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
       setVisibleMessages([]);
       setVisibleClientInfo([]);
       setVisibleAIFunctions([]);
+      
+      // Réinitialiser l'effet de frappe ET la progression
+      typingIntervalsRef.current.forEach(interval => clearInterval(interval));
+      typingIntervalsRef.current.clear();
+      setDisplayedMessages(new Map());
+      setTypingProgress(new Map());
 
       audio
         .play()
@@ -134,6 +192,21 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
       audio.pause();
       setIsPlaying(false);
     } else {
+      // 🆕 Si l'audio est terminé (ou proche de la fin), tout réinitialiser
+      if (audio.currentTime >= audio.duration - 0.1) {
+        audio.currentTime = 0;
+        setCurrentTime(0);
+        setVisibleMessages([]);
+        setVisibleClientInfo([]);
+        setVisibleAIFunctions([]);
+        
+        // 🆕 Réinitialiser la frappe pour replay
+        typingIntervalsRef.current.forEach(interval => clearInterval(interval));
+        typingIntervalsRef.current.clear();
+        setDisplayedMessages(new Map());
+        setTypingProgress(new Map());
+      }
+      
       audio
         .play()
         .then(() => setIsPlaying(true))
@@ -151,10 +224,27 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
     setCurrentTime(t);
 
     const currentDemo = demos[index];
+    
+    // 🆕 Réinitialiser l'effet de frappe lors du seek
+    typingIntervalsRef.current.forEach(interval => clearInterval(interval));
+    typingIntervalsRef.current.clear();
+    setDisplayedMessages(new Map());
+    setTypingProgress(new Map());
+    
     const messagesToShow = currentDemo.messages.filter(
       (msg) => msg.timestamp <= t
     );
     setVisibleMessages(messagesToShow);
+    
+    // 🆕 Afficher instantanément tous les messages jusqu'au point de seek
+    const instantMessages = new Map<number, string>();
+    const instantProgress = new Map<number, number>();
+    messagesToShow.forEach(msg => {
+      instantMessages.set(msg.id, msg.text);
+      instantProgress.set(msg.id, msg.text.length);
+    });
+    setDisplayedMessages(instantMessages);
+    setTypingProgress(instantProgress);
 
     const clientInfoToShow = currentDemo.clientInfo.filter(
       (info) => info.timestamp <= t
@@ -186,11 +276,17 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
     }
   };
 
+  // 🆕 Créer les messages avec le texte en cours de frappe
+  const messagesWithTyping = visibleMessages.map(msg => ({
+    ...msg,
+    text: displayedMessages.get(msg.id) || ''
+  }));
+
   return (
     <div className="max-w-7xl mx-auto">
       <audio ref={audioRef} preload="metadata" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-14">
         <div className="order-2 lg:order-1 space-y-6">
           <div className="glass-card rounded-2xl p-6 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10">
             <div className="flex items-center gap-3 mb-6">
@@ -291,27 +387,25 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
               className="glass-card rounded-2xl p-6 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="flex items-center gap-1">
-                  {isPlaying && (
-                    <>
-                      <motion.div
-                        className="w-1 h-3 bg-blue-500 rounded-full"
-                        animate={{ height: ['12px', '20px', '12px'] }}
-                        transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut' }}
-                      />
-                      <motion.div
-                        className="w-1 h-3 bg-blue-500 rounded-full"
-                        animate={{ height: ['12px', '20px', '12px'] }}
-                        transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
-                      />
-                      <motion.div
-                        className="w-1 h-3 bg-blue-500 rounded-full"
-                        animate={{ height: ['12px', '20px', '12px'] }}
-                        transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-                      />
-                    </>
-                  )}
-                </div>
+                {isPlaying && (
+                  <div className="flex items-center gap-1"> {/* 🆕 Déplacer la condition ici */}
+                    <motion.div
+                      className="w-1 h-3 bg-blue-500 rounded-full"
+                      animate={{ height: ['12px', '20px', '12px'] }}
+                      transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                    <motion.div
+                      className="w-1 h-3 bg-blue-500 rounded-full"
+                      animate={{ height: ['12px', '20px', '12px'] }}
+                      transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+                    />
+                    <motion.div
+                      className="w-1 h-3 bg-blue-500 rounded-full"
+                      animate={{ height: ['12px', '20px', '12px'] }}
+                      transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                    />
+                  </div>
+                )}
                 <div>
                   <h4 className="font-semibold text-lg">
                     {isPlaying ? 'AI Agent Active' : 'Ready to Start'}
@@ -401,35 +495,20 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
 
         <div className="order-1 lg:order-2 flex justify-center">
           <AnimatePresence mode="wait">
-            {currentDemo ? (
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-              >
-                <IPhoneMockup
-                  messages={visibleMessages}
-                  title={currentDemo.title}
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center h-[740px]"
-              >
-                <div className="glass-card rounded-2xl p-8 text-center bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10">
-                  <Volume2 className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                  <h3 className="text-xl font-semibold mb-2">Select a Demo</h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Choose an audio demo to see the conversation in action
-                  </p>
-                </div>
-              </motion.div>
-            )}
+            <motion.div
+              key={currentIndex ?? 'locked'}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* 🆕 Toujours afficher l'iPhone, avec écran de verrouillage ou messages */}
+              <IPhoneMockup
+                messages={messagesWithTyping}
+                title={currentDemo?.title}
+                isLocked={currentIndex === null}
+              />
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>

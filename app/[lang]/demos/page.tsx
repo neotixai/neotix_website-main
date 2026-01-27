@@ -11,19 +11,26 @@ import { useMemo } from 'react';
 export default function DemosPage() {
   const { t } = useT();
 
-  
+  const currentTime = useMemo(() => {
+    const now = new Date();
+    return now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }, []);
+
   const audioDemos = [
     {
       ...t.demosPage.audioDemos[0],
       src: '/audio/barbershop.mp3',
       industry: 'Customer inquiries about the business',
       messages: [
-        { id: 1, text: "Bonjour ! Je voudrais prendre rendez-vous pour une coupe.", sender: 'user' as const, time: '14:30', timestamp: 0 },
-        { id: 2, text: "Bonjour ! Avec plaisir. Préférez-vous un créneau en semaine ou le weekend ?", sender: 'agent' as const, time: '14:30', timestamp: 3 },
-        { id: 3, text: "Plutôt samedi prochain si possible.", sender: 'user' as const, time: '14:31', timestamp: 8 },
-        { id: 4, text: "Parfait ! J'ai une disponibilité samedi à 10h ou 14h. Quelle heure vous convient ?", sender: 'agent' as const, time: '14:31', timestamp: 12 },
-        { id: 5, text: "10h c'est parfait !", sender: 'user' as const, time: '14:32', timestamp: 18 },
-        { id: 6, text: "Excellent ! Votre rendez-vous est confirmé pour samedi à 10h. À bientôt !", sender: 'agent' as const, time: '14:32', timestamp: 22 },
+        { id: 1, text: "Bonjour ! Je voudrais prendre rendez-vous pour une coupe.", sender: 'user' as const, time: currentTime, timestamp: 0 },
+        { id: 2, text: "Bonjour ! Avec plaisir. Préférez-vous un créneau en semaine ou le weekend ?", sender: 'agent' as const, time: currentTime, timestamp: 3 },
+        { id: 3, text: "Plutôt samedi prochain si possible.", sender: 'user' as const, time: currentTime, timestamp: 8 },
+        { id: 4, text: "Parfait ! J'ai une disponibilité samedi à 10h ou 14h. Quelle heure vous convient ?", sender: 'agent' as const, time: currentTime, timestamp: 12 },
+        { id: 5, text: "10h c'est parfait !", sender: 'user' as const, time: currentTime, timestamp: 18 },
+        { id: 6, text: "Excellent ! Votre rendez-vous est confirmé pour samedi à 10h. À bientôt !", sender: 'agent' as const, time: currentTime, timestamp: 22 },
       ],
       clientInfo: [
         { label: 'Nom', value: 'Marc Dubois', timestamp: 5, icon: 'user' as const },
@@ -44,12 +51,12 @@ export default function DemosPage() {
       src: '/audio/restaurant.mp3',
       industry: 'Inbound call handling and qualification',
       messages: [
-        { id: 1, text: "Hi, I'd like to make a reservation for tonight.", sender: 'user' as const, time: '18:15', timestamp: 0 },
-        { id: 2, text: "Good evening! I'd be happy to help. How many people will be dining?", sender: 'agent' as const, time: '18:15', timestamp: 4 },
-        { id: 3, text: "4 people, around 8 PM if possible.", sender: 'user' as const, time: '18:16', timestamp: 9 },
-        { id: 4, text: "Let me check our availability... Yes, we have a table for 4 at 8 PM. May I have your name?", sender: 'agent' as const, time: '18:16', timestamp: 13 },
-        { id: 5, text: "John Smith", sender: 'user' as const, time: '18:17', timestamp: 20 },
-        { id: 6, text: "Perfect! Your table for 4 is reserved for tonight at 8 PM under John Smith. See you soon!", sender: 'agent' as const, time: '18:17', timestamp: 23 },
+        { id: 1, text: "Hi, I'd like to make a reservation for tonight.", sender: 'user' as const, time: currentTime, timestamp: 0 },
+        { id: 2, text: "Good evening! I'd be happy to help. How many people will be dining?", sender: 'agent' as const, time: currentTime, timestamp: 4 },
+        { id: 3, text: "4 people, around 8 PM if possible.", sender: 'user' as const, time: currentTime, timestamp: 9 },
+        { id: 4, text: "Let me check our availability... Yes, we have a table for 4 at 8 PM. May I have your name?", sender: 'agent' as const, time: currentTime, timestamp: 13 },
+        { id: 5, text: "John Smith", sender: 'user' as const, time: currentTime, timestamp: 20 },
+        { id: 6, text: "Perfect! Your table for 4 is reserved for tonight at 8 PM under John Smith. See you soon!", sender: 'agent' as const, time: currentTime, timestamp: 23 },
       ],
       clientInfo: [
         { label: 'Name', value: 'John Smith', timestamp: 6, icon: 'user' as const },
@@ -70,12 +77,12 @@ export default function DemosPage() {
       src: '/audio/dental.mp3',
       industry: 'Automated patient booking appointment',
       messages: [
-        { id: 1, text: "Hello, I need to schedule a dental cleaning.", sender: 'user' as const, time: '10:20', timestamp: 0 },
-        { id: 2, text: "Hello! I'd be happy to help you schedule that. Do you have a preferred day?", sender: 'agent' as const, time: '10:20', timestamp: 3 },
-        { id: 3, text: "Next Tuesday afternoon would be great.", sender: 'user' as const, time: '10:21', timestamp: 8 },
-        { id: 4, text: "Perfect! We have availability at 2 PM and 4 PM. Which time works better for you?", sender: 'agent' as const, time: '10:21', timestamp: 12 },
-        { id: 5, text: "2 PM would be perfect.", sender: 'user' as const, time: '10:22', timestamp: 17 },
-        { id: 6, text: "Great! You're all set for next Tuesday at 2 PM. We'll send you a reminder!", sender: 'agent' as const, time: '10:22', timestamp: 20 },
+        { id: 1, text: "Hello, I need to schedule a dental cleaning.", sender: 'user' as const, time: currentTime, timestamp: 0 },
+        { id: 2, text: "Hello! I'd be happy to help you schedule that. Do you have a preferred day?", sender: 'agent' as const, time: currentTime, timestamp: 3 },
+        { id: 3, text: "Next Tuesday afternoon would be great.", sender: 'user' as const, time: currentTime, timestamp: 8 },
+        { id: 4, text: "Perfect! We have availability at 2 PM and 4 PM. Which time works better for you?", sender: 'agent' as const, time: currentTime, timestamp: 12 },
+        { id: 5, text: "2 PM would be perfect.", sender: 'user' as const, time: currentTime, timestamp: 17 },
+        { id: 6, text: "Great! You're all set for next Tuesday at 2 PM. We'll send you a reminder!", sender: 'agent' as const, time: currentTime, timestamp: 20 },
       ],
       clientInfo: [
         { label: 'Name', value: 'Sarah Johnson', timestamp: 5, icon: 'user' as const },
@@ -96,18 +103,18 @@ export default function DemosPage() {
       src: '/audio/fitness.mp3',
       industry: 'Answering customer questions about the business',
       messages: [
-        { id: 1, text: "Bonjour, Je m'appelle Eric de Power Club, comment puis je vous aider ?", sender: 'agent' as const, time: '16:45', timestamp: 0 },
-        { id: 2, text: "Bonjour ! Je voudrais savoir c est qui les coachs qui sont dans votre club.", sender: 'user' as const, time: '16:45', timestamp: 4 },
-        { id: 3, text: "Nous avons 4 coachs certifiés dans notre club : Jason, Myke, Ryan et Chris. Chacun d'eux est spécialisé dans différentes approches d'entraînement et adapte les sécances au objectifs et à la condition physique de chaque client", sender: 'agent' as const, time: '16:45', timestamp: 7 },
-        { id: 4, text: "Et c'est quoi les activités proposées ?", sender: 'user' as const, time: '16:46', timestamp: 20 },
-        { id: 5, text: "Nous offrons plusieurs services pour vous aider à atteindre vos objectifs de remise en forme. Nous avons des séances d'entraînement personnels, de l'entraînement de musculation, du coaching en perte de poids, de l'entraînement HIIT (High Intensity Interval Training) ainsi qu'une séance de mobilité et de récuperation.", sender: 'agent' as const, time: '16:46', timestamp: 22 },
-        { id: 6, text: " Parfait, merci !", sender: 'user' as const, time: '16:47', timestamp: 38 },
+        { id: 1, text: "Bonjour, Je m'appelle Eric de Power Club, comment puis je vous aider ?", sender: 'agent' as const, time: currentTime, timestamp: 1 },
+        { id: 2, text: "Bonjour ! Je voudrais savoir c est qui les coachs qui sont dans votre club ?", sender: 'user' as const, time: currentTime, timestamp: 3.5 },
+        { id: 3, text: "Nous avons 4 coachs certifiés dans notre club : Jason, Myke, Ryan et Chris. Chacun d'eux est spécialisé dans différentes approches d'entraînement et adapte les sécances au objectifs et à la condition physique de chaque client.", sender: 'agent' as const, time: currentTime, timestamp: 8 },
+        { id: 4, text: "Et c'est quoi les activités proposées ?", sender: 'user' as const, time: currentTime, timestamp: 19.5 },
+        { id: 5, text: "Nous offrons plusieurs services pour vous aider à atteindre vos objectifs de remise en forme. Nous avons des séances d'entraînement personnels, de l'entraînement de musculation, du coaching en perte de poids, de l'entraînement HIIT (High Intensity Interval Training) ainsi qu'une séance de mobilité et de récuperation.", sender: 'agent' as const, time: currentTime, timestamp: 23 },
+        { id: 6, text: " Parfait, merci !", sender: 'user' as const, time: currentTime, timestamp: 38.7 },
       ],
       clientInfo: [
       ],
       aiFunctions: [
-        { label: 'Informations concernant les coachs du club', timestamp: 6 },
-        { label: 'Informations concernant les activités proposées', timestamp: 21 }
+        { label: 'Informations concernant les coachs du club.', timestamp: 7 },
+        { label: 'Informations concernant les activités proposées.', timestamp: 22 }
       ]
     },
   ];
