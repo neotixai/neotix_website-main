@@ -68,10 +68,10 @@ export default function IPhoneMockup({
           }}
         >
           {/* 📱 Écran */}
-          <div className="relative w-full h-full rounded-[44px] overflow-hidden bg-white">
+          <div className="relative w-full h-full rounded-[44px] overflow-hidden bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
             {/* 🔳 Encoche */}
             <div
-              className="absolute top-4 left-1/2 -translate-x-1/2 w-[38%] h-7 bg-black rounded-[999px] z-50 flex items-center justify-center"
+              className="absolute top-3 left-1/2 -translate-x-1/2 w-[38%] h-7 bg-black rounded-[999px] z-50 flex items-center justify-center"
               style={{ boxShadow: '0 8px 14px rgba(0,0,0,0.45)' }}
             >
               <div className="w-16 h-1.5 bg-gray-900 rounded-full opacity-80" />
@@ -152,7 +152,7 @@ export default function IPhoneMockup({
               </div>
             ) : (
               /* 💬 ÉCRAN DE CONVERSATION */
-              <div className="relative h-full flex flex-col bg-gradient-to-b from-gray-50 to-white">
+              <div className="relative h-full flex flex-col">
                 {/* 🔝 Status bar - remontée */}
                 <div className="pt-3 px-7 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
                   <div className="flex items-center justify-between">
