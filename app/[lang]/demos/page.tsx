@@ -104,7 +104,7 @@ export default function DemosPage() {
       industry: 'Answering customer questions about the business',
       messages: [
         { id: 1, text: "Bonjour, Je m'appelle Eric de Power Club, comment puis je vous aider ?", sender: 'agent' as const, time: currentTime, timestamp: 1 },
-        { id: 2, text: "Bonjour ! Je voudrais savoir c est qui les coachs qui sont dans votre club ?", sender: 'user' as const, time: currentTime, timestamp: 3.5 },
+        { id: 2, text: "Bonjour ! Je voudrais savoir c'est qui les coachs qui sont dans votre club ?", sender: 'user' as const, time: currentTime, timestamp: 3.5 },
         { id: 3, text: "Nous avons 4 coachs certifiés dans notre club : Jason, Myke, Ryan et Chris. Chacun d'eux est spécialisé dans différentes approches d'entraînement et adapte les sécances au objectifs et à la condition physique de chaque client.", sender: 'agent' as const, time: currentTime, timestamp: 8 },
         { id: 4, text: "Et c'est quoi les activités proposées ?", sender: 'user' as const, time: currentTime, timestamp: 19.5 },
         { id: 5, text: "Nous offrons plusieurs services pour vous aider à atteindre vos objectifs de remise en forme. Nous avons des séances d'entraînement personnels, de l'entraînement de musculation, du coaching en perte de poids, de l'entraînement HIIT (High Intensity Interval Training) ainsi qu'une séance de mobilité et de récuperation.", sender: 'agent' as const, time: currentTime, timestamp: 23 },

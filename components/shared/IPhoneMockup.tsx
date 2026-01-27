@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Battery, Wifi, Signal, Lock, BatteryFull } from 'lucide-react';
+import { Battery, Wifi, Signal, Lock, BatteryFull, Sun, Cloud } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
 interface Message {
@@ -61,81 +61,99 @@ export default function IPhoneMockup({
       >
         {/* 📱 Coque iPhone */}
         <div
-          className="relative w-full h-full rounded-[56px] bg-gradient-to-br from-gray-800 via-gray-900 to-black p-3"
+          className="relative w-full h-full rounded-[56px] bg-gradient-to-br from-gray-700 via-gray-700 to-gray-700 p-3"
           style={{
             boxShadow:
               '0 25px 60px -15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.1)',
           }}
         >
+          {/* 🔊 Volume + */}
+          <div className="absolute left-[-5px] top-[185px] w-[6px] h-[60px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+
+          {/* 🔊 Volume – */}
+          <div className="absolute left-[-5px] top-[250px] w-[6px] h-[60px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+          
+          {/* 🔊 Mute – */}
+          <div className="absolute left-[-5px] top-[120px] w-[6px] h-[40px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+
+          {/* 🔒 Power */}
+          <div className="absolute right-[-5px] top-[205px] w-[6px] h-[90px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+
           {/* 📱 Écran */}
           <div className="relative w-full h-full rounded-[44px] overflow-hidden bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
+           
             {/* 🔳 Encoche */}
             <div
-              className="absolute top-3 left-1/2 -translate-x-1/2 w-[38%] h-7 bg-black rounded-[999px] z-50 flex items-center justify-center"
+              className="absolute top-3 left-1/2 -translate-x-1/2 w-[38%] h-8 bg-black rounded-[999px] z-50 flex items-center justify-center"
               style={{ boxShadow: '0 8px 14px rgba(0,0,0,0.45)' }}
             >
               <div className="w-16 h-1.5 bg-gray-900 rounded-full opacity-80" />
             </div>
 
-
-
             {isLocked ? (
               /* 🔒 ÉCRAN DE VERROUILLAGE */
-              <div className="relative h-full flex flex-col bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
+              <div className="relative h-full flex flex-col bg-gradient-to-r from-[#B91C1C] via-[#BE185D] to-[#7C3AED]">
                 {/* Status bar */}
-                <div className="pt-3 px-6 flex items-center justify-between ml-2 mt-2">
+                <div className="pt-3 px-6 flex items-center justify-between ml-1 mt-1">
                   <div className="text-white text-sm font-semibold mr-3">
-                    TELUS
+                    Neotix AI
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Signal className="w-4 h-4 text-white" />
+                    <Signal className="w-4 h-4 text-white mr-1.5" />
                     <Wifi className="w-4 h-4 text-white" />
                     <BatteryFull className="w-6 h-4 text-white fill-white" />
                   </div>
                 </div>
 
                 {/* Centre : Date et branding */}
-                <div className="flex-1 flex flex-col items-center justify-center px-8">
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center"
-                  >
-                    {/* Date */}
-                    <div className="mb-12 mt-8">
-                      <div className="text-white/90 text-lg font-medium mb-1">
-                        {dayName}, {monthName} {date}
+                  <div className="flex-1 flex flex-col items-center justify-center px-8">
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="text-center"
+                    >
+                  {/* Date */}
+                  <div className="mb-32 -mt-24">
+                    <div className="text-white/90 text-lg font-medium mb-1">
+                      {dayName}, {monthName} {date}
+                    </div>
+                    
+                    <div className="text-white text-6xl sm:text-7xl lg:text-8xl font-semibold mt-2">
+                      {currentTime}
+                    </div>
+                    
+                    {/* Météo juste en dessous */}
+                    <div className="mx-auto px-6 py-4 rounded-3xl inline-flex flex-col gap-1 mt-6">
+                      {/* Température et icône */}
+                      <div className="flex gap-14">
+                        <div className="text-white text-1xl font-medium leading-tight -ml-32">
+                          31°
+                        </div>
+                        <Sun className="w-5 h-5 text-yellow-300 fill-yellow-300 -ml-28" />
                       </div>
                       
-                      <div className="text-white text-6xl sm:text-7xl lg:text-8xl font-semibold mt-2">
-                        {currentTime}
+                      {/* Infos supplémentaires */}
+                      <div className="text-white/90 text-xs font-light -ml-64">
+                        Sunny
                       </div>
                     </div>
+                  </div>
 
-                    {/* Logo/Branding */}
-                    <div className="mb-8 mt-14">
-                      <div className="w-48 h-48 mx-auto mb-5 rounded-3xl bg-white/20 backdrop-blur-xl flex items-center justify-center shadow-2xl p-4">
-                        {/* 🆕 Utiliser l'image du logo */}
-                        <img 
-                          src="/neotix-logo.png" 
-                          alt="Neotix Logo" 
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <h1 className="text-4xl font-bold text-white mb-2">
-                        Neotix AI
-                      </h1>
-                      <p className="text-white/80 text-sm">
-                        AI Agent
-                      </p>
-                    </div>
-
+                  {/* Logo / Branding avec espace */}
+                  <div className="mb-8">
+                    <h1 className="text-4xl font-bold text-white mb-10">
+                      Neotix AI
+                    </h1>
+                    <p className="text-white/80 text-sm">
+                      AI Agent
+                    </p>
+                  </div>
                     {/* Icône de déverrouillage */}
                     <motion.div
                       animate={{ y: [0, -6, 0] }}
                       transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                      className="flex flex-col items-center gap-2 mt-14"
+                      className="flex flex-col items-center gap-2 mt-24"
                     >
                       <Lock className="w-6 h-6 text-white/60" />
                       <p className="text-white/60 text-xs">
@@ -154,14 +172,14 @@ export default function IPhoneMockup({
               /* 💬 ÉCRAN DE CONVERSATION */
               <div className="relative h-full flex flex-col">
                 {/* 🔝 Status bar - remontée */}
-                <div className="pt-3 px-7 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
-                  <div className="flex items-center justify-between">
-                    <div className="text-[15px] font-semibold text-gray-900">
+                <div className="pt-3 px-6 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
+                  <div className="flex items-center justify-between ml-2">
+                    <div className="text-[15px] font-semibold text-gray-900 mt-2">
                       {currentTime}
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Signal className="w-4 h-4 text-gray-900" />
-                      <Wifi className="w-4 h-4 text-gray-900" />
+                      <Signal className="w-4 h-4 text-white mr-1.5" />
+                      <Wifi className="w-4 h-4 text-white" />
                       <BatteryFull className="w-6 h-4 text-black fill-black" />
                     </div>
                   </div>
@@ -169,22 +187,24 @@ export default function IPhoneMockup({
 
                 {/* 👤 Header avec AI et titre */}
                 <div className="pt-6 pb-4 px-5 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA] border-b border-white/10">
-                  <div className="max-w-[175px] mx-auto">
-                    <div className="flex items-center bg-gray-300 rounded-2xl p-3 shadow-sm border border-gray-500">
+                  <div className="flex justify-center">
+                    <div className="inline-flex items-center bg-gray-300 rounded-3xl p-3 shadow-sm border border-gray-500">
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mr-3 shadow-lg">
                         <span className="text-white text-sm font-semibold">AI</span>
                       </div>
-                      <div className="flex-1">
-                        <div className="text-gray-900 font-semibold text-[11px]">
+
+                      <div className="whitespace-nowrap">
+                        <div className="text-gray-900 font-semibold text-[11px] leading-tight">
                           {title}
                         </div>
-                        <div className="text-gray-500 text-xs">
+                        <div className="text-gray-500 text-xs leading-tight">
                           Neotix Agent
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 {/* 💬 Messages (zone scrollable) */}
                 <div
                   ref={chatScrollRef}

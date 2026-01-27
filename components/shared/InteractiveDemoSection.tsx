@@ -308,11 +308,11 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
                   <div
                     key={`${demo.src}-${index}`}
                     className={[
-                      'rounded-xl p-4 transition-all duration-300',
-                      isActive
-                        ? 'bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-950/30 dark:to-violet-950/30 ring-2 ring-blue-500/50'
-                        : 'bg-white/40 dark:bg-white/5 hover:bg-white/60 dark:hover:bg-white/10',
-                    ].join(' ')}
+                    'rounded-xl p-4 transition-all duration-300',
+                    isActive
+                      ? 'bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-950/30 dark:to-violet-950/30 ring-2 ring-blue-500/50'
+                      : 'bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10',
+                  ].join(' ')}
                   >
                     <div className="flex items-center gap-3">
                       <button
@@ -321,7 +321,7 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
                           'w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-all',
                           isActive
                             ? 'bg-gradient-to-br from-violet-500 to-blue-500 shadow-lg'
-                            : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600',
+                            : 'bg-gray-300 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600',
                         ].join(' ')}
                         aria-label={isPlaying && isActive ? 'Pause' : 'Play'}
                       >
