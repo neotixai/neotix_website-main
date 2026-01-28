@@ -200,83 +200,63 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
         setVisibleClientInfo([]);
         setVisibleAIFunctions([]);
         
-        // 🆕 Réinitialiser la frappe pour replay
+        // Réinitialiser complètement l'effet de frappe
         typingIntervalsRef.current.forEach(interval => clearInterval(interval));
         typingIntervalsRef.current.clear();
         setDisplayedMessages(new Map());
         setTypingProgress(new Map());
       }
-      
+
       audio
         .play()
         .then(() => setIsPlaying(true))
-        .catch((err) => console.error(err));
+        .catch((err) => console.error('Audio play error:', err));
     }
   };
 
-  const seekTo = (index: number, newTime: number) => {
+  const seekTo = (index: number, time: number) => {
     const audio = audioRef.current;
-    if (!audio) return;
-    if (currentIndex !== index) return;
+    if (!audio || currentIndex !== index) return;
 
-    const t = Math.min(Math.max(newTime, 0), duration || 0);
-    audio.currentTime = t;
-    setCurrentTime(t);
+    audio.currentTime = time;
+    setCurrentTime(time);
 
-    const currentDemo = demos[index];
-    
-    // 🆕 Réinitialiser l'effet de frappe lors du seek
+    // Réinitialiser uniquement les messages qui apparaissent après le nouveau temps
+    const currentDemo = demos[currentIndex];
+    const messagesToShow = currentDemo.messages.filter(
+      (msg) => msg.timestamp <= time
+    );
+
+    // Arrêter tous les intervalles de frappe
     typingIntervalsRef.current.forEach(interval => clearInterval(interval));
     typingIntervalsRef.current.clear();
-    setDisplayedMessages(new Map());
-    setTypingProgress(new Map());
-    
-    const messagesToShow = currentDemo.messages.filter(
-      (msg) => msg.timestamp <= t
-    );
-    setVisibleMessages(messagesToShow);
-    
-    // 🆕 Afficher instantanément tous les messages jusqu'au point de seek
-    const instantMessages = new Map<number, string>();
-    const instantProgress = new Map<number, number>();
-    messagesToShow.forEach(msg => {
-      instantMessages.set(msg.id, msg.text);
-      instantProgress.set(msg.id, msg.text.length);
+
+    // Réinitialiser uniquement la progression des messages qui ne sont plus visibles
+    const newTypingProgress = new Map<number, number>();
+    const newDisplayedMessages = new Map<number, string>();
+
+    messagesToShow.forEach((msg) => {
+      // Marquer les messages visibles comme complètement affichés
+      newTypingProgress.set(msg.id, msg.text.length);
+      newDisplayedMessages.set(msg.id, msg.text);
     });
-    setDisplayedMessages(instantMessages);
-    setTypingProgress(instantProgress);
 
-    const clientInfoToShow = currentDemo.clientInfo.filter(
-      (info) => info.timestamp <= t
-    );
-    setVisibleClientInfo(clientInfoToShow);
-
-    const aiFunctionsToShow = currentDemo.aiFunctions.filter(
-      (func) => func.timestamp <= t
-    );
-    setVisibleAIFunctions(aiFunctionsToShow);
+    setTypingProgress(newTypingProgress);
+    setDisplayedMessages(newDisplayedMessages);
   };
-
-  const currentDemo = currentIndex !== null ? demos[currentIndex] : null;
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'user':
-        return User;
-      case 'phone':
-        return Phone;
-      case 'mail':
-        return Mail;
-      case 'location':
-        return MapPin;
-      case 'calendar':
-        return Calendar;
-      default:
-        return User;
+      case 'user': return User;
+      case 'phone': return Phone;
+      case 'mail': return Mail;
+      case 'location': return MapPin;
+      case 'calendar': return Calendar;
+      default: return User;
     }
   };
 
-  // 🆕 Créer les messages avec le texte en cours de frappe
+  const currentDemo = currentIndex !== null ? demos[currentIndex] : null;
   const messagesWithTyping = visibleMessages.map(msg => ({
     ...msg,
     text: displayedMessages.get(msg.id) || ''
@@ -286,9 +266,10 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
     <div className="max-w-7xl mx-auto">
       <audio ref={audioRef} preload="metadata" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-14">
-        <div className="order-2 lg:order-1 space-y-6">
-          <div className="glass-card rounded-2xl p-6 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-12 items-start pt-14 mt-12">
+        {/* Select a Demo - Gauche */}
+        <div className="order-2 lg:order-1 flex justify-center mt-2">
+          <div className="glass-card rounded-3xl p-6 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 w-full max-w-md">
             <div className="flex items-center gap-3 mb-6">
               <Volume2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               <h3 className="text-xl font-semibold">Select a Demo</h3>
@@ -311,7 +292,7 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
                     'rounded-xl p-4 transition-all duration-300',
                     isActive
                       ? 'bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-950/30 dark:to-violet-950/30 ring-2 ring-blue-500/50'
-                      : 'bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10',
+                      : 'bg-gray-200 hover:bg-gray-300 dark:bg-white/5 dark:hover:bg-white/10',
                   ].join(' ')}
                   >
                     <div className="flex items-center gap-3">
@@ -321,7 +302,7 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
                           'w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-all',
                           isActive
                             ? 'bg-gradient-to-br from-violet-500 to-blue-500 shadow-lg'
-                            : 'bg-gray-300 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600',
+                            : 'bg-gray-400 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600',
                         ].join(' ')}
                         aria-label={isPlaying && isActive ? 'Pause' : 'Play'}
                       >
@@ -379,16 +360,38 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
               })}
             </div>
           </div>
+        </div>
 
+        {/* Téléphone - Centre */}
+        <div className="order-1 lg:order-2 flex justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex ?? 'locked'}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              <IPhoneMockup
+                messages={messagesWithTyping}
+                title={currentDemo?.title}
+                isLocked={currentIndex === null}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Client Info & AI Actions - Droite */}
+        <div className="order-3 lg:order-3 flex justify-center mt-2">
           {currentDemo && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="glass-card rounded-2xl p-6 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10"
+              className="glass-card rounded-2xl p-6 bg-white/60 dark:bg-white/5 backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10 w-full max-w-md"
             >
               <div className="flex items-center gap-3 mb-6">
                 {isPlaying && (
-                  <div className="flex items-center gap-1"> {/* 🆕 Déplacer la condition ici */}
+                  <div className="flex items-center gap-1">
                     <motion.div
                       className="w-1 h-3 bg-blue-500 rounded-full"
                       animate={{ height: ['12px', '20px', '12px'] }}
@@ -491,25 +494,6 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
               </div>
             </motion.div>
           )}
-        </div>
-
-        <div className="order-1 lg:order-2 flex justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex ?? 'locked'}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* 🆕 Toujours afficher l'iPhone, avec écran de verrouillage ou messages */}
-              <IPhoneMockup
-                messages={messagesWithTyping}
-                title={currentDemo?.title}
-                isLocked={currentIndex === null}
-              />
-            </motion.div>
-          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ export default function IPhoneMockup({
     >
       <div
         className="relative mx-auto isolate"
-        style={{ width: '360px', height: '740px' }}
+        style={{ width: '334px', height: '666px' }}
       >
         {/* 📱 Coque iPhone */}
         <div
@@ -114,7 +114,7 @@ export default function IPhoneMockup({
                       className="text-center"
                     >
                   {/* Date */}
-                  <div className="mb-32 -mt-24">
+                  <div className="mb-32 -mt-22">
                     <div className="text-white/90 text-lg font-medium mb-1">
                       {dayName}, {monthName} {date}
                     </div>
@@ -126,9 +126,9 @@ export default function IPhoneMockup({
                     {/* Météo juste en dessous */}
                     <div className="mx-auto px-6 py-4 rounded-3xl inline-flex flex-col gap-1 mt-6">
                       {/* Température et icône */}
-                      <div className="flex gap-14">
+                      <div className="flex gap-16">
                         <div className="text-white text-1xl font-medium leading-tight -ml-32">
-                          31°
+                          21°
                         </div>
                         <Sun className="w-5 h-5 text-yellow-300 fill-yellow-300 -ml-28" />
                       </div>
