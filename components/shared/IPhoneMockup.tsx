@@ -61,23 +61,23 @@ export default function IPhoneMockup({
       >
         {/* 📱 Coque iPhone */}
         <div
-          className="relative w-full h-full rounded-[56px] bg-gradient-to-br from-gray-700 via-gray-700 to-gray-700 p-3"
+          className="relative w-full h-full rounded-[56px] bg-gradient-to-br from-gray-800 via-gray-800 to-gray-800 p-3"
           style={{
             boxShadow:
               '0 25px 60px -15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.1)',
           }}
         >
           {/* 🔊 Volume + */}
-          <div className="absolute left-[-5px] top-[185px] w-[6px] h-[60px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+          <div className="absolute left-[-5px] top-[185px] w-[6px] h-[60px] bg-gradient-to-b from-gray-800 to-gray-800 rounded-full shadow-md" />
 
           {/* 🔊 Volume – */}
-          <div className="absolute left-[-5px] top-[250px] w-[6px] h-[60px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+          <div className="absolute left-[-5px] top-[250px] w-[6px] h-[60px] bg-gradient-to-b from-gray-800 to-gray-800 rounded-full shadow-md" />
           
           {/* 🔊 Mute – */}
-          <div className="absolute left-[-5px] top-[120px] w-[6px] h-[40px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+          <div className="absolute left-[-5px] top-[120px] w-[6px] h-[40px] bg-gradient-to-b from-gray-800 to-gray-800 rounded-full shadow-md" />
 
           {/* 🔒 Power */}
-          <div className="absolute right-[-5px] top-[205px] w-[6px] h-[90px] bg-gradient-to-b from-gray-700 to-gray-700 rounded-full shadow-md" />
+          <div className="absolute right-[-5px] top-[205px] w-[6px] h-[90px] bg-gradient-to-b from-gray-800 to-gray-800 rounded-full shadow-md" />
 
           {/* 📱 Écran */}
           <div className="relative w-full h-full rounded-[44px] overflow-hidden bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
