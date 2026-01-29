@@ -189,8 +189,8 @@ export const messages = {
 
     industries: {
       customerInquiries: 'Customer inquiries',
-      inboundCalls: 'Phone order management',
-      dentalBooking: 'Automated patient booking appointment',
+      inboundCalls: 'Order management',
+      dentalBooking: 'Appointment booking',
       fitnessQuestions: 'Client support',
     },
   },
@@ -675,8 +675,8 @@ demosPage: {
 
     industries: {
       customerInquiries: 'Demandes de renseignements',
-      inboundCalls: 'Gestion des commandes par téléphone',
-      dentalBooking: 'Prise de rendez-vous patients automatisée',
+      inboundCalls: 'Gestion des commandes',
+      dentalBooking: 'Prise de rendez-vous',
       fitnessQuestions: 'Support client',
     } 
   },

@@ -21,10 +21,8 @@ export default function DemosPage() {
 
   const audioDemos = [
     {
-      // ✅ FIXED: Use title property directly instead of spreading
       title: t.demosPage.audioDemos[0].title,
       src: '/audio/barbershop.mp3',
-      // ✅ FIXED: Use proper translation key instead of string literal
       industry: t.demosPage.ui.industries.customerInquiries,
       messages: [
         { id: 1, text: "Bonjour!", sender: 'agent' as const, time: currentTime, timestamp: 0.5 },
@@ -44,7 +42,6 @@ export default function DemosPage() {
         { id: 15, text: "D'accord, n'hésitez pas à revenir si vous avez d'autres questions!", sender: 'agent' as const, time: currentTime, timestamp: 41.9 },
       ],
       clientInfo: [
-        // ✅ FIXED: Use appropriate icons for each field
         { label: 'Demande', value: 'Horaires samedi', timestamp: 11, icon: 'calendar' as const },
         { label: 'Intérêt', value: 'Coupe régulière', timestamp: 23, icon: 'calendar' as const },
         { label: 'Prix', value: '38 dollars', timestamp: 23, icon: 'calendar' as const },
@@ -60,7 +57,6 @@ export default function DemosPage() {
       ]
     },
     {
-      // ✅ FIXED: Consistent structure
       title: t.demosPage.audioDemos[1].title,
       src: '/audio/restaurant.mp3',
       industry: t.demosPage.ui.industries.inboundCalls,
@@ -89,7 +85,6 @@ export default function DemosPage() {
         { id: 22, text: "Thank you Lyna. Your order is being prepared and will be delivered as soon as possible.", sender: 'agent' as const, time: currentTime, timestamp: 58 },
       ],
       clientInfo: [
-        // ✅ FIXED: Use proper icon types
         { label: 'Request', value: 'Food order', timestamp: 6.5, icon: 'calendar' as const },
         { label: 'Order details', value: 'Two chicken Tom Yum soups', timestamp: 7, icon: 'calendar' as const },
         { label: 'Order type', value: 'Delivery', timestamp: 11.7, icon: 'calendar' as const },
@@ -98,7 +93,6 @@ export default function DemosPage() {
         { label: 'Email', value: 'lyna.98@gmail.com', timestamp: 37.5, icon: 'mail' as const },
         { label: 'Address', value: '42 Bedford Street', timestamp: 43.5, icon: 'location' as const },
       ],
-
       aiFunctions: [
         { label: 'Detect customer intent', timestamp: 1.8 },
         { label: 'Extract order items', timestamp: 6.5 },
@@ -108,7 +102,6 @@ export default function DemosPage() {
         { label: 'Create delivery order', timestamp: 44 },
         { label: 'Send order confirmation', timestamp: 57.5 },
       ]
-
     },
     {
       title: t.demosPage.audioDemos[2].title,
@@ -148,9 +141,7 @@ export default function DemosPage() {
         { id: 5, text: "Nous proposons un large éventail d'activités : Musculation et cours collectifs comme yoga, spinning et boot camp.", sender: 'agent' as const, time: currentTime, timestamp: 22 },
         { id: 6, text: " Parfait, merci !", sender: 'user' as const, time: currentTime, timestamp: 38.7 },
       ],
-      clientInfo: [
-        // Empty as per original
-      ],
+      clientInfo: [],
       aiFunctions: [
         { label: 'Informations concernant les coachs du club.', timestamp: 7 },
         { label: 'Informations concernant les activités proposées.', timestamp: 22 }
@@ -161,9 +152,34 @@ export default function DemosPage() {
   const featuresIcons = [PhoneCall, Volume2, CalendarCheck];
   
   return (
-    <>
+    <div className="relative overflow-hidden">
+      {/* 
+        ✨ NOUVEAUX DÉGRADÉS D'ARRIÈRE-PLAN ✨
+        Multiples blobs de dégradé positionnés stratégiquement sur la page
+      */}
+      
+      {/* Dégradé Hero - En haut */}
+      <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
+      </div>
+
+      {/* Dégradé milieu de page - Pour la section features */}
+      <div className="absolute inset-x-0 top-[40rem] -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-20rem)] aspect-[1155/678] w-[36.125rem] -translate-x+1/3 rotate-[60deg] bg-gradient-to-tr from-violet-500 via-purple-500 to-blue-500 opacity-20 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" />
+      </div>
+
+      {/* Dégradé pour la section interactive demos */}
+      <div className="absolute inset-x-0 top-[85rem] -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] translate-x-1/5 rotate+[60deg] bg-gradient-to-tr from-violet-500 via-purple-500 to-blue-500 opacity-20 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" />
+      </div>
+
+      {/* Dégradé bas de page - Pour le CTA final */}
+      <div className="absolute inset-x-0 bottom-5 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/3 rotate-[90deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
+      </div>
+
       {/* HERO */}
-      <Section className="pt-32">
+      <Section className="pt-32 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -186,7 +202,7 @@ export default function DemosPage() {
       </Section>
 
       {/* FEATURES */}
-      <Section>
+      <Section className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -236,14 +252,13 @@ export default function DemosPage() {
       </Section>
 
       {/* INTERACTIVE DEMOS */}
-      <Section className="bg-gradient-to-b from-transparent via-slate-50/50 to-transparent dark:via-slate-900/50">
+      <Section className="relative bg-gradient-to-b from-transparent via-slate-50/50 to-transparent dark:via-slate-900/50">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          {/* Titre */}
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
             {t.demosPage.try.titlePrefix}{' '}
             <span className="gradient-text">
@@ -251,7 +266,6 @@ export default function DemosPage() {
             </span>
           </h2>
           
-          {/* Badge centré sous le titre */}
           <div className="flex justify-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 font-semibold text-sm backdrop-blur-sm">
               <Volume2 className="w-4 h-4" />
@@ -259,13 +273,12 @@ export default function DemosPage() {
             </div>
           </div>
 
-          {/* ✅ FIXED: Remove the extra t prop */}
           <InteractiveDemoSection demos={audioDemos} />
         </motion.div>
       </Section>
 
       {/* FINAL CTA */}
-      <Section>
+      <Section className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -286,6 +299,6 @@ export default function DemosPage() {
           </GradientButton>
         </motion.div>
       </Section>
-    </>
+    </div>
   );
 }

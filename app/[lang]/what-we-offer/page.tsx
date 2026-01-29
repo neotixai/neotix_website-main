@@ -24,9 +24,34 @@ export default function AutomationAIPage() {
   }));
 
   return (
-    <>
+    <div className="relative overflow-hidden">
+      {/* 
+        ✨ DÉGRADÉS SERVICES PAGE ✨
+        Motif: Vagues fluides - évoque l'automatisation et le flux de travail
+      */}
+      
+      {/* Dégradé Hero - Haut gauche, vague douce */}
+      <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-18rem)] aspect-[1155/678] w-[38rem] -translate-x-1/2 rotate-[20deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-30 sm:left-[calc(50%-35rem)] sm:w-[73rem]" />
+      </div>
+
+      {/* Dégradé Solutions Grid - Droite, vague montante */}
+      <div className="absolute inset-x-0 top-[42rem] -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%+12rem)] aspect-[1155/678] w-[44rem] translate-x-1/4 rotate-[-42deg] bg-gradient-to-bl from-blue-500 via-indigo-500 to-violet-500 opacity-30 sm:left-[calc(50%+28rem)] sm:w-[80rem]" />
+      </div>
+
+      {/* Dégradé Blocks - Gauche, vague descendante */}
+      <div className="absolute inset-x-0 top-[108rem] -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-22rem)] aspect-[1155/678] w-[40rem] -translate-x-1/4 rotate-[35deg] bg-gradient-to-tr from-violet-500 via-purple-500 to-fuchsia-500 opacity-20 sm:left-[calc(50%-42rem)] sm:w-[76rem]" />
+      </div>
+
+      {/* Dégradé FAQ - Centre-droite, vague finale */}
+      <div className="absolute inset-x-0 bottom-5 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%+5rem)] aspect-[1155/678] w-[37rem] translate-x-1/6 rotate-[-28deg] bg-gradient-to-tl from-blue-500 to-violet-500 opacity-25 sm:left-[calc(50%+15rem)] sm:w-[71rem]" />
+      </div>
+
       {/* HERO */}
-      <Section className="pt-32">
+      <Section className="pt-32 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,7 +72,7 @@ export default function AutomationAIPage() {
       </Section>
 
       {/* SOLUTIONS GRID */}
-      <Section>
+      <Section className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +111,7 @@ export default function AutomationAIPage() {
       </Section>
 
       {/* AUTOMATION BLOCK */}
-      <Section className="bg-gradient-to-b from-transparent via-violet-500/5 to-transparent">
+      <Section className="bg-gradient-to-b from-transparent via-violet-500/5 to-transparent relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -114,7 +139,7 @@ export default function AutomationAIPage() {
       </Section>
 
       {/* FAQ */}
-      <Section>
+      <Section className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +157,7 @@ export default function AutomationAIPage() {
       </Section>
 
       {/* FINAL CTA */}
-      <Section>
+      <Section className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -155,6 +180,6 @@ export default function AutomationAIPage() {
           </div>
         </motion.div>
       </Section>
-    </>
+    </div>
   );
 }

@@ -12,9 +12,34 @@ export default function AboutPage() {
   const { t } = useT();
 
   return (
-    <>
+    <div className="relative overflow-hidden">
+      {/* 
+        ✨ DÉGRADÉS ABOUT PAGE ✨
+        Motif: Ascension progressive - évoque la croissance et l'innovation
+      */}
+      
+      {/* Dégradé Hero - Bas gauche montant, début de l'histoire */}
+      <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-20rem)] aspect-[1155/678] w-[39rem] -translate-x-1/3 rotate-[18deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-30 sm:left-[calc(50%-38rem)] sm:w-[74rem]" />
+      </div>
+
+      {/* Dégradé Who/Why - Droite, évolution */}
+      <div className="absolute inset-x-0 top-[45rem] -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%+15rem)] aspect-[1155/678] w-[43rem] translate-x-1/5 rotate-[-38deg] bg-gradient-to-bl from-blue-500 via-indigo-500 to-violet-500 opacity-20 sm:left-[calc(50%+32rem)] sm:w-[79rem]" />
+      </div>
+
+      {/* Dégradé Values - Centre-gauche, expansion */}
+      <div className="absolute inset-x-0 top-[92rem] -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-14rem)] aspect-[1155/678] w-[41rem] -translate-x-1/5 rotate-[45deg] bg-gradient-to-tr from-violet-500 via-fuchsia-500 to-purple-500 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[77rem]" />
+      </div>
+
+      {/* Dégradé CTA - Haut droite, accomplissement */}
+      <div className="absolute inset-x-0 bottom-8 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%+8rem)] aspect-[1155/678] w-[38rem] translate-x-1/6 rotate-[-22deg] bg-gradient-to-tl from-blue-500 to-violet-500 opacity-20 sm:left-[calc(50%+20rem)] sm:w-[73rem]" />
+      </div>
+
       {/* HERO */}
-      <Section className="pt-32">
+      <Section className="pt-32 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,7 +58,7 @@ export default function AboutPage() {
       </Section>
 
       {/* WHO WE ARE + WHY */}
-      <Section>
+      <Section className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -82,7 +107,7 @@ export default function AboutPage() {
       </Section>
 
       {/* VALUES */}
-      <Section className="bg-gradient-to-b from-transparent via-violet-500/5 to-transparent">
+      <Section className="bg-gradient-to-b from-transparent via-violet-500/5 to-transparent relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +153,7 @@ export default function AboutPage() {
       </Section>
 
       {/* FINAL CTA */}
-      <Section>
+      <Section className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -149,6 +174,6 @@ export default function AboutPage() {
           </GradientButton>
         </motion.div>
       </Section>
-    </>
+    </div>
   );
 }
