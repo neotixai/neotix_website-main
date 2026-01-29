@@ -188,10 +188,10 @@ export const messages = {
     noActions: 'No actions executed yet...',
 
     industries: {
-      customerInquiries: 'Customer inquiries about the business',
-      inboundCalls: 'Inbound call handling and qualification',
+      customerInquiries: 'Customer inquiries',
+      inboundCalls: 'Phone order management',
       dentalBooking: 'Automated patient booking appointment',
-      fitnessQuestions: 'Answering customer questions about the business',
+      fitnessQuestions: 'Client support',
     },
   },
 
@@ -220,13 +220,14 @@ export const messages = {
   try: {
     titlePrefix: 'Try it',
     titleAccent: 'Yourself',
+    subtitle: 'Interactive Voice Demos',
   },
 
   audioDemos: [
-    { title: 'Barbershop Agent', description: 'Customer inquiries about the business' },
-    { title: 'Restaurant Agent', description: 'Inbound call handling and qualification' },
-    { title: 'Dental Agent', description: 'Automated patient booking appointment' },
-    { title: 'Fitness Club Agent', description: 'Answering customer questions about the business' },
+    { title: '[🇫🇷] - Barbershop Agent'},
+    { title: '[🇺🇸] - Restaurant Agent'},
+    { title: '[🇺🇸] - Dental Agent'},
+    { title: '[🇫🇷] - Fitness Club Agent'},
   ],
 
   faq: {
@@ -673,10 +674,10 @@ demosPage: {
     noActions: 'Aucune action exécutée pour le moment...',
 
     industries: {
-      customerInquiries: 'Questions clients sur le business',
-      inboundCalls: 'Gestion des appels entrants et qualification',
-      dentalBooking: 'Prise de rendez-vous patient automatisée',
-      fitnessQuestions: 'Réponses aux questions clients sur le business',
+      customerInquiries: 'Demandes de renseignements',
+      inboundCalls: 'Gestion des commandes par téléphone',
+      dentalBooking: 'Prise de rendez-vous patients automatisée',
+      fitnessQuestions: 'Support client',
     } 
   },
 
@@ -706,15 +707,16 @@ demosPage: {
   try: {
     titlePrefix: 'Essayez par ',
     titleAccent: 'vous-même',
+    subtitle: 'Démos vocales interactives',
   },
 
   audioDemos: [
-    { title: 'Agent Barbershop', description: 'Questions clients sur le business' },
-    { title: 'Agent Restaurant', description: 'Gestion des appels entrants' },
-    { title: 'Agent Dentaire', description: 'Prise de rendez-vous patients automatisée' },
-    { title: 'Agent Fitness', description: 'Réponses aux questions clients sur le business' },
+    { title: '[🇫🇷] - Agent Barbershop'},
+    { title: '[🇺🇸] - Agent Restaurant'},
+    { title: '[🇺🇸] - Agent Dentaire'},
+    { title: '[🇫🇷] - Agent Fitness'},
   ],
-
+  
   faq: {
     titlePrefix: 'Questions',
     titleAccent: 'courantes',
