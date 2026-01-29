@@ -30,7 +30,7 @@ export default function ContactPage() {
       
       {/* Dégradé Hero - Centre haut, rayonnement accueillant */}
       <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-5rem)] aspect-[1155/678] w-[42rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-br from-violet-500 via-fuchsia-500 to-blue-500 opacity-20 sm:left-[calc(50%-12rem)] sm:w-[78rem]" />
+        <div className="relative left-[calc(50%-5rem)] aspect-[1155/678] w-[42rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-br from-violet-500 to-blue-500 opacity-20 sm:left-[calc(50%-12rem)] sm:w-[78rem]" />
       </div>
 
       {/* Dégradé Cards - Gauche, chaleur subtile */}
