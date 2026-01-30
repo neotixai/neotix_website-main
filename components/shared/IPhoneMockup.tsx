@@ -11,16 +11,53 @@ interface Message {
   time: string;
 }
 
+interface PhoneTranslations {
+  lockScreen: {
+    carrier: string;
+    agent: string;
+    unlockPrompt: string;
+    weather: {
+      sunny: string;
+    };
+    days: string[];
+    months: string[];
+  };
+  conversation: {
+    neotixAgent: string;
+    messagePlaceholder: string;
+  };
+}
+
+// Default translations (English)
+const defaultTranslations: PhoneTranslations = {
+  lockScreen: {
+    carrier: 'Neotix AI',
+    agent: 'AI Agent',
+    unlockPrompt: 'Select a demo to unlock',
+    weather: {
+      sunny: 'Sunny',
+    },
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  },
+  conversation: {
+    neotixAgent: 'Neotix Agent',
+    messagePlaceholder: 'Message...',
+  },
+};
+
 interface IPhoneMockupProps {
   messages: Message[];
   title?: string;
   isLocked?: boolean;
+  translations?: PhoneTranslations;
 }
 
 export default function IPhoneMockup({
   messages,
   title = 'Conversation',
   isLocked = false,
+  translations = defaultTranslations,
 }: IPhoneMockupProps) {
   const chatScrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -40,11 +77,9 @@ export default function IPhoneMockup({
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const currentTime = `${hours}:${minutes}`;
 
-  // Obtenir la date
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const dayName = days[now.getDay()];
-  const monthName = months[now.getMonth()];
+  // Obtenir la date avec traductions
+  const dayName = translations.lockScreen.days[now.getDay()];
+  const monthName = translations.lockScreen.months[now.getMonth()];
   const date = now.getDate();
 
   return (
@@ -96,7 +131,7 @@ export default function IPhoneMockup({
                 {/* Status bar */}
                 <div className="pt-3 px-6 flex items-center justify-between ml-1 mt-1">
                   <div className="text-white text-sm font-semibold mr-3">
-                    Neotix AI
+                    {translations.lockScreen.carrier}
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Signal className="w-4 h-4 text-white mr-1.5" />
@@ -135,7 +170,7 @@ export default function IPhoneMockup({
                       
                       {/* Infos supplémentaires */}
                       <div className="text-white/90 text-xs font-light -ml-64">
-                        Sunny
+                        {translations.lockScreen.weather.sunny}
                       </div>
                     </div>
                   </div>
@@ -143,10 +178,10 @@ export default function IPhoneMockup({
                   {/* Logo / Branding avec espace */}
                   <div className="mb-8">
                     <h1 className="text-4xl font-bold text-white mb-10">
-                      Neotix AI
+                      {translations.lockScreen.carrier}
                     </h1>
                     <p className="text-white/80 text-sm">
-                      AI Agent
+                      {translations.lockScreen.agent}
                     </p>
                   </div>
                     {/* Icône de déverrouillage */}
@@ -157,7 +192,7 @@ export default function IPhoneMockup({
                     >
                       <Lock className="w-6 h-6 text-white/60" />
                       <p className="text-white/60 text-xs">
-                        Select a demo to unlock
+                        {translations.lockScreen.unlockPrompt}
                       </p>
                     </motion.div>
                   </motion.div>
@@ -198,7 +233,7 @@ export default function IPhoneMockup({
                           {title}
                         </div>
                         <div className="text-gray-500 text-xs leading-tight">
-                          Neotix Agent
+                          {translations.conversation.neotixAgent}
                         </div>
                       </div>
                     </div>
@@ -254,7 +289,7 @@ export default function IPhoneMockup({
                 <div className="px-4 py-3 bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#9333EA]">
                   <div className="flex items-center gap-2">
                     <div className="flex-1 bg-gray-100 rounded-full px-4 py-3 text-gray-400 text-[11px]">
-                      Message...
+                      {translations.conversation.messagePlaceholder}
                     </div>
                     <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
                       <svg

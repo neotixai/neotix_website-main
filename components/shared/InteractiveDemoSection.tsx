@@ -5,6 +5,24 @@ import { Play, Pause, Volume2, User, Phone, Mail, MapPin, Calendar, CheckCircle2
 import { motion, AnimatePresence } from 'framer-motion';
 import IPhoneMockup from './IPhoneMockup';
 
+// Interface for phone translations
+interface PhoneTranslations {
+  lockScreen: {
+    carrier: string;
+    agent: string;
+    unlockPrompt: string;
+    weather: {
+      sunny: string;
+    };
+    days: string[];
+    months: string[];
+  };
+  conversation: {
+    neotixAgent: string;
+    messagePlaceholder: string;
+  };
+}
+
 type Message = {
   id: number;
   text: string;
@@ -61,7 +79,13 @@ function getIcon(iconName: ClientInfo['icon']) {
   return iconMap[iconName] || Calendar;
 }
 
-export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }) {
+export default function InteractiveDemoSection({ 
+  demos,
+  translations 
+}: { 
+  demos: AudioDemo[];
+  translations?: PhoneTranslations;
+}) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -474,6 +498,7 @@ export default function InteractiveDemoSection({ demos }: { demos: AudioDemo[] }
                 messages={messagesWithTyping}
                 title={currentDemo?.title}
                 isLocked={currentIndex === null}
+                translations={translations}
               />
             </motion.div>
           </AnimatePresence>

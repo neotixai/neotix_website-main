@@ -30,7 +30,7 @@ export default function DemosPage() {
         { id: 3, text: "Comment puis-je vous aider ?", sender: 'agent' as const, time: currentTime, timestamp: 3.8 },
         { id: 4, text: "Bonjour, je voulais savoir si vous ouvrez les samedi matin s'il vous plait ?", sender: 'user' as const, time: currentTime, timestamp: 6 },
         { id: 5, text: "Oui le salon est ouvert le samedi de 9h à 17h.", sender: 'agent' as const, time: currentTime, timestamp: 10.8 },
-        { id: 6, text: "Avez-vous besoin d'autres informations ou souhaitez-vous prendre un rendez-vous ?", sender: 'agent' as const, time: currentTime, timestamp: 14.5 },
+        { id: 6, text: "Avez-vous besoin d'autres informations ou souhaitez-vous prendre rendez-vous ?", sender: 'agent' as const, time: currentTime, timestamp: 14.5 },
         { id: 7, text: "Quel est le prix pour une coupe régulière ?", sender: 'user' as const, time: currentTime, timestamp: 18.3 },
         { id: 8, text: "Le prix pour une coupe régulière est de 38 dollars.", sender: 'agent' as const, time: currentTime, timestamp: 23 },
         { id: 9, text: "Souhaitez-vous prendre rendez-vous pour ce service ?", sender: 'agent' as const, time: currentTime, timestamp: 25.6 },
@@ -172,10 +172,11 @@ export default function DemosPage() {
         { id: 2, text: "Bonjour ! Je voudrais savoir c'est qui les coachs qui sont dans votre club ?", sender: 'user' as const, time: currentTime, timestamp: 3.5 },
         { id: 3, text: "Nous avons 4 coachs certifiés dans notre club : Jason, Myke, Ryan et Chris. Chacun d'eux est spécialisé dans différentes approches d'entraînement et adapte les sécances au objectifs et à la condition physique de chaque client.", sender: 'agent' as const, time: currentTime, timestamp: 8 },
         { id: 4, text: "Et c'est quoi les activités proposées ?", sender: 'user' as const, time: currentTime, timestamp: 19.5 },
-        { id: 5, text: "Nous proposons un large éventail d'activités : Musculation et cours collectifs comme yoga, spinning et boot camp.", sender: 'agent' as const, time: currentTime, timestamp: 22 },
+        { id: 5, text: "Nous offrons plusieurs services pour vous aider à atteindre vos objectifs de remise en forme. Nous avons des séances d'entraînement personnels, de l'entraînement de musculation, du coaching en perte de poids, de l'entraînement HIIT (High Intensity Interval Training) ainsi qu'une séance de mobilité et de récuperation.", sender: 'agent' as const, time: currentTime, timestamp: 23 },
         { id: 6, text: " Parfait, merci !", sender: 'user' as const, time: currentTime, timestamp: 38.7 },
       ],
-      clientInfo: [],
+      clientInfo: [
+      ],
       aiFunctions: [
         { label: 'Informations concernant les coachs du club.', timestamp: 7 },
         { label: 'Informations concernant les activités proposées.', timestamp: 22 }
@@ -184,11 +185,28 @@ export default function DemosPage() {
   ];
 
   const featuresIcons = [PhoneCall, Volume2, CalendarCheck];
-  
+
+  // Préparer les traductions du téléphone
+  const phoneTranslations = {
+    lockScreen: {
+      carrier: t.demosPage.ui.phone.lockScreen.carrier,
+      agent: t.demosPage.ui.phone.lockScreen.agent,
+      unlockPrompt: t.demosPage.ui.phone.lockScreen.unlockPrompt,
+      weather: {
+        sunny: t.demosPage.ui.phone.lockScreen.weather.sunny,
+      },
+      days: [...t.demosPage.ui.phone.lockScreen.days] as string[],
+      months: [...t.demosPage.ui.phone.lockScreen.months] as string[],
+    },
+    conversation: {
+      neotixAgent: t.demosPage.ui.phone.conversation.neotixAgent,
+      messagePlaceholder: t.demosPage.ui.phone.conversation.messagePlaceholder,
+    },
+  };
+
   return (
-    <div className="relative overflow-hidden">
-      {/* 
-        ✨ NOUVEAUX DÉGRADÉS D'ARRIÈRE-PLAN ✨
+    <div className="relative">
+      {/*
         Multiples blobs de dégradé positionnés stratégiquement sur la page
       */}
       
@@ -292,7 +310,7 @@ export default function DemosPage() {
             </div>
           </div>
 
-          <InteractiveDemoSection demos={audioDemos} />
+          <InteractiveDemoSection demos={audioDemos} translations={phoneTranslations} />
         </motion.div>
       </Section>
 

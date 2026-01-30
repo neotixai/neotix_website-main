@@ -193,6 +193,23 @@ export const messages = {
       dentalBooking: 'Appointment booking',
       fitnessQuestions: 'Client support',
     },
+
+    phone: {
+      lockScreen: {
+        carrier: 'Neotix AI',
+        agent: 'AI Agent',
+        unlockPrompt: 'Select a demo to unlock',
+        weather: {
+          sunny: 'Sunny',
+        },
+        days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      },
+      conversation: {
+        neotixAgent: 'Neotix Agent',
+        messagePlaceholder: 'Message...',
+      },
+    },
   },
 
   features: {
@@ -512,13 +529,13 @@ contactForm: {
     contact: {
       titlePrefix: 'Construisons quelque chose de',
       titleAccent: 'smart',
-      subtitle: "Prêt à transformer ton business avec l’IA ? Contacte-nous et discutons de ton projet.",
+      subtitle: "Prêt à transformer votre business avec l’IA ? Contacte-nous et discutons de votre projet.",
     },
 
     integrations: {
       titlePrefix: 'Des intégrations qui',
       titleAccent: 'propulsent',
-      titleSuffix: 'tes workflows',
+      titleSuffix: 'vos workflows',
     },
 
     process: {
@@ -526,7 +543,7 @@ contactForm: {
       titleAccent: 'Processus',
       subtitle: 'De l’idée au lancement en trois étapes simples et efficaces',
       steps: [
-        { title: 'Découvrir', description: 'On analyse tes besoins et on conçoit la solution IA idéale.' },
+        { title: 'Découvrir', description: 'On analyse vos besoins et on conçoit la solution IA idéale.' },
         { title: 'Construire', description: 'On développe et on intègre des systèmes IA sur mesure.' },
         { title: 'Lancer', description: 'On déploie, optimise et fait évoluer avec un support continu.' },
       ],
@@ -544,7 +561,7 @@ contactForm: {
     },
 
     footer: {
-      tagline: "Solutions IA nouvelle génération pour automatiser et faire grandir ton business.",
+      tagline: "Solutions IA nouvelle génération pour automatiser et faire grandir votre business.",
       quickLinks: 'Liens rapides',
       services: 'Services',
       connect: 'Réseaux',
@@ -561,10 +578,10 @@ contactForm: {
     offerPage: {
   hero: {
     titlePrefix: 'Automatisation & IA',
-    titleSuffix: 'pour faire grandir ton business',
+    titleSuffix: 'pour faire grandir votre business',
     subtitle:
       "Des workflows intelligents, des assistants IA et des systèmes d’automatisation qui éliminent le travail répétitif et améliorent l’expérience client.",
-    cta: 'Transformer tes opérations',
+    cta: 'Transformer vos opérations',
   },
 
   solutions: {
@@ -575,7 +592,7 @@ contactForm: {
       {
         title: 'Automatisation de workflows',
         description:
-          'Créer des scénarios Make/N8N avancés pour connecter tes outils et automatiser les tâches répétitives.',
+          'Créer des scénarios Make/N8N avancés pour connecter votre outils et automatiser les tâches répétitives.',
       },
       {
         title: 'Automatisation des communications',
@@ -608,7 +625,7 @@ contactForm: {
   blocks: {
     leftTitle: 'Du chaos à la clarté',
     leftP1:
-      "Arrête de perdre des heures sur des tâches répétitives. On conçoit des workflows intelligents qui se déclenchent automatiquement selon des actions, le temps ou des conditions métier.",
+      "Arrêtez de perdre des heures sur des tâches répétitives. On conçoit des workflows intelligents qui se déclenchent automatiquement selon des actions, le temps ou des conditions métier.",
     leftP2:
       "Routage de leads, facturation, synchro CRM, notifications, tout tourne automatiquement en arrière-plan.",
 
@@ -616,7 +633,7 @@ contactForm: {
     rightP1:
       "Nos assistants IA gèrent le support, les conversations de vente et les flux de réservation avec une intelligence proche de l’humain.",
     rightP2:
-      "Disponibles 24/7, multilingues et totalement intégrés à tes outils — sans recruter plus.",
+      "Disponibles 24/7, multilingues et totalement intégrés à vos outils — sans recruter plus.",
   },
 
   faq: {
@@ -633,21 +650,21 @@ contactForm: {
       },
       {
         q: 'Est-ce sécurisé ?',
-        a: 'Oui. Connexions chiffrées, authentification sécurisée, et bonnes pratiques “enterprise” pour protéger tes données.',
+        a: 'Oui. Connexions chiffrées, authentification sécurisée, et bonnes pratiques “enterprise” pour protéger vos données.',
       },
       {
         q: 'Est-ce compatible avec nos processus actuels ?',
-        a: 'Absolument. On analyse tes workflows et on conçoit des systèmes IA/automation qui s’intègrent sans friction à tes opérations.',
+        a: 'Absolument. On analyse vos workflows et on conçoit des systèmes IA/automation qui s’intègrent sans friction à vos opérations.',
       },
     ],
   },
 
   finalCta: {
     titlePrefix: 'Prêt à',
-    titleAccent: 'scaler',
+    titleAccent: 'évoluer',
     titleSuffix: 'avec l’automatisation & l’IA ?',
     subtitle:
-      "On élimine le travail répétitif et on construit des systèmes intelligents qui font grandir ton business.",
+      "On élimine le travail répétitif et on construit des systèmes intelligents qui font grandir votre business.",
     button: 'Commencer maintenant',
   },
 },
@@ -657,12 +674,12 @@ demosPage: {
     titlePrefix: 'Automatise ton business',
     titleSuffix: 'de la bonne manière',
     subtitle:
-      "Connecte tes outils, réduis le travail manuel et scale tes opérations grâce à l’automatisation intelligente.",
+      "Connectez vos outils, réduisez le travail manuel optimisez vos opérations grâce à l’automatisation intelligente.",
     cta: 'Automatiser mon business',
   },
 
   ui: {
-    selectDemo: 'Choisir une démo',
+    selectDemo: 'Choisissez une démo',
     readyToStart: 'Prêt à démarrer',
 
     answeringQuestions: 'Réponse aux questions des clients',
@@ -678,7 +695,24 @@ demosPage: {
       inboundCalls: 'Gestion des commandes',
       dentalBooking: 'Prise de rendez-vous',
       fitnessQuestions: 'Support client',
-    } 
+    },
+
+    phone: {
+      lockScreen: {
+        carrier: 'Neotix AI',
+        agent: 'Agent IA',
+        unlockPrompt: 'Sélectionnez une démo pour déverrouiller',
+        weather: {
+          sunny: 'Ensoleillé',
+        },
+        days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      },
+      conversation: {
+        neotixAgent: 'Agent Neotix',
+        messagePlaceholder: 'Message...',
+      },
+    }, 
   },
 
   features: {
@@ -687,9 +721,9 @@ demosPage: {
     subtitle: "Des services d’automatisation de bout en bout pour les entreprises modernes",
     items: [
       {
-        title: 'Ne rate plus aucun appel',
+        title: 'Ne ratez plus aucun appel',
         description:
-          "Ton réceptionniste IA répond à 100% des appels entrants, 24/7, même hors heures d’ouverture. N’oublie pas : 1 appel manqué est 1 client de moins.",
+          "Votre réceptionniste IA répond à 100% des appels entrants, 24/7, même hors heures d’ouverture. N’oubliez pas : 1 appel manqué est 1 client de moins.",
       },
       {
         title: 'Voix naturelle',
@@ -699,7 +733,7 @@ demosPage: {
       {
         title: 'Prise de rendez-vous & synchronisation',
         description:
-          'Prend, annule, reporte les rendez-vous, et synchronise tout automatiquement avec tes outils.',
+          'Prend, annule, reporte les rendez-vous, et synchronise tout automatiquement avec vos outils.',
       },
     ],
   },
@@ -723,11 +757,11 @@ demosPage: {
     items: [
       {
         q: "Et si j’ai besoin de plus de minutes ?",
-        a: "Tu peux ajuster ton plan à tout moment. Les minutes supplémentaires sont facturées à un tarif simple par minute, et tu es toujours averti avant d’atteindre la limite pour éviter les surprises.",
+        a: "Vous pouvez ajuster votre plan à tout moment. Les minutes supplémentaires sont facturées à un tarif simple par minute, et vous êtes toujours averti avant d’atteindre la limite pour éviter les surprises.",
       },
       {
         q: "Est-ce que l’IA peut gérer plusieurs appels en même temps ?",
-        a: "Oui. L’IA peut gérer plusieurs appels simultanément sans attente, pour que chaque appelant soit répondu instantanément, même aux heures de pointe.",
+        a: "Oui. L’IA peut gérer plusieurs appels simultanément sans attente, pour que chaque appelant reçoive une réponse instantanée, même pendant les heures de pointe.",
       },
       {
         q: "Est-ce que l’IA peut parler plusieurs langues ?",
@@ -735,15 +769,15 @@ demosPage: {
       },
       {
         q: "Puis-je personnaliser les réponses de l’IA ?",
-        a: "Oui. Tu contrôles totalement la façon dont l’IA interagit : salutations, questions de qualification, heures d’ouverture, et ton général. Le système s’améliore aussi en continu grâce à ton feedback.",
+        a: "Oui. vous contrôlerez totalement la façon dont l’IA interagit : salutations, questions de qualification, heures d’ouverture, ..etc. Le système s’améliore aussi en continu grâce à vos suggestions et retour.",
       },
     ],
   },
 
   finalCta: {
-    title: 'Prêt à automatiser tes opérations ?',
+    title: 'Prêt à automatiser vos opérations ?',
     subtitle:
-      "Optimisons ton business, peu importe ton secteur, et libérons du temps pour ce qui compte vraiment.",
+      "Optimisons votre business, peu importe votre secteur, et libérons du temps pour ce qui compte vraiment.",
     button: 'Commencer',
   },
 },
@@ -752,17 +786,17 @@ pricingPage: {
   hero: {
     titlePrefix: 'Tarifs',
     titleAccent: 'simples',
-    subtitle: 'Choisis le forfait qui correspond à tes besoins.',
-    note: 'Les forfaits sont indicatifs — on adapte le scope à ton besoin',
+    subtitle: 'Choisissez le forfait qui correspond à vos besoins.',
+    note: 'Les forfaits sont indicatifs — on s\'adapte à vos besoins',
   },
 
   billing: {
     btn3m: '3 mois',
     btn6m: '6 mois',
     btn1y: '1 an',
-    billed3m: 'Engagement minimum sur 3 mois',
-    billed6m: 'Engagement minimum sur 6 mois',
-    billed1y: 'Engagement minimum sur 1 an',
+    billed3m: 'Engagement sur 3 mois',
+    billed6m: 'Engagement sur 6 mois',
+    billed1y: 'Engagement sur 1 an',
     badgeNone: 'Aucun rabais',
     badge10: '-10%',
     badge20: '-15%',
@@ -775,7 +809,7 @@ pricingPage: {
 
   cards: {
     enterpriseName: 'Entreprise',
-    enterprisePriceLabel: 'Contacte-nous pour les détails. On adapte le scope et le prix à ton besoin.',
+    enterprisePriceLabel: 'Contactez-nous pour plus de détails. On adapte le prix à vos besoin.',
     whatsIncluded: 'Inclus',
     totalLabel: 'au total',
   },
@@ -783,7 +817,7 @@ pricingPage: {
   plans: {
     starter: {
       name: 'Starter',
-      description: 'Parfait pour tester une automatisation IA pour ton business.',
+      description: 'Parfait pour tester une automatisation IA pour votre business.',
       cta: 'Choisir Starter',
       features: [
         '200 minutes incluses par mois',
@@ -796,7 +830,7 @@ pricingPage: {
     },
     pro: {
       name: 'Pro',
-      description: 'Pour les équipes en croissance qui veulent scaler.',
+      description: 'Pour les équipes en croissance qui veulent évoluer.',
       cta: 'Choisir Pro',
       features: [
         '475 minutes incluses par mois',
@@ -835,7 +869,7 @@ pricingPage: {
   comparison: {
     titlePrefix: 'Comparaison',
     titleAccent: 'des plans',
-    subtitle: "Un aperçu rapide de ce qui change quand tu scale.",
+    subtitle: "Un aperçu rapide de ce qui change entre les différentes offres.",
     headers: {
       feature: 'Fonctionnalité',
       starter: 'Starter',
@@ -859,7 +893,7 @@ pricingPage: {
   finalCta: {
     title: 'Prêt à commencer ?',
     subtitle:
-      'Dis-nous ce dont tu as besoin (plateformes, style, volume). On te proposera le meilleur plan pour ton timing.',
+      'Dites-nous ce dont vous avez besoin (plateformes, style, volume) et on vous proposera le meilleur plan.',
     button: 'Nous contacter',
   },
 },
@@ -869,7 +903,7 @@ contactPage: {
     titlePrefix: 'Nous',
     titleAccent: 'contacter',
     subtitle:
-      "Prêt à transformer ton business avec l’IA ? Parlons de ton projet et voyons comment on peut t’aider.",
+      "Prêt à transformer votre business avec l’IA ? Parlons de votre projet et voyons comment on peut vous aider.",
   },
   cards: {
     emailTitle: 'Email',
@@ -884,13 +918,13 @@ contactPage: {
     title: 'Planifier un appel',
     cardTitle: 'Planifier une consultation',
     subtitle:
-      "Tu préfères parler directement ? Choisis une option ci-dessous pour planifier un appel avec l’équipe.",
+      "Vous préfèrez parler directement ? Choisissez une option ci-dessous pour planifier un appel avec l’équipe.",
     requestBtn: 'Demander un appel',
     emailBtn: 'Envoyer un email',
     emailSubject: 'Demande d’appel',
   },
   expect: {
-    title: 'À quoi t’attendre',
+    title: 'À quoi vous attendre',
     items: [
       'Réponse sous 24-48h',
       'Appel de consultation gratuit',
@@ -916,7 +950,7 @@ aboutPage: {
     p2:
       "On aide les entreprises à automatiser leurs workflows, améliorer l’expérience client et débloquer de nouvelles opportunités de croissance grâce à des solutions IA sur mesure.",
     p3:
-      "Des startups aux grandes entreprises, on adapte notre approche à ton contexte et on t’aide à atteindre tes objectifs.",
+      "Des startups aux grandes entreprises, on adapte notre approche à votre contexte et on vous aidera à atteindre vos objectifs.",
   },
 
   why: {
@@ -941,20 +975,20 @@ aboutPage: {
       {
         title: 'Centrés client',
         description:
-          "Ton succès = notre succès. On travaille avec toi pour comprendre tes besoins et livrer des solutions concrètes.",
+          "Votre succès = notre succès. On travaille avec vous pour comprendre vos besoins et livrer des solutions concrètes.",
       },
       {
         title: 'Innovation d’abord',
         description:
-          "On reste à la pointe des technologies IA pour t’apporter les solutions les plus efficaces et performantes.",
+          "On reste à la pointe des technologies IA pour vous apporter les solutions les plus efficaces et performantes.",
       },
     ],
   },
 
   finalCta: {
-    title: 'Prêt à transformer ton business ?',
+    title: 'Prêt à transformer vos business ?',
     subtitle:
-      "Parlons de ton projet et voyons comment Neotix AI peut t’aider à atteindre tes objectifs grâce à l’automatisation intelligente.",
+      "Parlons de votre projet et voyons comment Neotix AI peut vous aider à atteindre vos objectifs grâce à l’automatisation intelligente.",
     button: 'Nous contacter',
   },
 },
@@ -968,8 +1002,8 @@ contactForm: {
     message: 'Message',
   },
   submit: 'Envoyer le message',
-  orEmail: 'Ou écris-nous directement à',
-  toastSuccess: 'Merci — on te répond sous 24–48h !',
+  orEmail: 'Ou écrivez-nous directement à',
+  toastSuccess: 'Merci — on vous répondra sous 24–48h !',
 },
 
 
