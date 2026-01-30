@@ -193,23 +193,8 @@ export default function DemosPage() {
       */}
       
       {/* Dégradé Hero - En haut */}
-      <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
-      </div>
-
-      {/* Dégradé milieu de page - Pour la section features */}
-      <div className="absolute inset-x-0 top-[40rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-20rem)] aspect-[1155/678] w-[36.125rem] -translate-x+1/3 rotate-[60deg] bg-gradient-to-tr from-violet-500 via-purple-500 to-blue-500 opacity-20 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" />
-      </div>
-
-      {/* Dégradé pour la section interactive demos */}
-      <div className="absolute inset-x-0 top-[85rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] translate-x-1/5 rotate+[60deg] bg-gradient-to-tr from-violet-500 via-purple-500 to-blue-500 opacity-20 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" />
-      </div>
-
-      {/* Dégradé bas de page - Pour le CTA final */}
-      <div className="absolute inset-x-0 bottom-5 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/3 rotate-[90deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
+      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/5 rotate-[150deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-40 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
       </div>
 
       {/* HERO */}

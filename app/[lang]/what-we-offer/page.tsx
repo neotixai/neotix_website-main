@@ -32,22 +32,7 @@ export default function AutomationAIPage() {
       
       {/* Dégradé Hero - Haut gauche, vague douce */}
       <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-18rem)] aspect-[1155/678] w-[38rem] -translate-x-1/2 rotate-[20deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-30 sm:left-[calc(50%-35rem)] sm:w-[73rem]" />
-      </div>
-
-      {/* Dégradé Solutions Grid - Droite, vague montante */}
-      <div className="absolute inset-x-0 top-[42rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%+12rem)] aspect-[1155/678] w-[44rem] translate-x-1/4 rotate-[-42deg] bg-gradient-to-bl from-blue-500 via-indigo-500 to-violet-500 opacity-30 sm:left-[calc(50%+28rem)] sm:w-[80rem]" />
-      </div>
-
-      {/* Dégradé Blocks - Gauche, vague descendante */}
-      <div className="absolute inset-x-0 top-[108rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-22rem)] aspect-[1155/678] w-[40rem] -translate-x-1/4 rotate-[35deg] bg-gradient-to-tr from-violet-500 via-purple-500 to-fuchsia-500 opacity-20 sm:left-[calc(50%-42rem)] sm:w-[76rem]" />
-      </div>
-
-      {/* Dégradé FAQ - Centre-droite, vague finale */}
-      <div className="absolute inset-x-0 bottom-5 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%+5rem)] aspect-[1155/678] w-[37rem] translate-x-1/6 rotate-[-28deg] bg-gradient-to-tl from-blue-500 to-violet-500 opacity-25 sm:left-[calc(50%+15rem)] sm:w-[71rem]" />
+        <div className="relative left-[calc(50%-18rem)] aspect-[1155/678] w-[38rem] -translate-x-1/5 rotate-[20deg] bg-gradient-to-tr from-violet-500 to-blue-500 opacity-30 sm:left-[calc(50%-35rem)] sm:w-[73rem]" />
       </div>
 
       {/* HERO */}

@@ -30,23 +30,9 @@ export default function ContactPage() {
       
       {/* Dégradé Hero - Centre haut, rayonnement accueillant */}
       <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-5rem)] aspect-[1155/678] w-[42rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-br from-violet-500 to-blue-500 opacity-20 sm:left-[calc(50%-12rem)] sm:w-[78rem]" />
+        <div className="relative left-[calc(50%-5rem)] aspect-[1155/678] w-[42rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-br from-violet-500 to-blue-500 opacity-30 sm:left-[calc(50%-12rem)] sm:w-[78rem]" />
       </div>
 
-      {/* Dégradé Cards - Gauche, chaleur subtile */}
-      <div className="absolute inset-x-0 top-[38rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-28rem)] aspect-[1155/678] w-[36rem] -translate-x-1/3 rotate-[-25deg] bg-gradient-to-tr from-blue-500 to-violet-500 opacity-30 sm:left-[calc(50%-48rem)] sm:w-[70rem]" />
-      </div>
-
-      {/* Dégradé Form Section - Droite, invitation */}
-      <div className="absolute inset-x-0 top-[72rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%+18rem)] aspect-[1155/678] w-[40rem] translate-x-1/4 rotate-[32deg] bg-gradient-to-tl from-violet-500 via-purple-500 to-blue-500 opacity-20 sm:left-[calc(50%+35rem)] sm:w-[74rem]" />
-      </div>
-
-      {/* Dégradé Bottom - Centre, conclusion douce */}
-      <div className="absolute inset-x-0 bottom-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%)] aspect-[1155/678] w-[38rem] -translate-x-1/2 rotate-[-18deg] bg-gradient-to-br from-blue-500 to-violet-500 opacity-20 sm:left-[calc(50%)] sm:w-[72rem]" />
-      </div>
       
       <Section className="pt-32 relative">
         <motion.div

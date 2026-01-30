@@ -110,25 +110,10 @@ export default function PricingPage() {
         ✨ DÉGRADÉS PRICING PAGE ✨
         Motif: Spirale élégante - évoque la croissance et l'évolution des plans
       */}
-      
-      {/* Dégradé Hero - Haut droite, rotation douce */}
-      <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%+15rem)] aspect-[1155/678] w-[40rem] translate-x-1/4 rotate-[25deg] bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 opacity-30 sm:left-[calc(50%+25rem)] sm:w-[75rem]" />
-      </div>
-
-      {/* Dégradé Plans - Gauche, rotation inverse pour équilibre */}
-      <div className="absolute inset-x-0 top-[35rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-25rem)] aspect-[1155/678] w-[38rem] -translate-x-1/3 rotate-[-35deg] bg-gradient-to-tr from-blue-500 to-violet-500 opacity-20 sm:left-[calc(50%-45rem)] sm:w-[70rem]" />
-      </div>
-
-      {/* Dégradé Comparison - Droit, accent subtil */}
-      <div className="absolute inset-x-0 top-[135rem] -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[42rem] translate-x-1/5 rotate-[140deg] bg-gradient-to-tl from-violet-500 via-fuchsia-500 to-blue-500 opacity-20 sm:left-[calc(50%+30rem)] sm:w-[78rem]" />
-      </div>
 
       {/* Dégradé Bottom - Centre, rotation circulaire */}
-      <div className="absolute inset-x-0 bottom-10 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div className="relative left-[calc(50%-8rem)] aspect-[1155/678] w-[36rem] -translate-x-1/6 rotate-[-50deg] bg-gradient-to-br from-blue-500 to-violet-500 opacity-30 sm:left-[calc(50%-20rem)] sm:w-[68rem]" />
+      <div className="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div className="relative left-[calc(50%-8rem)] aspect-[1155/678] w-[36rem] -translate-x-1/4 rotate-[-50deg] bg-gradient-to-br from-blue-500 to-violet-500 opacity-30 sm:left-[calc(50%-20rem)] sm:w-[68rem]" />
       </div>
 
       {/* HERO */}
