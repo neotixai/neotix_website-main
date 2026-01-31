@@ -23,6 +23,17 @@ interface PhoneTranslations {
   };
 }
 
+// Interface for UI translations
+interface UITranslations {
+  selectDemo: string;
+  readyToStart: string;
+  answeringQuestions: string;
+  clientInformation: string;
+  waitingClientData: string;
+  aiActions: string;
+  noActions: string;
+}
+
 type Message = {
   id: number;
   text: string;
@@ -81,10 +92,12 @@ function getIcon(iconName: ClientInfo['icon']) {
 
 export default function InteractiveDemoSection({ 
   demos,
-  translations 
+  translations,
+  uiTranslations,
 }: { 
   demos: AudioDemo[];
   translations?: PhoneTranslations;
+  uiTranslations: UITranslations;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
@@ -204,187 +217,103 @@ export default function InteractiveDemoSection({
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', onLoadedMeta);
-    audio.addEventListener('durationchange', onLoadedMeta);
     audio.addEventListener('ended', onEnded);
     audio.addEventListener('error', onError);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', onLoadedMeta);
-      audio.removeEventListener('durationchange', onLoadedMeta);
       audio.removeEventListener('ended', onEnded);
       audio.removeEventListener('error', onError);
     };
-  }, [currentIndex, demos, typingProgress, startTypingEffect]);
+  }, [currentIndex, demos, startTypingEffect, typingProgress]);
 
-  // ✅ IMPROVEMENT: Preload audio files for instant playback
-  useEffect(() => {
-    demos.forEach(demo => {
-      const audio = new Audio(demo.src);
-      audio.preload = 'auto';
-    });
-  }, [demos]);
+  const loadDemo = useCallback(
+    (index: number) => {
+      const audio = audioRef.current;
+      if (!audio) return;
 
-  const togglePlay = (index: number) => {
-    const audio = audioRef.current;
-    if (!audio) return;
+      // Arrêter les intervalles de frappe en cours
+      typingIntervalsRef.current.forEach(interval => clearInterval(interval));
+      typingIntervalsRef.current.clear();
 
-    const src = demos[index].src;
-
-    if (currentIndex !== index) {
-      setIsLoading(true);  // ✅ IMPROVEMENT: Show loading state
-      setAudioError(null); // Clear any previous errors
-      
-      audio.pause();
-      audio.src = src;
-      audio.load();
+      setCurrentIndex(index);
+      setIsPlaying(false);
       setCurrentTime(0);
-      setDuration(0);
       setVisibleMessages([]);
       setVisibleClientInfo([]);
       setVisibleAIFunctions([]);
-      
-      // Réinitialiser l'effet de frappe ET la progression
-      typingIntervalsRef.current.forEach(interval => clearInterval(interval));
-      typingIntervalsRef.current.clear();
       setDisplayedMessages(new Map());
       setTypingProgress(new Map());
+      setAudioError(null);
+      setIsLoading(true);
 
-      audio
-        .play()
-        .then(() => {
-          setCurrentIndex(index);
-          setIsPlaying(true);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.error('Audio play error:', err);
-          setAudioError('Failed to play audio. Please try again.');
-          setIsLoading(false);
-        });
+      audio.src = demos[index].src;
+      audio.load();
+    },
+    [demos]
+  );
 
-      return;
-    }
+  const togglePlay = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio || currentIndex === null) return;
 
     if (isPlaying) {
       audio.pause();
-      setIsPlaying(false);
+      // Arrêter tous les intervalles de frappe
+      typingIntervalsRef.current.forEach(interval => clearInterval(interval));
+      typingIntervalsRef.current.clear();
     } else {
-      // Si l'audio est terminé (ou proche de la fin), tout réinitialiser
-      if (audio.currentTime >= audio.duration - CONSTANTS.AUDIO_NEAR_END_THRESHOLD) {
-        audio.currentTime = 0;
-        setCurrentTime(0);
-        setVisibleMessages([]);
-        setVisibleClientInfo([]);
-        setVisibleAIFunctions([]);
-        
-        typingIntervalsRef.current.forEach(interval => clearInterval(interval));
-        typingIntervalsRef.current.clear();
-        setDisplayedMessages(new Map());
-        setTypingProgress(new Map());
-      }
-
-      audio
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => {
-          console.error('Audio play error:', err);
-          setAudioError('Failed to play audio. Please try again.');
-        });
+      audio.play().catch((err) => {
+        console.error('Playback error:', err);
+        setAudioError('Unable to play audio. Please try again.');
+      });
     }
-  };
+    setIsPlaying(!isPlaying);
+  }, [isPlaying, currentIndex]);
 
-  const seekTo = (index: number, newTime: number) => {
-    const audio = audioRef.current;
-    if (!audio || currentIndex !== index) return;
-
-    // Pause tous les effets de frappe en cours
-    typingIntervalsRef.current.forEach(interval => clearInterval(interval));
-    typingIntervalsRef.current.clear();
-
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-
-    // Réinitialiser les messages et la frappe
-    const currentDemo = demos[index];
-    const messagesToShow = currentDemo.messages.filter(
-      (msg) => msg.timestamp <= newTime
-    );
-    setVisibleMessages(messagesToShow);
-
-    // Réinitialiser displayedMessages et typingProgress
-    const newDisplayedMessages = new Map<number, string>();
-    const newTypingProgress = new Map<number, number>();
-
-    messagesToShow.forEach((msg) => {
-      newDisplayedMessages.set(msg.id, msg.text);
-      newTypingProgress.set(msg.id, msg.text.length);
-    });
-
-    setDisplayedMessages(newDisplayedMessages);
-    setTypingProgress(newTypingProgress);
-  };
+  const seekTo = useCallback(
+    (index: number, time: number) => {
+      const audio = audioRef.current;
+      if (!audio || currentIndex !== index) return;
+      audio.currentTime = time;
+    },
+    [currentIndex]
+  );
 
   const currentDemo = currentIndex !== null ? demos[currentIndex] : null;
 
-  const messagesWithTyping = visibleMessages.map((message) => ({
-    ...message,
-    text: displayedMessages.get(message.id) || '',
-  }));
-
-  // ✅ IMPROVEMENT: Add keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (currentIndex === null) return;
-      
-      switch(e.code) {
-        case 'Space':
-          e.preventDefault();
-          togglePlay(currentIndex);
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          seekTo(currentIndex, Math.max(0, currentTime - 5));
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          seekTo(currentIndex, Math.min(duration, currentTime + 5));
-          break;
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentIndex, currentTime, duration]);
+  // Créer les messages avec l'effet de frappe
+  const messagesWithTyping = visibleMessages.map((msg) => {
+    const displayedText = displayedMessages.get(msg.id);
+    if (displayedText !== undefined) {
+      return { ...msg, text: displayedText };
+    }
+    return msg;
+  });
 
   return (
     <div className="w-full">
-      <audio ref={audioRef} />
+      <audio ref={audioRef} preload="metadata" />
 
-      {/* ✅ IMPROVEMENT: Error message display */}
       {audioError && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-4 p-3 bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg text-sm text-center max-w-md mx-auto"
-        >
+        <div className="mb-4 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg text-center">
           {audioError}
-        </motion.div>
+        </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        {/* Demo List - Gauche */}
-        <div className="order-2 lg:order-1">
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold mb-4 text-center lg:text-left">
-              Select a Demo
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
+        {/* Liste des démos - Gauche */}
+        <div className="order-2 lg:order-1 flex justify-center">
+          <div className="w-full max-w-md">
+            <h3 className="text-lg font-semibold mb-4 text-center lg:text-left">
+              {uiTranslations.selectDemo}
             </h3>
-
             <div className="space-y-3">
               {demos.map((demo, index) => {
                 const isActive = currentIndex === index;
-                const shownDuration = isActive ? duration : 0;
                 const shownCurrent = isActive ? currentTime : 0;
+                const shownDuration = isActive ? duration : 0;
                 const progressPercent = shownDuration > 0 ? (shownCurrent / shownDuration) * 100 : 0;
 
                 return (
@@ -393,29 +322,29 @@ export default function InteractiveDemoSection({
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}  // ✅ IMPROVEMENT: Tap feedback
                   >
                     <div
-                      className={[
-                        'glass-card rounded-xl p-4 transition-all duration-300 cursor-pointer',
+                      className={`glass-card rounded-xl p-4 cursor-pointer transition-all duration-300 ${
                         isActive
-                          ? 'bg-gradient-to-br from-violet-50 to-blue-50 dark:from-violet-900/20 dark:to-blue-900/20 ring-2 ring-violet-400 dark:ring-violet-600 shadow-lg'
-                          : 'bg-white/60 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 ring-1 ring-black/12 dark:ring-white/10',
-                      ].join(' ')}
-                      onClick={() => !isLoading && togglePlay(index)}
+                          ? 'ring-2 ring-violet-500 bg-white/80 dark:bg-white/10'
+                          : 'bg-white/60 dark:bg-white/5 hover:bg-white/70 dark:hover:bg-white/8'
+                      } backdrop-blur-xl ring-1 ring-black/12 dark:ring-white/10`}
+                      onClick={() => !isActive && loadDemo(index)}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-start gap-3">
                         <button
-                          className={[
-                            'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300',
-                            isActive
-                              ? 'bg-gradient-to-br from-violet-500 to-blue-500 shadow-lg'
-                              : 'bg-gray-400 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600',
-                          ].join(' ')}
-                          aria-label={`${isPlaying && isActive ? 'Pause' : 'Play'} ${demo.title}`}
-                          aria-pressed={isActive}
-                          disabled={isLoading}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (isActive) {
+                              togglePlay();
+                            } else {
+                              loadDemo(index);
+                              setTimeout(() => togglePlay(), 100);
+                            }
+                          }}
+                          disabled={isLoading && isActive}
+                          className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                          aria-label={isPlaying && isActive ? 'Pause' : 'Play'}
                         >
                           {isLoading && isActive ? (
                             <motion.div
@@ -534,7 +463,7 @@ export default function InteractiveDemoSection({
                 )}
                 <div>
                   <h4 className="font-semibold text-lg">
-                    {isPlaying ? 'AI Agent Active' : 'Ready to Start'}
+                    {isPlaying ? uiTranslations.answeringQuestions : uiTranslations.readyToStart}
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
                     {currentDemo.industry}
@@ -545,12 +474,12 @@ export default function InteractiveDemoSection({
               <div className="space-y-6">
                 <div>
                   <h5 className="text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                    Client Information
+                    {uiTranslations.clientInformation}
                   </h5>
                   <div className="space-y-2">
                     {visibleClientInfo.length === 0 ? (
                       <p className="text-sm text-gray-400 dark:text-gray-500 italic">
-                        Waiting for client data...
+                        {uiTranslations.waitingClientData}
                       </p>
                     ) : (
                       visibleClientInfo.map((info, index) => {
@@ -583,12 +512,12 @@ export default function InteractiveDemoSection({
 
                 <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                   <h5 className="text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                    AI Actions
+                    {uiTranslations.aiActions}
                   </h5>
                   <div className="space-y-2">
                     {visibleAIFunctions.length === 0 ? (
                       <p className="text-sm text-gray-400 dark:text-gray-500 italic">
-                        No actions executed yet...
+                        {uiTranslations.noActions}
                       </p>
                     ) : (
                       visibleAIFunctions.map((func, index) => (

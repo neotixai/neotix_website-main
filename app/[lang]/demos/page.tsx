@@ -204,6 +204,17 @@ export default function DemosPage() {
     },
   };
 
+  // Préparer les traductions de l'interface
+  const uiTranslations = {
+    selectDemo: t.demosPage.ui.selectDemo,
+    readyToStart: t.demosPage.ui.readyToStart,
+    answeringQuestions: t.demosPage.ui.answeringQuestions,
+    clientInformation: t.demosPage.ui.clientInformation,
+    waitingClientData: t.demosPage.ui.waitingClientData,
+    aiActions: t.demosPage.ui.aiActions,
+    noActions: t.demosPage.ui.noActions,
+  };
+
   return (
     <div className="relative">
       {/*
@@ -310,7 +321,7 @@ export default function DemosPage() {
             </div>
           </div>
 
-          <InteractiveDemoSection demos={audioDemos} translations={phoneTranslations} />
+          <InteractiveDemoSection demos={audioDemos} translations={phoneTranslations} uiTranslations={uiTranslations}/>
         </motion.div>
       </Section>
 
