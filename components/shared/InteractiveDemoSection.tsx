@@ -389,13 +389,13 @@ export default function InteractiveDemoSection({
   }));
 
   return (
-    <div className="py-16 px-4">
+    <div className="py-16 px-3">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Audio Controls - Gauche */}
           <div className="order-2 lg:order-1 flex justify-center">
             <div className="w-full max-w-md">
-              <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+              <h3 className="text-2xl font-semibold mb-10 text-center text-gray-900 dark:text-white">
                 {uiTranslations.selectDemo}
               </h3>
               {demos.map((demo, index) => {
